@@ -23,3 +23,23 @@ create-agent-tools-cache.json
 # Local dev
 .env
 
+# Generated artifacts from CLI runs/tests
+done/
+My Agent/
+customtool/
+mergeagent/
+dryrunagent/
+dryrunfs/
+
+# Backups
+**/*.bak
+
+# Docusaurus build
+website/build/
+
+# TypeDoc output (if accidentally generated elsewhere)
+typedoc/
+
+# Vitest coverage
+coverage/
+

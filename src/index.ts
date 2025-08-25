@@ -28,23 +28,41 @@ async function run(opts: any) {
       { value: "llamaindex", label: "LlamaIndex" },
       { value: "autogen", label: "AutoGen" },
       { value: "mcp", label: "Model Context Protocol (server)" },
+      { value: "vscode", label: "VS Code (Copilot)" },
       { value: "custom", label: "Custom" },
     ],
     initialValue: defaults.preset ?? "openai",
   });
   if (isCancel(preset)) return;
+  // Map common presets to sensible library selections. Only ask for libraries
+  // when the user explicitly chooses `custom`.
+  const PRESET_LIBS: Record<string, string[]> = {
+    openai: ["openai"],
+    langchain: ["langchain"],
+    llamaindex: ["llamaindex"],
+    autogen: ["autogen"],
+    mcp: ["mcp"],
+    vscode: ["openai"],
+  };
 
-  const libs = await multiselect({
-    message: "Pick libraries to target",
-    options: [
-      { value: "openai", label: "OpenAI SDK" },
-      { value: "langchain", label: "LangChain" },
-      { value: "llamaindex", label: "LlamaIndex" },
-      { value: "autogen", label: "AutoGen" },
-    ],
-    initialValues: defaults.libraries ?? ["openai"],
-  });
-  if (isCancel(libs)) return;
+  let libs: string[] = [];
+  if (preset === "custom") {
+    const libsRes = await multiselect({
+      message: "Pick libraries to target",
+      options: [
+        { value: "openai", label: "OpenAI SDK" },
+        { value: "langchain", label: "LangChain" },
+        { value: "llamaindex", label: "LlamaIndex" },
+        { value: "autogen", label: "AutoGen" },
+        { value: "mcp", label: "Model Context Protocol (server)" },
+      ],
+      initialValues: defaults.libraries ?? ["openai"],
+    });
+    if (isCancel(libsRes)) return;
+    libs = libsRes as string[];
+  } else {
+    libs = PRESET_LIBS[preset] ?? defaults.libraries ?? ["openai"];
+  }
 
   const tsStrict = await select({
     message: "TypeScript strictness",
@@ -71,25 +89,83 @@ async function run(opts: any) {
     label: t.hint ? `${t.name} — ${t.hint}` : t.name,
   }));
   toolOptions.push({ value: "other", label: "Other / custom" });
-
-  const toolChoices = await multiselect({
-    message: "Pick common tools/frameworks (choose Other to add custom names)",
-    options: toolOptions,
-    initialValues: defaults.tools ?? [],
-  });
-  if (isCancel(toolChoices)) return;
-
-  let extraToolsRaw = "";
-  if (toolChoices.includes("other")) {
-    const resp = await text({
-      message: "Comma-separated custom tool names (leave empty to skip)",
-      placeholder: "web.run, fileSearch, http.get",
-    });
-    if (isCancel(resp)) return;
-    extraToolsRaw = resp;
+  // Fuzzy-search assisted selection loop. Users can search multiple times
+  // to add more tools. Type an empty search to show all. Type `done` to finish.
+  function scoreOption(optLabel: string, q: string) {
+    const label = optLabel.toLowerCase();
+    const qry = q.toLowerCase();
+    if (!qry) return 1; // neutral score when no query
+    if (label.startsWith(qry)) return 100;
+    if (label.includes(qry)) return 50;
+    // simple subsequence match: higher score if characters appear in order
+    let i = 0;
+    for (const ch of qry) {
+      i = label.indexOf(ch, i);
+      if (i === -1) return 0;
+      i++;
+    }
+    return 10;
   }
 
-  const selectedTools = (toolChoices as string[]).filter((t) => t !== "other");
+  const selectedSet = new Set<string>((defaults.tools ?? []) as string[]);
+  let extraToolsRaw = "";
+  while (true) {
+    const query = await text({
+      message:
+        "Search tools/frameworks (leave blank to show all, type 'done' to finish)",
+      placeholder: "vitest, playwright, typescript",
+    });
+    if (isCancel(query)) return;
+    const q = (query || "").trim();
+    if (q.toLowerCase() === "done") break;
+
+    // filter and sort options by fuzzy score
+    const filtered = toolOptions
+      .map((o) => ({ o, score: scoreOption(o.label, q) }))
+      .filter((s) => s.score > 0 || q === "")
+      .sort((a, b) => b.score - a.score)
+      .map((s) => s.o);
+
+    // ensure 'other' present at end
+    const optsForPrompt = filtered.filter((x) => x.value !== "other");
+    optsForPrompt.push({ value: "other", label: "Other / custom" });
+
+    const picked = await multiselect({
+      message: `Matches for: "${
+        q || "all"
+      }" — pick any to add (Esc to cancel)",`,
+      options: optsForPrompt,
+      initialValues: Array.from(selectedSet),
+    });
+    if (isCancel(picked)) return;
+    const pickedList = picked as string[];
+    // handle custom entry
+    if (pickedList.includes("other")) {
+      const resp = await text({
+        message: "Comma-separated custom tool names (leave empty to skip)",
+        placeholder: "web.run, fileSearch, http.get",
+      });
+      if (isCancel(resp)) return;
+      extraToolsRaw = extraToolsRaw ? `${extraToolsRaw},${resp}` : resp || "";
+    }
+
+    for (const p of pickedList) {
+      if (p && p !== "other") selectedSet.add(p);
+    }
+
+    const again = await select({
+      message: "Search for more tools?",
+      options: [
+        { value: "yes", label: "Yes, search again" },
+        { value: "no", label: "No, I'm done" },
+      ],
+      initialValue: "no",
+    });
+    if (isCancel(again)) return;
+    if (again === "no") break;
+  }
+
+  const selectedTools = Array.from(selectedSet);
   const allToolNames = [
     ...selectedTools,
     ...(extraToolsRaw

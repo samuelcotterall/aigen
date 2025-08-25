@@ -9,5 +9,9 @@ Each tool has a JSON input and optional JSON output.
 ```json```
 ## vitest**Description:** vitest tool**Input:**
 ```json```
+## file.search**Description:** file.search tool**Input:**
+```json```
+## http.get**Description:** http.get tool**Input:**
+```json```
 ## playwright**Description:** playwright tool**Input:**
 ```json```

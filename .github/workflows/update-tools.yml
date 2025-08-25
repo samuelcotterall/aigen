@@ -1,0 +1,53 @@
+name: Update Tool Catalog
+
+on:
+  schedule:
+    - cron: "0 3 * * 0" # weekly on Sunday at 03:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  update-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Run fetch-tools
+        env:
+          CI: true
+        run: pnpm dlx tsx scripts/fetch-tools.ts
+      - name: Run tests
+        run: pnpm test --silent
+
+      - name: Commit updated catalog
+        run: |
+          git config user.name "tool-updater"
+          git config user.email "tool-updater@users.noreply.github.com"
+          git add src/tools/catalog.ts src/tools/generated.json src/tools/generated.ts || true
+          if git diff --staged --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "chore: update tool catalog (automation)"
+
+      - name: Create Pull Request for catalog update
+        uses: peter-evans/create-pull-request@v4
+        with:
+          # Uses the workflow GITHUB_TOKEN by default. If you prefer a machine
+          # user PAT for PR creation, set TOOL_UPDATE_PAT and update this step.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update tool catalog (automation)"
+          title: "chore: update tool catalog (automation)"
+          body: |
+            This pull request updates the generated tool catalog.
+            The workflow ran the fetch script and test suite; please review changes before merging.
+          base: ${{ github.ref_name }}
+          branch: update/tool-catalog-${{ github.run_id }}
+          labels: automation,tools

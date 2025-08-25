@@ -30,6 +30,104 @@ export async function run(opts: any) {
   intro("Create Agent Instructions");
   const defaults = await loadDefaults();
 
+  // Inspect repository files to guess environment(s) and tools to enable by default
+  async function detectEnvAndTools(root: string) {
+    const inferredEnvs: string[] = [];
+    const inferredTools = new Set<string>();
+    try {
+      // package.json -> node / typescript / react / frameworks
+      const pkgPath = path.join(root, "package.json");
+      const pkgRaw = await fs.readFile(pkgPath, "utf8").catch(() => "");
+      if (pkgRaw) {
+        try {
+          const pkg = JSON.parse(pkgRaw);
+          const deps = Object.assign(
+            {},
+            pkg.dependencies || {},
+            pkg.devDependencies || {}
+          );
+          if (Object.keys(deps).length) {
+            // assume Node/TypeScript project when package.json exists
+            // prefer TypeScript if tsconfig or typescript dep present
+            const hasTs = await fs
+              .stat(path.join(root, "tsconfig.json"))
+              .then(() => true)
+              .catch(() => false);
+            if (hasTs || deps.typescript) inferredEnvs.push("typescript");
+            else inferredEnvs.push("typescript");
+
+            // detect React / Next / Vite
+            if (deps.react || deps["react-dom"] || deps.next || deps.vite)
+              inferredEnvs.push("web");
+
+            // detect common tools from deps
+            const map: Record<string, string> = {
+              playwright: "playwright",
+              puppeteer: "puppeteer",
+              vitest: "vitest",
+              jest: "jest",
+              axios: "axios",
+              fetch: "fetch",
+            };
+            for (const k of Object.keys(map))
+              if (deps[k]) inferredTools.add(map[k]);
+          }
+        } catch {}
+      }
+
+      // Python indicators
+      const reqPath = path.join(root, "requirements.txt");
+      const pyproject = path.join(root, "pyproject.toml");
+      const hasReq = await fs
+        .stat(reqPath)
+        .then(() => true)
+        .catch(() => false);
+      const hasPyProj = await fs
+        .stat(pyproject)
+        .then(() => true)
+        .catch(() => false);
+      if (hasReq || hasPyProj) {
+        inferredEnvs.push("python");
+        // enable python tools
+        inferredTools.add("requests");
+        if (hasPyProj) inferredTools.add("poetry");
+        if (hasReq) inferredTools.add("pip");
+        // detect pytest from common test files
+        const hasPyTest = await fs
+          .stat(path.join(root, "pytest.ini"))
+          .then(() => true)
+          .catch(() => false);
+        if (hasPyTest) inferredTools.add("pytest");
+      }
+
+      // Check for lockfiles / config files that indicate specific tools
+      const files = [
+        ["playwright.config.ts", "playwright"],
+        ["playwright.config.js", "playwright"],
+        ["vitest.config.ts", "vitest"],
+        ["vitest.config.js", "vitest"],
+        ["jest.config.js", "jest"],
+        ["jest.config.ts", "jest"],
+      ];
+      for (const [f, tool] of files) {
+        const p = path.join(root, f);
+        if (
+          await fs
+            .stat(p)
+            .then(() => true)
+            .catch(() => false)
+        )
+          inferredTools.add(tool);
+      }
+    } catch (e) {
+      // ignore failures, inference is best-effort
+    }
+    // dedupe inferred envs and default to typescript when none found
+    const uniqEnvs = Array.from(new Set(inferredEnvs));
+    if (uniqEnvs.length === 0) uniqEnvs.push("typescript");
+    return { environments: uniqEnvs, tools: Array.from(inferredTools) };
+  }
+
   // Try to import existing instruction files (pre-fill defaults).
   async function importExisting(dir: string) {
     const imported: any = {};
@@ -113,30 +211,50 @@ export async function run(opts: any) {
 
   // Ask for environment selection first; these set recommended tool defaults.
   let environments: string[] = [];
+  // run quick detection in cwd for best-effort inference
+  const inferred = await detectEnvAndTools(process.cwd());
+  const inferredEnvs = inferred.environments || [];
+  const inferredTools = new Set(inferred.tools || []);
+
   if (opts.nonInteractive) {
-    environments =
-      opts.environments ?? (defaults.environments || ["typescript"]);
+    environments = opts.environments ?? defaults.environments ?? inferredEnvs;
+    // merge inferred tools into defaults when non-interactive
+    for (const t of inferredTools) {
+      if (
+        !defaults.tools ||
+        !defaults.tools.find((x: any) => (x.name || x) === t)
+      ) {
+        // push simple string tool names into defaults.tools for initial selection
+        (defaults.tools = defaults.tools || []).push(t);
+      }
+    }
   } else {
     const envOptions = Object.entries(ENV_PROFILES).map(([k, v]) => ({
       value: k,
       label: v.label,
     }));
+    // preselect inferred envs merged with persisted defaults
+    const preSelectedEnvs = Array.from(
+      new Set([...(defaults.environments || []), ...inferredEnvs])
+    );
     const envPicked = await multiselect({
       message: "Select target environment(s) (affects recommended tools)",
       options: envOptions,
-      initialValues: defaults.environments ?? ["typescript"],
+      initialValues: preSelectedEnvs.length ? preSelectedEnvs : ["typescript"],
     });
     if (!envPicked) return;
     environments = envPicked as string[];
   }
 
-  // Collect environment-suggested tools
+  // Collect environment-suggested tools (from ENV_PROFILES and inferred detection)
   const envSuggestedTools = new Set<string>();
   for (const e of environments) {
     const prof = ENV_PROFILES[e];
     if (prof && prof.defaults)
       for (const t of prof.defaults) envSuggestedTools.add(t);
   }
+  // merge inferred tools (from repo files)
+  for (const t of Array.from(inferredTools)) envSuggestedTools.add(t);
 
   let libs: string[] = [];
   if (preset === "custom") {
@@ -216,10 +334,45 @@ export async function run(opts: any) {
   const toolList = (await loadToolList(
     (opts && opts.toolsSource) || undefined
   )) as ToolItem[];
-  const toolOptions = toolList.map((t) => ({
-    value: t.name,
-    label: t.hint ? `${t.name} — ${t.hint}` : t.name,
-  }));
+  // filter toolList by selected environments (language/ecosystem) but keep inferred and default selections
+  function matchesEnv(tool: any, envs: string[]) {
+    if (!envs || envs.length === 0) return true;
+    const lowered = envs.map(String).map((s) => s.toLowerCase());
+    if (tool.language && lowered.includes(String(tool.language).toLowerCase()))
+      return true;
+    if (
+      tool.ecosystem &&
+      lowered.includes(String(tool.ecosystem).toLowerCase())
+    )
+      return true;
+    // special mappings
+    if (
+      lowered.includes("typescript") &&
+      (tool.language === "javascript" || tool.language === "typescript")
+    )
+      return true;
+    if (
+      lowered.includes("web") &&
+      (tool.ecosystem === "browser" || tool.ecosystem === "node")
+    )
+      return true;
+    if (lowered.includes("python") && tool.language === "python") return true;
+    return false;
+  }
+  function formatToolLabel(t: any) {
+    const meta = [] as string[];
+    if (t.hint) meta.push(t.hint);
+    if (t.language) meta.push(String(t.language));
+    if (t.ecosystem) meta.push(String(t.ecosystem));
+    const suffix = meta.length ? ` — ${meta.join(" / ")}` : "";
+    return `${t.name}${suffix}`;
+  }
+  const toolOptions = toolList
+    .filter((t) => matchesEnv(t, environments))
+    .map((t) => ({
+      value: t.name,
+      label: formatToolLabel(t),
+    }));
   toolOptions.push({ value: "other", label: "Other / custom" });
   // (Previously used Fuse.js for a two-step filter flow; replaced by a
   // live Enquirer multiselect so Fuse is no longer needed.)
@@ -243,9 +396,12 @@ export async function run(opts: any) {
   for (const t of toolList || []) {
     if (!t || !t.name) continue;
     if (choiceMap.has(t.name)) continue;
+    // only include a tool in choices if it matches the selected envs, or
+    // it's in the selectedSet (inferred/default) so users can unselect it.
+    if (!matchesEnv(t, environments) && !selectedSet.has(t.name)) continue;
     choiceMap.set(t.name, {
       name: t.name,
-      message: t.hint ? `${t.name} — ${t.hint}` : t.name,
+      message: formatToolLabel(t),
       value: t.name,
       disabled: false,
       checked: selectedSet.has(t.name),

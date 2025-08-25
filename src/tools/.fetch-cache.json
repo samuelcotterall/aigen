@@ -1,0 +1,6128 @@
+{
+  "packages": {
+    "playwright": {
+      "fetchedAt": 1756142312251,
+      "meta": {
+        "name": "playwright",
+        "description": "A high-level API to automate web browsers",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/microsoft/playwright.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 18506513,
+        "githubTopics": []
+      }
+    },
+    "puppeteer": {
+      "fetchedAt": 1756142313218,
+      "meta": {
+        "name": "puppeteer",
+        "description": "A high-level API to control headless Chrome over the DevTools Protocol",
+        "keywords": [
+          "puppeteer",
+          "chrome",
+          "headless",
+          "automation"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/puppeteer/puppeteer.git#main"
+        },
+        "source": "npm",
+        "downloads": 5438113,
+        "githubTopics": []
+      }
+    },
+    "vitest": {
+      "fetchedAt": 1756142314139,
+      "meta": {
+        "name": "vitest",
+        "description": "Next generation testing framework powered by Vite",
+        "keywords": [
+          "vite",
+          "vitest",
+          "test",
+          "jest"
+        ],
+        "repository": {
+          "url": "git+https://github.com/vitest-dev/vitest.git",
+          "type": "git",
+          "directory": "packages/vitest"
+        },
+        "source": "npm",
+        "downloads": 14120005,
+        "githubTopics": []
+      }
+    },
+    "jest": {
+      "fetchedAt": 1756142314415,
+      "meta": {
+        "name": "jest",
+        "description": "Delightful JavaScript Testing.",
+        "keywords": [
+          "ava",
+          "babel",
+          "coverage",
+          "easy",
+          "expect",
+          "facebook",
+          "immersive",
+          "instant",
+          "jasmine",
+          "jest",
+          "jsdom",
+          "mocha",
+          "mocking",
+          "painless",
+          "qunit",
+          "runner",
+          "sandboxed",
+          "snapshot",
+          "tap",
+          "tape",
+          "test",
+          "testing",
+          "typescript",
+          "watch"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/jestjs/jest.git",
+          "directory": "packages/jest"
+        },
+        "source": "npm",
+        "downloads": 30678049,
+        "githubTopics": []
+      }
+    },
+    "axios": {
+      "fetchedAt": 1756142314696,
+      "meta": {
+        "name": "axios",
+        "description": "Promise based HTTP client for the browser and node.js",
+        "keywords": [
+          "xhr",
+          "http",
+          "ajax",
+          "promise",
+          "node"
+        ],
+        "repository": {
+          "url": "git+https://github.com/axios/axios.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 65121330,
+        "githubTopics": []
+      }
+    },
+    "@tanstack/react-query": {
+      "fetchedAt": 1756142315986,
+      "meta": {
+        "name": "@tanstack/react-query",
+        "description": "Hooks for managing, caching and syncing asynchronous and remote data in React",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/TanStack/query.git",
+          "directory": "packages/react-query"
+        },
+        "source": "npm",
+        "downloads": 12842442,
+        "githubTopics": []
+      }
+    },
+    "jotai": {
+      "fetchedAt": 1756142316947,
+      "meta": {
+        "name": "jotai",
+        "description": "👻 Primitive and flexible state management for React",
+        "keywords": [
+          "react",
+          "state",
+          "manager",
+          "management",
+          "recoil",
+          "store"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/pmndrs/jotai.git"
+        },
+        "source": "npm",
+        "downloads": 1957777,
+        "githubTopics": []
+      }
+    },
+    "zustand": {
+      "fetchedAt": 1756142317188,
+      "meta": {
+        "name": "zustand",
+        "description": "🐻 Bear necessities for state management in React",
+        "keywords": [
+          "react",
+          "state",
+          "manager",
+          "management",
+          "redux",
+          "store"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/pmndrs/zustand.git"
+        },
+        "source": "npm",
+        "downloads": 10434624,
+        "githubTopics": []
+      }
+    },
+    "swr": {
+      "fetchedAt": 1756142317441,
+      "meta": {
+        "name": "swr",
+        "description": "React Hooks library for remote data fetching",
+        "keywords": [
+          "swr",
+          "react",
+          "hooks",
+          "request",
+          "cache",
+          "fetch"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/vercel/swr.git"
+        },
+        "source": "npm",
+        "downloads": 4907851,
+        "githubTopics": []
+      }
+    },
+    "next": {
+      "fetchedAt": 1756142318870,
+      "meta": {
+        "name": "next",
+        "description": "The React Framework",
+        "keywords": [
+          "react",
+          "framework",
+          "nextjs",
+          "web",
+          "server",
+          "node",
+          "front-end",
+          "backend",
+          "cli",
+          "vercel"
+        ],
+        "repository": {
+          "url": "git+https://github.com/vercel/next.js.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 14663613,
+        "githubTopics": []
+      }
+    },
+    "react": {
+      "fetchedAt": 1756142319974,
+      "meta": {
+        "name": "react",
+        "description": "React is a JavaScript library for building user interfaces.",
+        "keywords": [
+          "react"
+        ],
+        "repository": {
+          "url": "git+https://github.com/facebook/react.git",
+          "type": "git",
+          "directory": "packages/react"
+        },
+        "source": "npm",
+        "downloads": 43682472,
+        "githubTopics": []
+      }
+    },
+    "vite": {
+      "fetchedAt": 1756142321543,
+      "meta": {
+        "name": "vite",
+        "description": "Native-ESM powered web dev build tool",
+        "keywords": [
+          "frontend",
+          "framework",
+          "hmr",
+          "dev-server",
+          "build-tool",
+          "vite"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/vitejs/vite.git",
+          "directory": "packages/vite"
+        },
+        "source": "npm",
+        "downloads": 149485239,
+        "githubTopics": []
+      }
+    },
+    "webpack": {
+      "fetchedAt": 1756142321939,
+      "meta": {
+        "name": "webpack",
+        "description": "Packs ECMAScript/CommonJs/AMD modules for the browser. Allows you to split your codebase into multiple bundles, which can be loaded on demand. Supports loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/webpack/webpack.git"
+        },
+        "source": "npm",
+        "downloads": 31423972,
+        "githubTopics": []
+      }
+    },
+    "react-is": {
+      "fetchedAt": 1756142322950,
+      "meta": {
+        "name": "react-is",
+        "description": "Brand checking of React Elements.",
+        "keywords": [
+          "react"
+        ],
+        "repository": {
+          "url": "git+https://github.com/facebook/react.git",
+          "type": "git",
+          "directory": "packages/react-is"
+        },
+        "source": "npm",
+        "downloads": 153973539,
+        "githubTopics": []
+      }
+    },
+    "react-smooth": {
+      "fetchedAt": 1756142323877,
+      "meta": {
+        "name": "react-smooth",
+        "description": "react animation library",
+        "keywords": [
+          "react",
+          "reactjs",
+          "animation",
+          "react-component"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/recharts/react-smooth.git"
+        },
+        "source": "npm",
+        "downloads": 8705770,
+        "githubTopics": []
+      }
+    },
+    "react-router": {
+      "fetchedAt": 1756142324168,
+      "meta": {
+        "name": "react-router",
+        "description": "Declarative routing for React",
+        "keywords": [
+          "react",
+          "router",
+          "route",
+          "routing",
+          "history",
+          "link"
+        ],
+        "repository": {
+          "url": "git+https://github.com/remix-run/react-router.git",
+          "type": "git",
+          "directory": "packages/react-router"
+        },
+        "source": "npm",
+        "downloads": 19786362,
+        "githubTopics": []
+      }
+    },
+    "@types/react": {
+      "fetchedAt": 1756142324660,
+      "meta": {
+        "name": "@types/react",
+        "description": "TypeScript definitions for react",
+        "keywords": [],
+        "repository": {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+          "type": "git",
+          "directory": "types/react"
+        },
+        "source": "npm",
+        "downloads": 43408684,
+        "githubTopics": []
+      }
+    },
+    "react-dom": {
+      "fetchedAt": 1756142325128,
+      "meta": {
+        "name": "react-dom",
+        "description": "React package for working with the DOM.",
+        "keywords": [
+          "react"
+        ],
+        "repository": {
+          "url": "git+https://github.com/facebook/react.git",
+          "type": "git",
+          "directory": "packages/react-dom"
+        },
+        "source": "npm",
+        "downloads": 40923560,
+        "githubTopics": []
+      }
+    },
+    "react-redux": {
+      "fetchedAt": 1756142325425,
+      "meta": {
+        "name": "react-redux",
+        "description": "Official React bindings for Redux",
+        "keywords": [
+          "react",
+          "reactjs",
+          "redux"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/reduxjs/react-redux.git"
+        },
+        "source": "npm",
+        "downloads": 10743168,
+        "githubTopics": []
+      }
+    },
+    "eslint-plugin-react": {
+      "fetchedAt": 1756142326329,
+      "meta": {
+        "name": "eslint-plugin-react",
+        "description": "React specific linting rules for ESLint",
+        "keywords": [
+          "eslint",
+          "eslint-plugin",
+          "eslintplugin",
+          "react"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/jsx-eslint/eslint-plugin-react.git"
+        },
+        "source": "npm",
+        "downloads": 25679867,
+        "githubTopics": []
+      }
+    },
+    "eslint-plugin-react-hooks": {
+      "fetchedAt": 1756142326685,
+      "meta": {
+        "name": "eslint-plugin-react-hooks",
+        "description": "ESLint rules for React Hooks",
+        "keywords": [
+          "eslint",
+          "eslint-plugin",
+          "eslintplugin",
+          "react"
+        ],
+        "repository": {
+          "url": "git+https://github.com/facebook/react.git",
+          "type": "git",
+          "directory": "packages/eslint-plugin-react-hooks"
+        },
+        "source": "npm",
+        "downloads": 28028423,
+        "githubTopics": []
+      }
+    },
+    "@react-navigation/native": {
+      "fetchedAt": 1756142327522,
+      "meta": {
+        "name": "@react-navigation/native",
+        "description": "React Native integration for React Navigation",
+        "keywords": [
+          "react-native",
+          "react-navigation",
+          "ios",
+          "android"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/react-navigation/react-navigation.git",
+          "directory": "packages/native"
+        },
+        "source": "npm",
+        "downloads": 1768025,
+        "githubTopics": []
+      }
+    },
+    "react-draggable": {
+      "fetchedAt": 1756142327803,
+      "meta": {
+        "name": "react-draggable",
+        "description": "React draggable component",
+        "keywords": [
+          "react",
+          "draggable",
+          "react-component"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/react-grid-layout/react-draggable.git"
+        },
+        "source": "npm",
+        "downloads": 2903374,
+        "githubTopics": []
+      }
+    },
+    "react-freeze": {
+      "fetchedAt": 1756142328676,
+      "meta": {
+        "name": "react-freeze",
+        "description": "React Freeze",
+        "keywords": [
+          "react",
+          "freeze"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/software-mansion/react-freeze.git"
+        },
+        "source": "npm",
+        "downloads": 1510940,
+        "githubTopics": []
+      }
+    },
+    "@storybook/react": {
+      "fetchedAt": 1756142329902,
+      "meta": {
+        "name": "@storybook/react",
+        "description": "Storybook React renderer",
+        "keywords": [
+          "storybook"
+        ],
+        "repository": {
+          "url": "https://github.com/storybookjs/storybook.git",
+          "type": "git",
+          "directory": "code/renderers/react"
+        },
+        "source": "npm",
+        "downloads": 7303583,
+        "githubTopics": []
+      }
+    },
+    "@floating-ui/react-dom": {
+      "fetchedAt": 1756142330826,
+      "meta": {
+        "name": "@floating-ui/react-dom",
+        "description": "Floating UI for React DOM",
+        "keywords": [
+          "tooltip",
+          "popover",
+          "dropdown",
+          "menu",
+          "popup",
+          "positioning",
+          "react",
+          "react-dom"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/floating-ui/floating-ui.git",
+          "directory": "packages/react-dom"
+        },
+        "source": "npm",
+        "downloads": 19824387,
+        "githubTopics": []
+      }
+    },
+    "@floating-ui/react": {
+      "fetchedAt": 1756142331749,
+      "meta": {
+        "name": "@floating-ui/react",
+        "description": "Floating UI for React",
+        "keywords": [
+          "tooltip",
+          "popover",
+          "dropdown",
+          "menu",
+          "popup",
+          "positioning",
+          "react",
+          "react-dom"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/floating-ui/floating-ui.git",
+          "directory": "packages/react"
+        },
+        "source": "npm",
+        "downloads": 7021416,
+        "githubTopics": []
+      }
+    },
+    "@mdx-js/react": {
+      "fetchedAt": 1756142332670,
+      "meta": {
+        "name": "@mdx-js/react",
+        "description": "React context for MDX",
+        "keywords": [
+          "jsx",
+          "markdown",
+          "mdx",
+          "react",
+          "remark"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mdx-js/mdx.git",
+          "directory": "packages/react/"
+        },
+        "source": "npm",
+        "downloads": 8109566,
+        "githubTopics": []
+      }
+    },
+    "react-markdown": {
+      "fetchedAt": 1756142333492,
+      "meta": {
+        "name": "react-markdown",
+        "description": "React component to render markdown",
+        "keywords": [
+          "ast",
+          "commonmark",
+          "component",
+          "gfm",
+          "markdown",
+          "react",
+          "react-component",
+          "remark",
+          "unified"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/remarkjs/react-markdown.git"
+        },
+        "source": "npm",
+        "downloads": 6025154,
+        "githubTopics": []
+      }
+    },
+    "react-router-dom": {
+      "fetchedAt": 1756142334412,
+      "meta": {
+        "name": "react-router-dom",
+        "description": "Declarative routing for React web applications",
+        "keywords": [
+          "react",
+          "router",
+          "route",
+          "routing",
+          "history",
+          "link"
+        ],
+        "repository": {
+          "url": "git+https://github.com/remix-run/react-router.git",
+          "type": "git",
+          "directory": "packages/react-router-dom"
+        },
+        "source": "npm",
+        "downloads": 17774259,
+        "githubTopics": []
+      }
+    },
+    "react-transition-group": {
+      "fetchedAt": 1756142335337,
+      "meta": {
+        "name": "react-transition-group",
+        "description": "A react component toolset for managing animations",
+        "keywords": [
+          "react",
+          "transition",
+          "addons",
+          "transition-group",
+          "animation",
+          "css",
+          "transitions"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/reactjs/react-transition-group.git"
+        },
+        "source": "npm",
+        "downloads": 20820818,
+        "githubTopics": []
+      }
+    },
+    "react-toastify": {
+      "fetchedAt": 1756142335589,
+      "meta": {
+        "name": "react-toastify",
+        "description": "React notification made easy",
+        "keywords": [
+          "react",
+          "notification",
+          "toast",
+          "react-component",
+          "react-toastify",
+          "push",
+          "alert",
+          "snackbar",
+          "message"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fkhadra/react-toastify.git"
+        },
+        "source": "npm",
+        "downloads": 2574523,
+        "githubTopics": []
+      }
+    },
+    "@types/react-dom": {
+      "fetchedAt": 1756142336460,
+      "meta": {
+        "name": "@types/react-dom",
+        "description": "TypeScript definitions for react-dom",
+        "keywords": [],
+        "repository": {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+          "type": "git",
+          "directory": "types/react-dom"
+        },
+        "source": "npm",
+        "downloads": 30985484,
+        "githubTopics": []
+      }
+    },
+    "react-refresh": {
+      "fetchedAt": 1756142337497,
+      "meta": {
+        "name": "react-refresh",
+        "description": "React is a JavaScript library for building user interfaces.",
+        "keywords": [
+          "react"
+        ],
+        "repository": {
+          "url": "git+https://github.com/facebook/react.git",
+          "type": "git",
+          "directory": "packages/react"
+        },
+        "source": "npm",
+        "downloads": 21864388,
+        "githubTopics": []
+      }
+    },
+    "@react-spring/web": {
+      "fetchedAt": 1756142338410,
+      "meta": {
+        "name": "@react-spring/web",
+        "description": "`react-dom` support",
+        "keywords": [
+          "animated",
+          "animation",
+          "hooks",
+          "motion",
+          "react",
+          "react-native",
+          "spring",
+          "typescript",
+          "velocity"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/pmndrs/react-spring.git"
+        },
+        "source": "npm",
+        "downloads": 2463713,
+        "githubTopics": []
+      }
+    },
+    "react-tooltip": {
+      "fetchedAt": 1756142340060,
+      "meta": {
+        "name": "react-tooltip",
+        "description": "react tooltip component",
+        "keywords": [
+          "react",
+          "react-component",
+          "tooltip",
+          "react-tooltip"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/ReactTooltip/react-tooltip.git"
+        },
+        "source": "npm",
+        "downloads": 1459983,
+        "githubTopics": []
+      }
+    },
+    "lucide-react": {
+      "fetchedAt": 1756142340963,
+      "meta": {
+        "name": "lucide-react",
+        "description": "A Lucide icon library package for React applications.",
+        "keywords": [
+          "Lucide",
+          "React",
+          "Feather",
+          "Icons",
+          "Icon",
+          "SVG",
+          "Feather Icons",
+          "Fontawesome",
+          "Font Awesome"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/lucide-icons/lucide.git",
+          "directory": "packages/lucide-react"
+        },
+        "source": "npm",
+        "downloads": 12430248,
+        "githubTopics": []
+      }
+    },
+    "@emotion/react": {
+      "fetchedAt": 1756142341842,
+      "meta": {
+        "name": "@emotion/react",
+        "description": "> Simple styling in React.",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/emotion-js/emotion.git#main"
+        },
+        "source": "npm",
+        "downloads": 11115477,
+        "githubTopics": []
+      }
+    },
+    "react-test-renderer": {
+      "fetchedAt": 1756142342957,
+      "meta": {
+        "name": "react-test-renderer",
+        "description": "React package for snapshot testing.",
+        "keywords": [
+          "react",
+          "react-native",
+          "react-testing"
+        ],
+        "repository": {
+          "url": "git+https://github.com/facebook/react.git",
+          "type": "git",
+          "directory": "packages/react-test-renderer"
+        },
+        "source": "npm",
+        "downloads": 5135435,
+        "githubTopics": []
+      }
+    },
+    "lottie-react": {
+      "fetchedAt": 1756142343857,
+      "meta": {
+        "name": "lottie-react",
+        "description": "Lottie for React",
+        "keywords": [
+          "lottie",
+          "react",
+          "lottie react",
+          "react lottie",
+          "lottie web",
+          "animation",
+          "component",
+          "hook"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Gamote/lottie-react.git"
+        },
+        "source": "npm",
+        "downloads": 1113075,
+        "githubTopics": []
+      }
+    },
+    "@vitejs/plugin-react": {
+      "fetchedAt": 1756142344758,
+      "meta": {
+        "name": "@vitejs/plugin-react",
+        "description": "The default Vite plugin for React projects",
+        "keywords": [
+          "vite",
+          "vite-plugin",
+          "react",
+          "babel",
+          "react-refresh",
+          "fast refresh"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/vitejs/vite-plugin-react.git",
+          "directory": "packages/plugin-react"
+        },
+        "source": "npm",
+        "downloads": 11099298,
+        "githubTopics": []
+      }
+    },
+    "react-popper-tooltip": {
+      "fetchedAt": 1756142345683,
+      "meta": {
+        "name": "react-popper-tooltip",
+        "description": "React tooltip library built around react-popper",
+        "keywords": [
+          "react",
+          "tooltip",
+          "popover",
+          "overlay",
+          "react-tooltip",
+          "react-popper"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/mohsinulhaq/react-popper-tooltip"
+        },
+        "source": "npm",
+        "downloads": 684848,
+        "githubTopics": []
+      }
+    },
+    "ui": {
+      "fetchedAt": 1756142346520,
+      "meta": {
+        "name": "ui",
+        "description": "platform agnostic ui models",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/marcuswestin/ui.js.git"
+        },
+        "source": "npm",
+        "downloads": 7196,
+        "githubTopics": []
+      }
+    },
+    "@floating-ui/utils": {
+      "fetchedAt": 1756142347425,
+      "meta": {
+        "name": "@floating-ui/utils",
+        "description": "Utilities for Floating UI",
+        "keywords": [
+          "tooltip",
+          "popover",
+          "dropdown",
+          "menu",
+          "popup",
+          "positioning"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/floating-ui/floating-ui.git",
+          "directory": "packages/utils"
+        },
+        "source": "npm",
+        "downloads": 20827538,
+        "githubTopics": []
+      }
+    },
+    "@floating-ui/dom": {
+      "fetchedAt": 1756142348272,
+      "meta": {
+        "name": "@floating-ui/dom",
+        "description": "Floating UI for the web",
+        "keywords": [
+          "tooltip",
+          "popover",
+          "dropdown",
+          "menu",
+          "popup",
+          "positioning"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/floating-ui/floating-ui.git",
+          "directory": "packages/dom"
+        },
+        "source": "npm",
+        "downloads": 24251406,
+        "githubTopics": []
+      }
+    },
+    "swagger-ui-express": {
+      "fetchedAt": 1756142349125,
+      "meta": {
+        "name": "swagger-ui-express",
+        "description": "Swagger UI Express",
+        "keywords": [
+          "swagger",
+          "express",
+          "ui",
+          "json",
+          "documentation"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/scottie1984/swagger-ui-express.git"
+        },
+        "source": "npm",
+        "downloads": 2226692,
+        "githubTopics": []
+      }
+    },
+    "@vitest/ui": {
+      "fetchedAt": 1756142349672,
+      "meta": {
+        "name": "@vitest/ui",
+        "description": "UI for Vitest",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/vitest-dev/vitest.git",
+          "type": "git",
+          "directory": "packages/ui"
+        },
+        "source": "npm",
+        "downloads": 3554833,
+        "githubTopics": []
+      }
+    },
+    "@material-ui/system": {
+      "fetchedAt": 1756142350577,
+      "meta": {
+        "name": "@material-ui/system",
+        "description": "Material-UI System - Design system for Material-UI.",
+        "keywords": [
+          "react",
+          "react-component",
+          "material design",
+          "material-ui",
+          "system"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mui-org/material-ui.git",
+          "directory": "packages/material-ui-system"
+        },
+        "source": "npm",
+        "downloads": 1097196,
+        "githubTopics": []
+      }
+    },
+    "@material-ui/types": {
+      "fetchedAt": 1756142351509,
+      "meta": {
+        "name": "@material-ui/types",
+        "description": "Material-UI Types - Utility types for Material-UI.",
+        "keywords": [
+          "react",
+          "react-component",
+          "material design",
+          "material-ui",
+          "types"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mui-org/material-ui.git",
+          "directory": "packages/material-ui-types"
+        },
+        "source": "npm",
+        "downloads": 1193894,
+        "githubTopics": []
+      }
+    },
+    "@material-ui/utils": {
+      "fetchedAt": 1756142352443,
+      "meta": {
+        "name": "@material-ui/utils",
+        "description": "Material-UI Utils - Utility functions for Material-UI.",
+        "keywords": [
+          "react",
+          "react-component",
+          "material design",
+          "material-ui",
+          "utils"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mui-org/material-ui.git",
+          "directory": "packages/material-ui-utils"
+        },
+        "source": "npm",
+        "downloads": 1197921,
+        "githubTopics": []
+      }
+    },
+    "@storybook/ui": {
+      "fetchedAt": 1756142353638,
+      "meta": {
+        "name": "@storybook/ui",
+        "description": "Core Storybook UI",
+        "keywords": [
+          "storybook"
+        ],
+        "repository": {
+          "url": "git+https://github.com/storybookjs/storybook.git",
+          "type": "git",
+          "directory": "lib/ui"
+        },
+        "source": "npm",
+        "downloads": 1214327,
+        "githubTopics": []
+      }
+    },
+    "swagger-ui-dist": {
+      "fetchedAt": 1756142354494,
+      "meta": {
+        "name": "swagger-ui-dist",
+        "description": "[![NPM version](https://badge.fury.io/js/swagger-ui-dist.svg)](http://badge.fury.io/js/swagger-ui-dist)",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/swagger-api/swagger-ui.git"
+        },
+        "source": "npm",
+        "downloads": 4924295,
+        "githubTopics": []
+      }
+    },
+    "@ckeditor/ckeditor5-ui": {
+      "fetchedAt": 1756142355626,
+      "meta": {
+        "name": "@ckeditor/ckeditor5-ui",
+        "description": "The UI framework and standard UI library of CKEditor 5.",
+        "keywords": [
+          "ckeditor",
+          "ckeditor5",
+          "ckeditor 5",
+          "ckeditor5-lib",
+          "ckeditor5-dll"
+        ],
+        "repository": {
+          "url": "git+https://github.com/ckeditor/ckeditor5.git",
+          "type": "git",
+          "directory": "packages/ckeditor5-ui"
+        },
+        "source": "npm",
+        "downloads": 1188832,
+        "githubTopics": []
+      }
+    },
+    "fizzy-ui-utils": {
+      "fetchedAt": 1756142356538,
+      "meta": {
+        "name": "fizzy-ui-utils",
+        "description": "UI utilities",
+        "keywords": [
+          "ui",
+          "utility",
+          "browser",
+          "DOM"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/metafizzy/fizzy-ui-utils.git"
+        },
+        "source": "npm",
+        "downloads": 305070,
+        "githubTopics": []
+      }
+    },
+    "@sanity/ui": {
+      "fetchedAt": 1756142357148,
+      "meta": {
+        "name": "@sanity/ui",
+        "description": "The Sanity UI components.",
+        "keywords": [
+          "sanity",
+          "ui",
+          "primitives",
+          "react",
+          "components",
+          "design-system"
+        ],
+        "repository": {
+          "url": "git+https://github.com/sanity-io/ui.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 341411,
+        "githubTopics": []
+      }
+    },
+    "@floating-ui/vue": {
+      "fetchedAt": 1756142358670,
+      "meta": {
+        "name": "@floating-ui/vue",
+        "description": "Floating UI for Vue",
+        "keywords": [
+          "tooltip",
+          "popover",
+          "dropdown",
+          "menu",
+          "popup",
+          "positioning",
+          "vue"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/floating-ui/floating-ui.git",
+          "directory": "packages/vue"
+        },
+        "source": "npm",
+        "downloads": 661437,
+        "githubTopics": []
+      }
+    },
+    "@chakra-ui/control-box": {
+      "fetchedAt": 1756142359581,
+      "meta": {
+        "name": "@chakra-ui/control-box",
+        "description": "Chakra UI ControlBox component",
+        "keywords": [
+          "checkbox",
+          "custom",
+          "input",
+          "react",
+          "chakra-ui"
+        ],
+        "repository": {
+          "url": "git+https://github.com/chakra-ui/chakra-ui.git",
+          "type": "git",
+          "directory": "packages/components/control-box"
+        },
+        "source": "npm",
+        "downloads": 381118,
+        "githubTopics": []
+      }
+    },
+    "@chakra-ui/system": {
+      "fetchedAt": 1756142360511,
+      "meta": {
+        "name": "@chakra-ui/system",
+        "description": "Chakra UI system primitives",
+        "keywords": [
+          "system",
+          "styled-component",
+          "emotion",
+          "ui-component",
+          "ui",
+          "chakra",
+          "style-props",
+          "design-system"
+        ],
+        "repository": {
+          "url": "git+https://github.com/chakra-ui/chakra-ui.git",
+          "type": "git",
+          "directory": "packages/core/system"
+        },
+        "source": "npm",
+        "downloads": 507445,
+        "githubTopics": []
+      }
+    },
+    "expo-system-ui": {
+      "fetchedAt": 1756142361068,
+      "meta": {
+        "name": "expo-system-ui",
+        "description": "Interact with system UI elements",
+        "keywords": [
+          "react-native",
+          "expo",
+          "background-color",
+          "user-interface",
+          "appearance"
+        ],
+        "repository": {
+          "url": "git+https://github.com/expo/expo.git",
+          "type": "git",
+          "directory": "packages/expo-system-ui"
+        },
+        "source": "npm",
+        "downloads": 712208,
+        "githubTopics": []
+      }
+    },
+    "reka-ui": {
+      "fetchedAt": 1756142361346,
+      "meta": {
+        "name": "reka-ui",
+        "description": "Vue port for Radix UI Primitives.",
+        "keywords": [
+          "ui",
+          "vue",
+          "accessibility",
+          "headless",
+          "nuxt",
+          "primitives",
+          "components",
+          "radix",
+          "unstyled"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/unovue/reka-ui.git"
+        },
+        "source": "npm",
+        "downloads": 307740,
+        "githubTopics": []
+      }
+    },
+    "@fastify/swagger-ui": {
+      "fetchedAt": 1756142362365,
+      "meta": {
+        "name": "@fastify/swagger-ui",
+        "description": "Serve Swagger-ui for Fastify",
+        "keywords": [
+          "fastify",
+          "swagger",
+          "openapi",
+          "swagger-ui",
+          "serve",
+          "static"
+        ],
+        "repository": {
+          "url": "git+https://github.com/fastify/fastify-swagger-ui.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 388090,
+        "githubTopics": []
+      }
+    },
+    "@radix-ui/react-icons": {
+      "fetchedAt": 1756142363164,
+      "meta": {
+        "name": "@radix-ui/react-icons",
+        "description": "Radix UI React Icon Set",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 1631612,
+        "githubTopics": []
+      }
+    },
+    "ra-ui-materialui": {
+      "fetchedAt": 1756142364828,
+      "meta": {
+        "name": "ra-ui-materialui",
+        "description": "UI Components for react-admin with Material UI",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/marmelab/react-admin.git"
+        },
+        "source": "npm",
+        "downloads": 101722,
+        "githubTopics": []
+      }
+    },
+    "@types/swagger-ui-express": {
+      "fetchedAt": 1756142365738,
+      "meta": {
+        "name": "@types/swagger-ui-express",
+        "description": "TypeScript definitions for swagger-ui-express",
+        "keywords": [],
+        "repository": {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+          "type": "git",
+          "directory": "types/swagger-ui-express"
+        },
+        "source": "npm",
+        "downloads": 878054,
+        "githubTopics": []
+      }
+    },
+    "@material-ui/icons": {
+      "fetchedAt": 1756142365993,
+      "meta": {
+        "name": "@material-ui/icons",
+        "description": "Material Design Svg Icons converted to Material-UI React components.",
+        "keywords": [
+          "react",
+          "react-component",
+          "material design",
+          "material-ui",
+          "icons"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mui-org/material-ui.git",
+          "directory": "packages/material-ui-icons"
+        },
+        "source": "npm",
+        "downloads": 735127,
+        "githubTopics": []
+      }
+    },
+    "@leafygreen-ui/typography": {
+      "fetchedAt": 1756142368103,
+      "meta": {
+        "name": "@leafygreen-ui/typography",
+        "description": "leafyGreen UI Kit Typography",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mongodb/leafygreen-ui.git"
+        },
+        "source": "npm",
+        "downloads": 423285,
+        "githubTopics": []
+      }
+    },
+    "instantsearch-ui-components": {
+      "fetchedAt": 1756142369541,
+      "meta": {
+        "name": "instantsearch-ui-components",
+        "description": "Common UI components for InstantSearch.",
+        "keywords": [
+          "algolia",
+          "components",
+          "fast",
+          "instantsearch",
+          "react",
+          "search",
+          "jsx",
+          "vdom",
+          "hyperscript"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/algolia/instantsearch.git"
+        },
+        "source": "npm",
+        "downloads": 337545,
+        "githubTopics": []
+      }
+    },
+    "@chakra-ui/css-reset": {
+      "fetchedAt": 1756142370415,
+      "meta": {
+        "name": "@chakra-ui/css-reset",
+        "description": "CSS reset component for Chakra UI",
+        "keywords": [
+          "theme",
+          "theming",
+          "ui mode",
+          "chakra ui",
+          "css reset"
+        ],
+        "repository": {
+          "url": "git+https://github.com/chakra-ui/chakra-ui.git",
+          "type": "git",
+          "directory": "packages/components/css-reset"
+        },
+        "source": "npm",
+        "downloads": 384542,
+        "githubTopics": []
+      }
+    },
+    "@chakra-ui/table": {
+      "fetchedAt": 1756142371952,
+      "meta": {
+        "name": "@chakra-ui/table",
+        "description": "Table component for React and Chakra UI",
+        "keywords": [
+          "react",
+          "react component",
+          "table",
+          "accessible table",
+          "a11y table",
+          "react a11y table",
+          "react accessible table",
+          "react table",
+          "chakra ui",
+          "chakra",
+          "react table component",
+          "a11y",
+          "react aria table",
+          "aria",
+          "aria table"
+        ],
+        "repository": {
+          "url": "git+https://github.com/chakra-ui/chakra-ui.git",
+          "type": "git",
+          "directory": "packages/components/table"
+        },
+        "source": "npm",
+        "downloads": 384015,
+        "githubTopics": []
+      }
+    },
+    "swagger-ui-react": {
+      "fetchedAt": 1756142373834,
+      "meta": {
+        "name": "swagger-ui-react",
+        "description": "[![NPM version](https://badge.fury.io/js/swagger-ui-react.svg)](http://badge.fury.io/js/swagger-ui-react)",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/swagger-api/swagger-ui.git"
+        },
+        "source": "npm",
+        "downloads": 311593,
+        "githubTopics": []
+      }
+    },
+    "@hapi/statehood": {
+      "fetchedAt": 1756142374753,
+      "meta": {
+        "name": "@hapi/statehood",
+        "description": "HTTP State Management Utilities",
+        "keywords": [
+          "HTTP",
+          "state",
+          "cookies",
+          "secure"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/hapijs/statehood.git"
+        },
+        "source": "npm",
+        "downloads": 907195,
+        "githubTopics": []
+      }
+    },
+    "vuex": {
+      "fetchedAt": 1756142375685,
+      "meta": {
+        "name": "vuex",
+        "description": "state management for Vue.js",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/vuejs/vuex.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 1403827,
+        "githubTopics": []
+      }
+    },
+    "mobx": {
+      "fetchedAt": 1756142376605,
+      "meta": {
+        "name": "mobx",
+        "description": "Simple, scalable state management.",
+        "keywords": [
+          "mobx",
+          "mobservable",
+          "observable",
+          "react-component",
+          "react",
+          "reactjs",
+          "reactive",
+          "model",
+          "frp",
+          "functional-reactive-programming",
+          "state management",
+          "data flow"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mobxjs/mobx.git"
+        },
+        "source": "npm",
+        "downloads": 1957772,
+        "githubTopics": []
+      }
+    },
+    "little-state-machine": {
+      "fetchedAt": 1756142377532,
+      "meta": {
+        "name": "little-state-machine",
+        "description": "State management made super simple",
+        "keywords": [
+          "state",
+          "flux"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/bluebill1049/little-state-machine.git"
+        },
+        "source": "npm",
+        "downloads": 459377,
+        "githubTopics": []
+      }
+    },
+    "@snap/state-management": {
+      "fetchedAt": 1756142379447,
+      "meta": {
+        "name": "@snap/state-management",
+        "description": "Redux-inspired state management using Observables",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 18237,
+        "githubTopics": []
+      }
+    },
+    "recoil": {
+      "fetchedAt": 1756142380329,
+      "meta": {
+        "name": "recoil",
+        "description": "Recoil - A state management library for React",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/facebookexperimental/Recoil.git"
+        },
+        "source": "npm",
+        "downloads": 532813,
+        "githubTopics": []
+      }
+    },
+    "@segment/sovran-react-native": {
+      "fetchedAt": 1756142381976,
+      "meta": {
+        "name": "@segment/sovran-react-native",
+        "description": "A cross-platform state management system",
+        "keywords": [
+          "react-native",
+          "ios",
+          "android",
+          "segment"
+        ],
+        "repository": {
+          "url": "git+https://github.com/segmentio/analytics-react-native.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 118231,
+        "githubTopics": []
+      }
+    },
+    "@wordpress/notices": {
+      "fetchedAt": 1756142384354,
+      "meta": {
+        "name": "@wordpress/notices",
+        "description": "State management for notices.",
+        "keywords": [
+          "wordpress",
+          "gutenberg",
+          "notices"
+        ],
+        "repository": {
+          "url": "https://github.com/WordPress/gutenberg.git",
+          "type": "git",
+          "directory": "packages/notices"
+        },
+        "source": "npm",
+        "downloads": 82506,
+        "githubTopics": []
+      }
+    },
+    "flowstate": {
+      "fetchedAt": 1756142385736,
+      "meta": {
+        "name": "flowstate",
+        "description": "Per-request state management middleware.",
+        "keywords": [
+          "express",
+          "connect",
+          "state"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/jaredhanson/flowstate.git"
+        },
+        "source": "npm",
+        "downloads": 55043,
+        "githubTopics": []
+      }
+    },
+    "simpler-state": {
+      "fetchedAt": 1756142387163,
+      "meta": {
+        "name": "simpler-state",
+        "description": "The simplest app state management for React",
+        "keywords": [
+          "react",
+          "state",
+          "global",
+          "shared",
+          "data",
+          "simple",
+          "functional",
+          "hooks"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/arnelenero/simpler-state.git"
+        },
+        "source": "npm",
+        "downloads": 56614,
+        "githubTopics": []
+      }
+    },
+    "carbon-state-management": {
+      "fetchedAt": 1756142388630,
+      "meta": {
+        "name": "carbon-state-management",
+        "description": "Carbon - State Management",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Sage/carbon-state-management.git"
+        },
+        "source": "npm",
+        "downloads": 486,
+        "githubTopics": []
+      }
+    },
+    "mobx-react-form": {
+      "fetchedAt": 1756142390210,
+      "meta": {
+        "name": "mobx-react-form",
+        "description": "Reactive MobX Form State Management",
+        "keywords": [
+          "form",
+          "mobx",
+          "state",
+          "events",
+          "nested",
+          "fields",
+          "bindings",
+          "react",
+          "reactive",
+          "validation",
+          "validator",
+          "json",
+          "schema",
+          "declarative",
+          "rules"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/foxhound87/mobx-react-form.git"
+        },
+        "source": "npm",
+        "downloads": 11930,
+        "githubTopics": []
+      }
+    },
+    "@antv/data-set": {
+      "fetchedAt": 1756142391159,
+      "meta": {
+        "name": "@antv/data-set",
+        "description": "data set with state management",
+        "keywords": [
+          "antv",
+          "data-set",
+          "dataSet"
+        ],
+        "repository": {
+          "url": "git+ssh://git@github.com/antvis/data-set.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 16639,
+        "githubTopics": []
+      }
+    },
+    "@ngneat/elf": {
+      "fetchedAt": 1756142392031,
+      "meta": {
+        "name": "@ngneat/elf",
+        "description": "A reactive state management for JS applications",
+        "keywords": [
+          "rxjs",
+          "state management",
+          "reactive state management",
+          "js state management",
+          "reactive store",
+          "elf"
+        ],
+        "repository": {
+          "url": "git+https://github.com/ngneat/elf.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 36500,
+        "githubTopics": []
+      }
+    },
+    "@datorama/akita": {
+      "fetchedAt": 1756142393708,
+      "meta": {
+        "name": "@datorama/akita",
+        "description": "A Reactive State Management Tailored-Made for JS Applications",
+        "keywords": [
+          "angular",
+          "state management",
+          "react",
+          "vue",
+          "typescript",
+          "javascript",
+          "rxjs",
+          "angular store",
+          "store",
+          "observable data stores",
+          "redux",
+          "reactive"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/datorama/akita.git",
+          "directory": "libs/akita"
+        },
+        "source": "npm",
+        "downloads": 42881,
+        "githubTopics": []
+      }
+    },
+    "final-form": {
+      "fetchedAt": 1756142394527,
+      "meta": {
+        "name": "final-form",
+        "description": "🏁 Framework agnostic, high performance, subscription-based form state management",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/final-form/final-form.git"
+        },
+        "source": "npm",
+        "downloads": 435185,
+        "githubTopics": []
+      }
+    },
+    "react-final-form": {
+      "fetchedAt": 1756142395462,
+      "meta": {
+        "name": "react-final-form",
+        "description": "🏁 High performance subscription-based form state management for React",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/final-form/react-final-form.git"
+        },
+        "source": "npm",
+        "downloads": 349134,
+        "githubTopics": []
+      }
+    },
+    "@chatscope/use-chat": {
+      "fetchedAt": 1756142397498,
+      "meta": {
+        "name": "@chatscope/use-chat",
+        "description": "React hook for state management in chat applications",
+        "keywords": [
+          "chat",
+          "headless",
+          "hook",
+          "react",
+          "reactjs",
+          "ui",
+          "user interface",
+          "components",
+          "ui kit",
+          "communication",
+          "conversation",
+          "toolkit",
+          "library",
+          "frontend",
+          "reusable",
+          "social",
+          "talk"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/chatscope/use-chat.git"
+        },
+        "source": "npm",
+        "downloads": 24465,
+        "githubTopics": []
+      }
+    },
+    "overmind": {
+      "fetchedAt": 1756142399023,
+      "meta": {
+        "name": "overmind",
+        "description": "Frictionless state management",
+        "keywords": [
+          "state",
+          "sideeffects",
+          "app",
+          "framework"
+        ],
+        "repository": {
+          "url": "git+https://github.com/cerebral/overmind.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 7380,
+        "githubTopics": []
+      }
+    },
+    "next-query-params": {
+      "fetchedAt": 1756142400600,
+      "meta": {
+        "name": "next-query-params",
+        "description": "Convenient state management of query parameters in Next.js apps.",
+        "keywords": [
+          "react",
+          "next",
+          "url",
+          "query",
+          "parameters",
+          "hook",
+          "hooks"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/amannn/next-query-params.git"
+        },
+        "source": "npm",
+        "downloads": 38734,
+        "githubTopics": []
+      }
+    },
+    "alvamind": {
+      "fetchedAt": 1756142402210,
+      "meta": {
+        "name": "alvamind",
+        "description": "A lightweight state management library",
+        "keywords": [
+          "state-management",
+          "typescript"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/alvamind/alvamind-ts.git"
+        },
+        "source": "npm",
+        "downloads": 4118,
+        "githubTopics": []
+      }
+    },
+    "synaptik": {
+      "fetchedAt": 1756142403839,
+      "meta": {
+        "name": "synaptik",
+        "description": "Yet another state management library",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/heydoctor/synaptik"
+        },
+        "source": "npm",
+        "downloads": 1352,
+        "githubTopics": []
+      }
+    },
+    "@tcn/state": {
+      "fetchedAt": 1756142405762,
+      "meta": {
+        "name": "@tcn/state",
+        "description": "State management for complex business logic.",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 3656,
+        "githubTopics": []
+      }
+    },
+    "@openmrs/esm-state": {
+      "fetchedAt": 1756142408138,
+      "meta": {
+        "name": "@openmrs/esm-state",
+        "description": "Frontend stores & state management for OpenMRS",
+        "keywords": [
+          "openmrs",
+          "microfrontends"
+        ],
+        "repository": {
+          "url": "git+https://github.com/openmrs/openmrs-esm-core.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 5049,
+        "githubTopics": []
+      }
+    },
+    "react-native-onyx": {
+      "fetchedAt": 1756142409782,
+      "meta": {
+        "name": "react-native-onyx",
+        "description": "State management for React Native",
+        "keywords": [
+          "React Native",
+          "React",
+          "Persistent storage",
+          "Pub/Sub"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Expensify/react-native-onyx.git"
+        },
+        "source": "npm",
+        "downloads": 19135,
+        "githubTopics": []
+      }
+    },
+    "@storefront/flux-capacitor": {
+      "fetchedAt": 1756142412336,
+      "meta": {
+        "name": "@storefront/flux-capacitor",
+        "description": "State management for StoreFront",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/groupby/storefront.git"
+        },
+        "source": "npm",
+        "downloads": 2778,
+        "githubTopics": []
+      }
+    },
+    "react-oidc-context": {
+      "fetchedAt": 1756142413211,
+      "meta": {
+        "name": "react-oidc-context",
+        "description": "OpenID Connect & OAuth2 authentication using react context api as state management",
+        "keywords": [
+          "authentication",
+          "context-api",
+          "oauth2",
+          "oidc",
+          "openid",
+          "OpenID Connect",
+          "react-component"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/authts/react-oidc-context.git"
+        },
+        "source": "npm",
+        "downloads": 196041,
+        "githubTopics": []
+      }
+    },
+    "unstated-next": {
+      "fetchedAt": 1756142414562,
+      "meta": {
+        "name": "unstated-next",
+        "description": "200 bytes to never think about React state management libraries ever again",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 37414,
+        "githubTopics": []
+      }
+    },
+    "@opentelemetry/instrumentation-dataloader": {
+      "fetchedAt": 1756142415515,
+      "meta": {
+        "name": "@opentelemetry/instrumentation-dataloader",
+        "description": "OpenTelemetry instrumentation for `dataloader` data fetching layer",
+        "keywords": [
+          "dataloader",
+          "instrumentation",
+          "nodejs",
+          "opentelemetry",
+          "profiling",
+          "tracing"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/open-telemetry/opentelemetry-js-contrib.git",
+          "directory": "packages/instrumentation-dataloader"
+        },
+        "source": "npm",
+        "downloads": 5942030,
+        "githubTopics": []
+      }
+    },
+    "sswr": {
+      "fetchedAt": 1756142416437,
+      "meta": {
+        "name": "sswr",
+        "description": "Svelte stale while revalidate (SWR) data fetching strategy",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "github.com/ConsoleTVs/sswr"
+        },
+        "source": "npm",
+        "downloads": 405415,
+        "githubTopics": []
+      }
+    },
+    "swrev": {
+      "fetchedAt": 1756142416741,
+      "meta": {
+        "name": "swrev",
+        "description": "Framework agnostic stale while revalidate (SWR) data fetching strategy",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 388498,
+        "githubTopics": []
+      }
+    },
+    "swr-store": {
+      "fetchedAt": 1756142418279,
+      "meta": {
+        "name": "swr-store",
+        "description": "SWR stores for data-fetching",
+        "keywords": [
+          "pridepack",
+          "swr"
+        ],
+        "repository": {
+          "url": "git+https://github.com/lxsmnsyc/swr-store.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 45777,
+        "githubTopics": []
+      }
+    },
+    "@pinia/colada": {
+      "fetchedAt": 1756142419915,
+      "meta": {
+        "name": "@pinia/colada",
+        "description": "The smart data fetching layer for Vue.js",
+        "keywords": [
+          "pinia",
+          "plugin",
+          "data",
+          "fetching",
+          "query",
+          "mutation",
+          "cache",
+          "layer"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/posva/pinia-colada.git"
+        },
+        "source": "npm",
+        "downloads": 15627,
+        "githubTopics": []
+      }
+    },
+    "dexie-react-hooks": {
+      "fetchedAt": 1756142421446,
+      "meta": {
+        "name": "dexie-react-hooks",
+        "description": "React hooks for reactive data fetching using Dexie.js",
+        "keywords": [
+          "react",
+          "hooks",
+          "indexeddb",
+          "storage",
+          "data-fetching",
+          "reactive",
+          "subscription",
+          "dexie"
+        ],
+        "repository": {
+          "url": "git+https://github.com/dexie/Dexie.js.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 104057,
+        "githubTopics": []
+      }
+    },
+    "use-asset": {
+      "fetchedAt": 1756142422804,
+      "meta": {
+        "name": "use-asset",
+        "description": "A data fetching strategy for React Suspense",
+        "keywords": [
+          "react",
+          "suspense",
+          "resource",
+          "asset"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/pmndrs/use-asset.git"
+        },
+        "source": "npm",
+        "downloads": 39980,
+        "githubTopics": []
+      }
+    },
+    "react-async": {
+      "fetchedAt": 1756142423993,
+      "meta": {
+        "name": "react-async",
+        "description": "React component for declarative promise resolution and data fetching",
+        "keywords": [
+          "react",
+          "async",
+          "promise",
+          "fetch",
+          "hook"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/async-library/react-async.git",
+          "directory": "packages/react-async"
+        },
+        "source": "npm",
+        "downloads": 28095,
+        "githubTopics": []
+      }
+    },
+    "thwack": {
+      "fetchedAt": 1756142425764,
+      "meta": {
+        "name": "thwack",
+        "description": "A tiny modern data fetching solution.",
+        "keywords": [
+          "utils",
+          "lib",
+          "fetch",
+          "axios",
+          "xmlhttprequest",
+          "xhr",
+          "http",
+          "ajax",
+          "promise",
+          "nodejs",
+          "react-native"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/donavon/thwack.git"
+        },
+        "source": "npm",
+        "downloads": 8063,
+        "githubTopics": []
+      }
+    },
+    "@nanostores/query": {
+      "fetchedAt": 1756142427905,
+      "meta": {
+        "name": "@nanostores/query",
+        "description": "Tiny remote data fetching library for Nano Stores",
+        "keywords": [
+          "nano",
+          "react",
+          "react-native",
+          "preact",
+          "vue",
+          "svelte",
+          "store",
+          "request",
+          "cache",
+          "fetch"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/nanostores/query.git"
+        },
+        "source": "npm",
+        "downloads": 5354,
+        "githubTopics": []
+      }
+    },
+    "preact-fetching": {
+      "fetchedAt": 1756142429437,
+      "meta": {
+        "name": "preact-fetching",
+        "description": "Preact hooks for asynchronous data fetching",
+        "keywords": [
+          "preact",
+          "async",
+          "fetch"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/aduth/preact-fetching.git"
+        },
+        "source": "npm",
+        "downloads": 985,
+        "githubTopics": []
+      }
+    },
+    "react-resolver": {
+      "fetchedAt": 1756142430861,
+      "meta": {
+        "name": "react-resolver",
+        "description": "Async-rendering & data-fetching for universal React applications",
+        "keywords": [
+          "async",
+          "decorator",
+          "lazy",
+          "load",
+          "react",
+          "resolve"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/ericclemmons/react-resolver.git"
+        },
+        "source": "npm",
+        "downloads": 4112,
+        "githubTopics": []
+      }
+    },
+    "use-async-resource": {
+      "fetchedAt": 1756142432263,
+      "meta": {
+        "name": "use-async-resource",
+        "description": "A custom React hook for simple data fetching with React Suspense",
+        "keywords": [
+          "react",
+          "reactjs",
+          "async",
+          "data",
+          "fetch",
+          "cache",
+          "suspense",
+          "hooks",
+          "custom-hook",
+          "react-hook",
+          "react-hooks",
+          "react-cache",
+          "react-suspense",
+          "data-fetching"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/andreiduca/use-async-resource.git"
+        },
+        "source": "npm",
+        "downloads": 5089,
+        "githubTopics": []
+      }
+    },
+    "@dhis2/app-service-data": {
+      "fetchedAt": 1756142433943,
+      "meta": {
+        "name": "@dhis2/app-service-data",
+        "description": "Declarative data fetching for [DHIS2](https://dhis2.org) applications",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/dhis2/app-runtime.git",
+          "directory": "services/data"
+        },
+        "source": "npm",
+        "downloads": 2568,
+        "githubTopics": []
+      }
+    },
+    "mutoid": {
+      "fetchedAt": 1756142435385,
+      "meta": {
+        "name": "mutoid",
+        "description": "Reactive library for data fetching, caching, state management",
+        "keywords": [
+          "algebraic-data-types",
+          "fp-ts-rxjs",
+          "fp-ts",
+          "io-ts",
+          "isomorphic",
+          "react",
+          "reactive",
+          "reactivex",
+          "rxjs",
+          "typescript"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/facile-it/mutoid.git"
+        },
+        "source": "npm",
+        "downloads": 2506,
+        "githubTopics": []
+      }
+    },
+    "@normy/core": {
+      "fetchedAt": 1756142437532,
+      "meta": {
+        "name": "@normy/core",
+        "description": "Automatic normalization and data updates for data fetching libraries",
+        "keywords": [
+          "normalization",
+          "react-query"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/klis87/normy.git"
+        },
+        "source": "npm",
+        "downloads": 4861,
+        "githubTopics": []
+      }
+    },
+    "@plasmicpkgs/plasmic-query": {
+      "fetchedAt": 1756142439563,
+      "meta": {
+        "name": "@plasmicpkgs/plasmic-query",
+        "description": "Plasmic components and registration calls for data fetching",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 1305,
+        "githubTopics": []
+      }
+    },
+    "join-monster": {
+      "fetchedAt": 1756142440943,
+      "meta": {
+        "name": "join-monster",
+        "description": "A GraphQL to SQL query execution layer for batch data fetching.",
+        "keywords": [
+          "graphql",
+          "sql",
+          "join",
+          "query",
+          "batch",
+          "data",
+          "schema"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/join-monster/join-monster.git"
+        },
+        "source": "npm",
+        "downloads": 4574,
+        "githubTopics": []
+      }
+    },
+    "@subsquid/util-internal-ingest-tools": {
+      "fetchedAt": 1756142442905,
+      "meta": {
+        "name": "@subsquid/util-internal-ingest-tools",
+        "description": "Common tools for data fetching",
+        "keywords": [],
+        "repository": {
+          "url": "git+ssh://git@github.com/subsquid/squid.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 1598,
+        "githubTopics": []
+      }
+    },
+    "redial": {
+      "fetchedAt": 1756142444355,
+      "meta": {
+        "name": "redial",
+        "description": "Universal data fetching and route lifecycle management for React etc.",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/markdalgleish/redial.git"
+        },
+        "source": "npm",
+        "downloads": 2875,
+        "githubTopics": []
+      }
+    },
+    "ladda-cache": {
+      "fetchedAt": 1756142445706,
+      "meta": {
+        "name": "ladda-cache",
+        "description": "Data fetching layer with support for caching",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/ladda-js/ladda.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 762,
+        "githubTopics": []
+      }
+    },
+    "@subsquid/util-internal-processor-tools": {
+      "fetchedAt": 1756142447797,
+      "meta": {
+        "name": "@subsquid/util-internal-processor-tools",
+        "description": "Common tools for data fetching and mapping execution",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/subsquid/squid.git"
+        },
+        "source": "npm",
+        "downloads": 1701,
+        "githubTopics": []
+      }
+    },
+    "react-data-fetching": {
+      "fetchedAt": 1756142449167,
+      "meta": {
+        "name": "react-data-fetching",
+        "description": "Declarative data fetching for React",
+        "keywords": [
+          "react",
+          "native",
+          "data",
+          "fetch",
+          "api",
+          "component"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/CharlesMangwa/react-data-fetching.git"
+        },
+        "source": "npm",
+        "downloads": 11,
+        "githubTopics": []
+      }
+    },
+    "@nacelle/storefront-sdk": {
+      "fetchedAt": 1756142451133,
+      "meta": {
+        "name": "@nacelle/storefront-sdk",
+        "description": "GraphQL-first data fetching for composable commerce projects",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/getnacelle/nacelle-js.git",
+          "directory": "packages/storefront-sdk"
+        },
+        "source": "npm",
+        "downloads": 541,
+        "githubTopics": []
+      }
+    },
+    "falcor": {
+      "fetchedAt": 1756142452100,
+      "meta": {
+        "name": "falcor",
+        "description": "A JavaScript library for efficient data fetching.",
+        "keywords": [
+          "JSON",
+          "Netflix",
+          "Observable",
+          "falcorjs"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Netflix/falcor.git"
+        },
+        "source": "npm",
+        "downloads": 751,
+        "githubTopics": []
+      }
+    },
+    "@graphistry/falcor": {
+      "fetchedAt": 1756142454120,
+      "meta": {
+        "name": "@graphistry/falcor",
+        "description": "A JavaScript library for efficient data fetching.",
+        "keywords": [
+          "JSON",
+          "Netflix",
+          "Observable",
+          "falcorjs"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/graphistry/falcor.git"
+        },
+        "source": "npm",
+        "downloads": 1422,
+        "githubTopics": []
+      }
+    },
+    "@normy/react-query": {
+      "fetchedAt": 1756142456247,
+      "meta": {
+        "name": "@normy/react-query",
+        "description": "react-query addon for normy - automatic normalization and data updates for data fetching libraries",
+        "keywords": [
+          "normalization",
+          "react-query"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/klis87/normy.git"
+        },
+        "source": "npm",
+        "downloads": 3700,
+        "githubTopics": []
+      }
+    },
+    "ha-store": {
+      "fetchedAt": 1756142457729,
+      "meta": {
+        "name": "ha-store",
+        "description": "Efficient data fetching",
+        "keywords": [
+          "store",
+          "cache",
+          "batch",
+          "congestion",
+          "tlru"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fed135/ha-store.git"
+        },
+        "source": "npm",
+        "downloads": 70,
+        "githubTopics": []
+      }
+    },
+    "http-react": {
+      "fetchedAt": 1756142459346,
+      "meta": {
+        "name": "http-react",
+        "description": "React hooks for data fetching",
+        "keywords": [
+          "ssr",
+          "caching",
+          "swr",
+          "request deduplication",
+          "http",
+          "api",
+          "react http",
+          "fetching hook",
+          "use fetch",
+          "http request",
+          "fetching utilities",
+          "cache",
+          "graphql-client",
+          "graphql",
+          "gql",
+          "suspense",
+          "pagination",
+          "optimistic-ui",
+          "server actions"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/atomic-state/http-react.git"
+        },
+        "source": "npm",
+        "downloads": 175,
+        "githubTopics": []
+      }
+    },
+    "expect-puppeteer": {
+      "fetchedAt": 1756142460197,
+      "meta": {
+        "name": "expect-puppeteer",
+        "description": "Assertion toolkit for Puppeteer.",
+        "keywords": [
+          "jest",
+          "puppeteer",
+          "jest-puppeteer",
+          "chromeless",
+          "chrome-headless",
+          "expect",
+          "assert",
+          "should",
+          "assertion"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/argos-ci/jest-puppeteer.git",
+          "directory": "packages/expect-puppeteer"
+        },
+        "source": "npm",
+        "downloads": 246336,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-extra": {
+      "fetchedAt": 1756142461037,
+      "meta": {
+        "name": "puppeteer-extra",
+        "description": "Teach puppeteer new tricks through plugins.",
+        "keywords": [
+          "puppeteer",
+          "puppeteer-extra",
+          "flash",
+          "stealth",
+          "prefs",
+          "user-preferences",
+          "chrome",
+          "headless",
+          "pupeteer"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/berstend/puppeteer-extra.git"
+        },
+        "source": "npm",
+        "downloads": 290683,
+        "githubTopics": []
+      }
+    },
+    "jest-environment-puppeteer": {
+      "fetchedAt": 1756142461887,
+      "meta": {
+        "name": "jest-environment-puppeteer",
+        "description": "Puppeteer environment for Jest.",
+        "keywords": [
+          "jest",
+          "jest-environment",
+          "puppeteer",
+          "jest-puppeteer",
+          "chromeless",
+          "chrome-headless"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/argos-ci/jest-puppeteer.git",
+          "directory": "packages/jest-environment-puppeteer"
+        },
+        "source": "npm",
+        "downloads": 185105,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-extra-plugin": {
+      "fetchedAt": 1756142463443,
+      "meta": {
+        "name": "puppeteer-extra-plugin",
+        "description": "Base class for puppeteer-extra plugins.",
+        "keywords": [
+          "puppeteer",
+          "puppeteer-extra",
+          "puppeteer-extra-plugin",
+          "ua",
+          "user-agent",
+          "chrome",
+          "headless",
+          "pupeteer"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/berstend/puppeteer-extra.git"
+        },
+        "source": "npm",
+        "downloads": 366242,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-cluster": {
+      "fetchedAt": 1756142464864,
+      "meta": {
+        "name": "puppeteer-cluster",
+        "description": "Cluster management for puppeteer",
+        "keywords": [
+          "puppeteer",
+          "cluster",
+          "pool"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/thomasdondorf/puppeteer-cluster.git"
+        },
+        "source": "npm",
+        "downloads": 100612,
+        "githubTopics": []
+      }
+    },
+    "jest-puppeteer": {
+      "fetchedAt": 1756142465725,
+      "meta": {
+        "name": "jest-puppeteer",
+        "description": "Run your tests using Jest & Puppeteer.",
+        "keywords": [
+          "jest",
+          "puppeteer",
+          "jest-puppeteer",
+          "chromeless",
+          "chrome-headless"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/argos-ci/jest-puppeteer.git",
+          "directory": "packages/jest-puppeteer"
+        },
+        "source": "npm",
+        "downloads": 171413,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-extra-plugin-user-preferences": {
+      "fetchedAt": 1756142467000,
+      "meta": {
+        "name": "puppeteer-extra-plugin-user-preferences",
+        "description": "Launch puppeteer with arbitrary user preferences.",
+        "keywords": [
+          "puppeteer",
+          "puppeteer-extra",
+          "puppeteer-extra-plugin",
+          "user-prefs",
+          "user-preferences",
+          "chrome",
+          "headless",
+          "pupeteer"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/berstend/puppeteer-extra.git"
+        },
+        "source": "npm",
+        "downloads": 345306,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-extra-plugin-user-data-dir": {
+      "fetchedAt": 1756142467984,
+      "meta": {
+        "name": "puppeteer-extra-plugin-user-data-dir",
+        "description": "Custom user data directory for puppeteer.",
+        "keywords": [
+          "puppeteer",
+          "puppeteer-extra",
+          "puppeteer-extra-plugin",
+          "user-data",
+          "userDataDir",
+          "profile",
+          "chrome",
+          "headless",
+          "pupeteer"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/berstend/puppeteer-extra.git"
+        },
+        "source": "npm",
+        "downloads": 345562,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-har": {
+      "fetchedAt": 1756142469313,
+      "meta": {
+        "name": "puppeteer-har",
+        "description": "Generate HAR file with Puppeteer",
+        "keywords": [
+          "har",
+          "puppeteer",
+          "performance"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Everettss/puppeteer-har.git"
+        },
+        "source": "npm",
+        "downloads": 45654,
+        "githubTopics": []
+      }
+    },
+    "@applitools/eyes-puppeteer": {
+      "fetchedAt": 1756142471529,
+      "meta": {
+        "name": "@applitools/eyes-puppeteer",
+        "description": "Applitools Eyes SDK for Puppeteer",
+        "keywords": [
+          "eyes-puppeteer",
+          "applitools",
+          "eyes",
+          "test automation",
+          "visual regression",
+          "automation",
+          "testing",
+          "tests",
+          "puppeteer"
+        ],
+        "source": "npm",
+        "downloads": 65430,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-extra-plugin-stealth": {
+      "fetchedAt": 1756142471851,
+      "meta": {
+        "name": "puppeteer-extra-plugin-stealth",
+        "description": "Stealth mode: Applies various techniques to make detection of headless puppeteer harder.",
+        "keywords": [
+          "puppeteer",
+          "puppeteer-extra",
+          "puppeteer-extra-plugin",
+          "stealth",
+          "stealth-mode",
+          "detection-evasion",
+          "crawler",
+          "chrome",
+          "headless",
+          "pupeteer"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/berstend/puppeteer-extra.git"
+        },
+        "source": "npm",
+        "downloads": 327523,
+        "githubTopics": []
+      }
+    },
+    "@types/jest-environment-puppeteer": {
+      "fetchedAt": 1756142472899,
+      "meta": {
+        "name": "@types/jest-environment-puppeteer",
+        "description": "TypeScript definitions for jest-environment-puppeteer",
+        "keywords": [],
+        "repository": {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+          "type": "git",
+          "directory": "types/jest-environment-puppeteer"
+        },
+        "source": "npm",
+        "downloads": 58417,
+        "githubTopics": []
+      }
+    },
+    "@types/expect-puppeteer": {
+      "fetchedAt": 1756142474704,
+      "meta": {
+        "name": "@types/expect-puppeteer",
+        "description": "TypeScript definitions for expect-puppeteer",
+        "keywords": [],
+        "repository": {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+          "type": "git",
+          "directory": "types/expect-puppeteer"
+        },
+        "source": "npm",
+        "downloads": 28051,
+        "githubTopics": []
+      }
+    },
+    "vitest-environment-puppeteer": {
+      "fetchedAt": 1756142476198,
+      "meta": {
+        "name": "vitest-environment-puppeteer",
+        "description": "Puppeteer environment for Vitest.",
+        "keywords": [
+          "vitest",
+          "vitest-environment",
+          "puppeteer",
+          "vitest-puppeteer",
+          "chromeless",
+          "chrome-headless"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/carbonate-dev/vitest-puppeteer.git",
+          "directory": "packages/vitest-environment-puppeteer"
+        },
+        "source": "npm",
+        "downloads": 8710,
+        "githubTopics": []
+      }
+    },
+    "@hint/connector-puppeteer": {
+      "fetchedAt": 1756142477115,
+      "meta": {
+        "name": "@hint/connector-puppeteer",
+        "description": "hint connector for browsers supported by Puppeteer",
+        "keywords": [
+          "connector",
+          "chromium",
+          "edge",
+          "microsoft edge",
+          "chrome",
+          "google chrome",
+          "hint",
+          "hint-connector-puppeteer",
+          "puppeteer",
+          "webhint"
+        ],
+        "repository": {
+          "directory": "packages/connector-puppeteer",
+          "type": "git",
+          "url": "git+https://github.com/webhintio/hint.git"
+        },
+        "source": "npm",
+        "downloads": 21470,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-extra-plugin-adblocker": {
+      "fetchedAt": 1756142478715,
+      "meta": {
+        "name": "puppeteer-extra-plugin-adblocker",
+        "description": "A puppeteer-extra plugin to block ads and trackers.",
+        "keywords": [
+          "puppeteer",
+          "puppeteer-extra",
+          "puppeteer-extra-plugin",
+          "ads",
+          "adblocker",
+          "adblocking"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/berstend/puppeteer-extra.git"
+        },
+        "source": "npm",
+        "downloads": 23835,
+        "githubTopics": []
+      }
+    },
+    "@cypress/puppeteer": {
+      "fetchedAt": 1756142480850,
+      "meta": {
+        "name": "@cypress/puppeteer",
+        "description": "Plugin for enhancing Cypress tests with Puppeteer",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/cypress-io/cypress.git"
+        },
+        "source": "npm",
+        "downloads": 16664,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-extra-plugin-recaptcha": {
+      "fetchedAt": 1756142482481,
+      "meta": {
+        "name": "puppeteer-extra-plugin-recaptcha",
+        "description": "A puppeteer-extra plugin to solve reCAPTCHAs and hCaptchas automatically.",
+        "keywords": [
+          "puppeteer",
+          "puppeteer-extra",
+          "puppeteer-extra-plugin",
+          "recaptcha",
+          "hcaptcha",
+          "captcha",
+          "2captcha"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/berstend/puppeteer-extra.git"
+        },
+        "source": "npm",
+        "downloads": 39255,
+        "githubTopics": []
+      }
+    },
+    "@axe-core/puppeteer": {
+      "fetchedAt": 1756142483917,
+      "meta": {
+        "name": "@axe-core/puppeteer",
+        "description": "Provides a chainable axe API for Puppeteer and automatically injects into all frames",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/dequelabs/axe-core-npm.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 61633,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-extra-plugin-anonymize-ua": {
+      "fetchedAt": 1756142485454,
+      "meta": {
+        "name": "puppeteer-extra-plugin-anonymize-ua",
+        "description": "Anonymize User-Agent in puppeteer.",
+        "keywords": [
+          "puppeteer",
+          "puppeteer-extra",
+          "puppeteer-extra-plugin",
+          "ua",
+          "user-agent",
+          "chrome",
+          "headless",
+          "pupeteer"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/berstend/puppeteer-extra.git"
+        },
+        "source": "npm",
+        "downloads": 8802,
+        "githubTopics": []
+      }
+    },
+    "@ghostery/adblocker-puppeteer": {
+      "fetchedAt": 1756142487705,
+      "meta": {
+        "name": "@ghostery/adblocker-puppeteer",
+        "description": "Ghostery adblocker Puppeteer wrapper",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/ghostery/adblocker.git",
+          "directory": "packages/adblocker-puppeteer"
+        },
+        "source": "npm",
+        "downloads": 7672,
+        "githubTopics": []
+      }
+    },
+    "pptr-testing-library": {
+      "fetchedAt": 1756142489180,
+      "meta": {
+        "name": "pptr-testing-library",
+        "description": "puppeteer + dom-testing-library",
+        "keywords": [
+          "puppeteer",
+          "dom-testing-library",
+          "testing-library",
+          "testing",
+          "utility"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/testing-library/pptr-testing-library.git"
+        },
+        "source": "npm",
+        "downloads": 34835,
+        "githubTopics": []
+      }
+    },
+    "@web/test-runner-puppeteer": {
+      "fetchedAt": 1756142491340,
+      "meta": {
+        "name": "@web/test-runner-puppeteer",
+        "description": "Puppeteer browser launcher for Web Test Runner",
+        "keywords": [
+          "web",
+          "test",
+          "runner",
+          "testrunner",
+          "puppeteer",
+          "browser",
+          "launcher"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/modernweb-dev/web.git",
+          "directory": "packages/test-runner-puppeteer"
+        },
+        "source": "npm",
+        "downloads": 4707,
+        "githubTopics": []
+      }
+    },
+    "@types/aws-synthetics-puppeteer": {
+      "fetchedAt": 1756142493533,
+      "meta": {
+        "name": "@types/aws-synthetics-puppeteer",
+        "description": "TypeScript definitions for aws-synthetics-puppeteer",
+        "keywords": [],
+        "repository": {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+          "type": "git",
+          "directory": "types/aws-synthetics-puppeteer"
+        },
+        "source": "npm",
+        "downloads": 6767,
+        "githubTopics": []
+      }
+    },
+    "nestjs-puppeteer": {
+      "fetchedAt": 1756142495084,
+      "meta": {
+        "name": "nestjs-puppeteer",
+        "description": "Puppeteer module for NestJS",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/oblakstudio/nestjs-puppeteer.git"
+        },
+        "source": "npm",
+        "downloads": 3491,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-extra-plugin-proxy": {
+      "fetchedAt": 1756142496501,
+      "meta": {
+        "name": "puppeteer-extra-plugin-proxy",
+        "description": "A puppeteer-extra plugin to add convenient proxy support to puppeteer",
+        "keywords": [
+          "puppeteer",
+          "puppeteer-extra",
+          "puppeteer-extra-plugin",
+          "proxy",
+          "chrome",
+          "headless",
+          "authless"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/f9mac/puppeteer-extra-plugin-proxy.git"
+        },
+        "source": "npm",
+        "downloads": 1930,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-autoscroll-down": {
+      "fetchedAt": 1756142497848,
+      "meta": {
+        "name": "puppeteer-autoscroll-down",
+        "description": "Handle infinite scroll on websites with puppeteer",
+        "keywords": [
+          "headless-chrome",
+          "puppeteer",
+          "parsing",
+          "infinite",
+          "scroll"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mbalabash/puppeteer-autoscroll-down.git"
+        },
+        "source": "npm",
+        "downloads": 4860,
+        "githubTopics": []
+      }
+    },
+    "@wordpress/jest-puppeteer-axe": {
+      "fetchedAt": 1756142499995,
+      "meta": {
+        "name": "@wordpress/jest-puppeteer-axe",
+        "description": "Axe API integration with Jest and Puppeteer.",
+        "keywords": [
+          "wordpress",
+          "gutenberg",
+          "jest",
+          "puppeteer",
+          "axe",
+          "accessibility"
+        ],
+        "repository": {
+          "url": "https://github.com/WordPress/gutenberg.git",
+          "type": "git",
+          "directory": "packages/jest-puppeteer-axe"
+        },
+        "source": "npm",
+        "downloads": 6533,
+        "githubTopics": []
+      }
+    },
+    "puppeteer-mcp-server": {
+      "fetchedAt": 1756142501063,
+      "meta": {
+        "name": "puppeteer-mcp-server",
+        "description": "Experimental MCP server for browser automation using Puppeteer (inspired by @modelcontextprotocol/server-puppeteer)",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/merajmehrabi/puppeteer-mcp-server.git"
+        },
+        "source": "npm",
+        "downloads": 2562,
+        "githubTopics": []
+      }
+    },
+    "vector": {
+      "fetchedAt": 1756142502429,
+      "meta": {
+        "name": "vector",
+        "description": "",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 51,
+        "githubTopics": []
+      }
+    },
+    "@mapbox/vector-tile": {
+      "fetchedAt": 1756142503288,
+      "meta": {
+        "name": "@mapbox/vector-tile",
+        "description": "Parses vector tiles",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/mapbox/vector-tile-js.git"
+        },
+        "source": "npm",
+        "downloads": 2000558,
+        "githubTopics": []
+      }
+    },
+    "@types/react-native-vector-icons": {
+      "fetchedAt": 1756142504828,
+      "meta": {
+        "name": "@types/react-native-vector-icons",
+        "description": "TypeScript definitions for react-native-vector-icons",
+        "keywords": [],
+        "repository": {
+          "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+          "type": "git",
+          "directory": "types/react-native-vector-icons"
+        },
+        "source": "npm",
+        "downloads": 385459,
+        "githubTopics": []
+      }
+    },
+    "geojson-vt": {
+      "fetchedAt": 1756142505724,
+      "meta": {
+        "name": "geojson-vt",
+        "description": "Slice GeoJSON data into vector tiles efficiently",
+        "keywords": [
+          "spatial",
+          "geojson",
+          "tiles",
+          "geometry"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/mapbox/geojson-vt.git"
+        },
+        "source": "npm",
+        "downloads": 2166442,
+        "githubTopics": []
+      }
+    },
+    "filtered-vector": {
+      "fetchedAt": 1756142507196,
+      "meta": {
+        "name": "filtered-vector",
+        "description": "Filter an input vector valued curve",
+        "keywords": [
+          "filter",
+          "input",
+          "curve",
+          "device",
+          "mouse"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mikolalysenko/filtered-vector.git"
+        },
+        "source": "npm",
+        "downloads": 21530,
+        "githubTopics": []
+      }
+    },
+    "term-vector": {
+      "fetchedAt": 1756142508088,
+      "meta": {
+        "name": "term-vector",
+        "description": "Creates a term vector from tokenized text.",
+        "keywords": [
+          "natural",
+          "language",
+          "vector",
+          "vector space model"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/fergiemcdowall/term-vector.git"
+        },
+        "source": "npm",
+        "downloads": 10455,
+        "githubTopics": []
+      }
+    },
+    "esri-leaflet-vector": {
+      "fetchedAt": 1756142508981,
+      "meta": {
+        "name": "esri-leaflet-vector",
+        "description": "Esri vector basemap and vector tile layer plugin for Leaflet.",
+        "keywords": [
+          "maplibre",
+          "arcgis",
+          "leaflet",
+          "leafletjs",
+          "maps"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Esri/esri-leaflet-vector.git"
+        },
+        "source": "npm",
+        "downloads": 7539,
+        "githubTopics": []
+      }
+    },
+    "raphael": {
+      "fetchedAt": 1756142509827,
+      "meta": {
+        "name": "raphael",
+        "description": "JavaScript Vector Library",
+        "keywords": [
+          "svg",
+          "vml",
+          "javascript"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/DmitryBaranovskiy/raphael.git"
+        },
+        "source": "npm",
+        "downloads": 163677,
+        "githubTopics": []
+      }
+    },
+    "vt-pbf": {
+      "fetchedAt": 1756142510747,
+      "meta": {
+        "name": "vt-pbf",
+        "description": "Serialize mapbox vector tiles to binary protobufs in javascript.",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mapbox/vt-pbf.git"
+        },
+        "source": "npm",
+        "downloads": 1598171,
+        "githubTopics": []
+      }
+    },
+    "@loaders.gl/mvt": {
+      "fetchedAt": 1756142511679,
+      "meta": {
+        "name": "@loaders.gl/mvt",
+        "description": "Loader for Mapbox Vector Tiles",
+        "keywords": [
+          "geometry",
+          "loader",
+          "parser",
+          "MVT",
+          "Mapbox Vector Tiles"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/visgl/loaders.gl"
+        },
+        "source": "npm",
+        "downloads": 193257,
+        "githubTopics": []
+      }
+    },
+    "art": {
+      "fetchedAt": 1756142512595,
+      "meta": {
+        "name": "art",
+        "description": "Cross-browser Vector Graphics",
+        "keywords": [
+          "art",
+          "canvas",
+          "svg",
+          "vml"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/sebmarkbage/art.git"
+        },
+        "source": "npm",
+        "downloads": 154640,
+        "githubTopics": []
+      }
+    },
+    "@upstash/vector": {
+      "fetchedAt": 1756142513644,
+      "meta": {
+        "name": "@upstash/vector",
+        "description": "An HTTP/REST based Vector DB client built on top of Upstash REST API.",
+        "keywords": [
+          "vector",
+          "upstash",
+          "db"
+        ],
+        "repository": {
+          "url": "git+https://github.com/upstash/vector-js.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 42334,
+        "githubTopics": []
+      }
+    },
+    "gl-matrix": {
+      "fetchedAt": 1756142514536,
+      "meta": {
+        "name": "gl-matrix",
+        "description": "Javascript Matrix and Vector library for High Performance WebGL apps",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/toji/gl-matrix.git"
+        },
+        "source": "npm",
+        "downloads": 2565156,
+        "githubTopics": []
+      }
+    },
+    "@expo/vector-icons": {
+      "fetchedAt": 1756142515156,
+      "meta": {
+        "name": "@expo/vector-icons",
+        "description": "Built-in support for popular icon fonts and the tooling to create your own Icon components from your font and glyph map. This is a wrapper around react-native-vector-icons to make it compatible with Expo.",
+        "keywords": [
+          "expo"
+        ],
+        "repository": {
+          "url": "https://github.com/expo/vector-icons.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 1477601,
+        "githubTopics": []
+      }
+    },
+    "country-flag-icons": {
+      "fetchedAt": 1756142516561,
+      "meta": {
+        "name": "country-flag-icons",
+        "description": "Vector (*.svg) country flag icons in 3x2 aspect ratio.",
+        "keywords": [
+          "country",
+          "flag",
+          "icons",
+          "vector",
+          "svg",
+          "react"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://gitlab.com/catamphetamine/country-flag-icons.git"
+        },
+        "source": "npm",
+        "downloads": 1211255,
+        "githubTopics": []
+      }
+    },
+    "svgo": {
+      "fetchedAt": 1756142517401,
+      "meta": {
+        "name": "svgo",
+        "description": "SVGO is a Node.js library and command-line application for optimizing vector images.",
+        "keywords": [
+          "svgo",
+          "svg",
+          "optimize",
+          "minify"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/svg/svgo.git"
+        },
+        "source": "npm",
+        "downloads": 20603496,
+        "githubTopics": []
+      }
+    },
+    "jqvmap-novulnerability": {
+      "fetchedAt": 1756142518824,
+      "meta": {
+        "name": "jqvmap-novulnerability",
+        "description": "jQuery Vector Map Library",
+        "keywords": [
+          "jquery",
+          "map",
+          "svg",
+          "vml",
+          "vector"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/manifestinteractive/jqvmap.git"
+        },
+        "source": "npm",
+        "downloads": 43595,
+        "githubTopics": []
+      }
+    },
+    "@react-native-vector-icons/ionicons": {
+      "fetchedAt": 1756142520845,
+      "meta": {
+        "name": "@react-native-vector-icons/ionicons",
+        "description": "Ionicons font for react native vector icons",
+        "keywords": [
+          "react-native",
+          "ios",
+          "android",
+          "osx",
+          "windows",
+          "macos",
+          "react-component",
+          "react-native-component",
+          "react",
+          "mobile",
+          "ui",
+          "icon",
+          "icons",
+          "vector",
+          "retina",
+          "font",
+          "react-native-vector-icons-icon",
+          "ionicons"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/oblador/react-native-vector-icons.git",
+          "directory": "packages/ionicons"
+        },
+        "source": "npm",
+        "downloads": 7273,
+        "githubTopics": []
+      }
+    },
+    "mapnik-vector-tile": {
+      "fetchedAt": 1756142522336,
+      "meta": {
+        "name": "mapnik-vector-tile",
+        "description": "Mapnik Vector Tile API",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/mapbox/mapnik-vector-tile.git"
+        },
+        "source": "npm",
+        "downloads": 1721,
+        "githubTopics": []
+      }
+    },
+    "@react-native-vector-icons/material-design-icons": {
+      "fetchedAt": 1756142524262,
+      "meta": {
+        "name": "@react-native-vector-icons/material-design-icons",
+        "description": "Material Design Icons font for react native vector icons",
+        "keywords": [
+          "react-native",
+          "ios",
+          "android",
+          "osx",
+          "windows",
+          "macos",
+          "react-component",
+          "react-native-component",
+          "react",
+          "mobile",
+          "ui",
+          "icon",
+          "icons",
+          "vector",
+          "retina",
+          "font",
+          "react-native-vector-icons-icon",
+          "material-design-icons"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/oblador/react-native-vector-icons.git",
+          "directory": "packages/material-design-icons"
+        },
+        "source": "npm",
+        "downloads": 12716,
+        "githubTopics": []
+      }
+    },
+    "react-native-vector-image": {
+      "fetchedAt": 1756142525621,
+      "meta": {
+        "name": "react-native-vector-image",
+        "description": "Native vector images generated from SVG",
+        "keywords": [
+          "react-native",
+          "image",
+          "svg",
+          "vector"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/oblador/react-native-vector-image.git"
+        },
+        "source": "npm",
+        "downloads": 2728,
+        "githubTopics": []
+      }
+    },
+    "leaflet-draw": {
+      "fetchedAt": 1756142526491,
+      "meta": {
+        "name": "leaflet-draw",
+        "description": "Vector drawing plugin for Leaflet",
+        "keywords": [
+          "maps",
+          "leaflet",
+          "client",
+          "vector",
+          "drawing",
+          "draw"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Leaflet/Leaflet.draw.git"
+        },
+        "source": "npm",
+        "downloads": 185238,
+        "githubTopics": []
+      }
+    },
+    "@react-native-vector-icons/material-icons": {
+      "fetchedAt": 1756142528568,
+      "meta": {
+        "name": "@react-native-vector-icons/material-icons",
+        "description": "Material Icons font for react native vector icons",
+        "keywords": [
+          "react-native",
+          "ios",
+          "android",
+          "osx",
+          "windows",
+          "macos",
+          "react-component",
+          "react-native-component",
+          "react",
+          "mobile",
+          "ui",
+          "icon",
+          "icons",
+          "vector",
+          "retina",
+          "font",
+          "react-native-vector-icons-icon",
+          "material-icons"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/oblador/react-native-vector-icons.git",
+          "directory": "packages/material-icons"
+        },
+        "source": "npm",
+        "downloads": 4514,
+        "githubTopics": []
+      }
+    },
+    "@langchain/qdrant": {
+      "fetchedAt": 1756142529835,
+      "meta": {
+        "name": "@langchain/qdrant",
+        "description": "LangChain.js integration for the Qdrant vector database",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/langchain-ai/langchainjs.git"
+        },
+        "source": "npm",
+        "downloads": 118766,
+        "githubTopics": []
+      }
+    },
+    "paper": {
+      "fetchedAt": 1756142530724,
+      "meta": {
+        "name": "paper",
+        "description": "The Swiss Army Knife of Vector Graphics Scripting",
+        "keywords": [
+          "vector",
+          "graphic",
+          "graphics",
+          "2d",
+          "geometry",
+          "bezier",
+          "curve",
+          "curves",
+          "path",
+          "paths",
+          "canvas",
+          "svg",
+          "paper",
+          "paper.js",
+          "paperjs"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/paperjs/paper.js"
+        },
+        "source": "npm",
+        "downloads": 50296,
+        "githubTopics": []
+      }
+    },
+    "rat-vec": {
+      "fetchedAt": 1756142531526,
+      "meta": {
+        "name": "rat-vec",
+        "description": "Exact rational vector arithmetic",
+        "keywords": [
+          "rational",
+          "vector",
+          "exact",
+          "arithmetic",
+          "geometry"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/rat-nest/rat-vec.git"
+        },
+        "source": "npm",
+        "downloads": 22266,
+        "githubTopics": []
+      }
+    },
+    "@brightlayer-ui/react-native-vector-icons": {
+      "fetchedAt": 1756142533574,
+      "meta": {
+        "name": "@brightlayer-ui/react-native-vector-icons",
+        "description": "Brightlayer UI vector icons for use in React Native projects, based on react-native-vector-icons",
+        "keywords": [
+          "react-native",
+          "Brightlayer UI",
+          "brightlayer-ui",
+          "icons",
+          "vector",
+          "power",
+          "eaton"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/etn-ccis/blui-icons.git",
+          "baseUrl": "https://github.com/etn-ccis/blui-icons/tree/master/react-native-vector-icons"
+        },
+        "source": "npm",
+        "downloads": 2422,
+        "githubTopics": []
+      }
+    },
+    "snapsvg": {
+      "fetchedAt": 1756142535145,
+      "meta": {
+        "name": "snapsvg",
+        "description": "JavaScript Vector Library",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/adobe-webplatform/Snap.svg.git"
+        },
+        "source": "npm",
+        "downloads": 53887,
+        "githubTopics": []
+      }
+    },
+    "@react-native-vector-icons/fontawesome": {
+      "fetchedAt": 1756142537377,
+      "meta": {
+        "name": "@react-native-vector-icons/fontawesome",
+        "description": "Fontawesome font for react native vector icons",
+        "keywords": [
+          "react-native",
+          "ios",
+          "android",
+          "osx",
+          "windows",
+          "macos",
+          "react-component",
+          "react-native-component",
+          "react",
+          "mobile",
+          "ui",
+          "icon",
+          "icons",
+          "vector",
+          "retina",
+          "font",
+          "react-native-vector-icons-icon",
+          "fontawesome"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/oblador/react-native-vector-icons.git",
+          "directory": "packages/fontawesome"
+        },
+        "source": "npm",
+        "downloads": 2853,
+        "githubTopics": []
+      }
+    },
+    "@react-native-vector-icons/feather": {
+      "fetchedAt": 1756142539449,
+      "meta": {
+        "name": "@react-native-vector-icons/feather",
+        "description": "Feather font for react native vector icons",
+        "keywords": [
+          "react-native",
+          "ios",
+          "android",
+          "osx",
+          "windows",
+          "macos",
+          "react-component",
+          "react-native-component",
+          "react",
+          "mobile",
+          "ui",
+          "icon",
+          "icons",
+          "vector",
+          "retina",
+          "font",
+          "react-native-vector-icons-icon",
+          "feather"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/oblador/react-native-vector-icons.git",
+          "directory": "packages/feather"
+        },
+        "source": "npm",
+        "downloads": 2201,
+        "githubTopics": []
+      }
+    },
+    "@traceloop/instrumentation-pinecone": {
+      "fetchedAt": 1756142541443,
+      "meta": {
+        "name": "@traceloop/instrumentation-pinecone",
+        "description": "OpenTelemetry instrumentation for pinecone vector DB",
+        "keywords": [
+          "opentelemetry",
+          "nodejs",
+          "tracing",
+          "attributes",
+          "semantic conventions"
+        ],
+        "repository": "traceloop/openllmetry-js",
+        "source": "npm",
+        "downloads": 32768,
+        "githubTopics": []
+      }
+    },
+    "@upstash/semantic-cache": {
+      "fetchedAt": 1756142543649,
+      "meta": {
+        "name": "@upstash/semantic-cache",
+        "description": "A Semantic cache built on top of Upstash Vector DB",
+        "keywords": [
+          "vector",
+          "upstash",
+          "db",
+          "semantic-cache",
+          "cache",
+          "classification"
+        ],
+        "repository": {
+          "url": "git+https://github.com/upstash/semantic-cache.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 10368,
+        "githubTopics": []
+      }
+    },
+    "@memberjunction/ai-vector-dupe": {
+      "fetchedAt": 1756142545641,
+      "meta": {
+        "name": "@memberjunction/ai-vector-dupe",
+        "description": "MemberJunction: AI Vector/Entity Sync Package - Handles synchronization between Vector DB and MJ CDP Data",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 637,
+        "githubTopics": []
+      }
+    },
+    "wrekenfile-converter": {
+      "fetchedAt": 1756142547077,
+      "meta": {
+        "name": "wrekenfile-converter",
+        "description": "Convert OpenAPI and Postman specs to Wrekenfile format with mini-chunking for vector DB storage",
+        "keywords": [
+          "wrekenfile",
+          "openapi",
+          "swagger",
+          "postman",
+          "api",
+          "converter",
+          "yaml",
+          "vector-db",
+          "ai"
+        ],
+        "source": "npm",
+        "downloads": 3,
+        "githubTopics": []
+      }
+    },
+    "@modelfusion/pinecone": {
+      "fetchedAt": 1756142549298,
+      "meta": {
+        "name": "@modelfusion/pinecone",
+        "description": "Pinecone vector DB for ModelFusion",
+        "keywords": [
+          "pinecone",
+          "modelfusion",
+          "vectordb"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/lgrammel/modelfusion.git"
+        },
+        "source": "npm",
+        "downloads": 8,
+        "githubTopics": []
+      }
+    },
+    "vectordb-js": {
+      "fetchedAt": 1756142550740,
+      "meta": {
+        "name": "vectordb-js",
+        "description": "用typescript实现的vector db",
+        "keywords": [
+          "vectordb"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/biu9/vertorDB.git"
+        },
+        "source": "npm",
+        "downloads": 5,
+        "githubTopics": []
+      }
+    },
+    "@modelfusion/sqlite-vss": {
+      "fetchedAt": 1756142552835,
+      "meta": {
+        "name": "@modelfusion/sqlite-vss",
+        "description": "SQLite VSS Vector DB for ModelFusion",
+        "keywords": [
+          "pinecone",
+          "modelfusion",
+          "vectordb"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/lgrammel/modelfusion.git"
+        },
+        "source": "npm",
+        "downloads": 2,
+        "githubTopics": []
+      }
+    },
+    "mime-db": {
+      "fetchedAt": 1756142553754,
+      "meta": {
+        "name": "mime-db",
+        "description": "Media Type Database",
+        "keywords": [
+          "mime",
+          "db",
+          "type",
+          "types",
+          "database",
+          "charset",
+          "charsets"
+        ],
+        "repository": {
+          "url": "git+https://github.com/jshttp/mime-db.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 97377854,
+        "githubTopics": []
+      }
+    },
+    "update-browserslist-db": {
+      "fetchedAt": 1756142554579,
+      "meta": {
+        "name": "update-browserslist-db",
+        "description": "CLI tool to update caniuse-lite to refresh target browsers from Browserslist config",
+        "keywords": [
+          "caniuse",
+          "browsers",
+          "target"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/browserslist/update-db.git"
+        },
+        "source": "npm",
+        "downloads": 57183789,
+        "githubTopics": []
+      }
+    },
+    "embedded-vector-db": {
+      "fetchedAt": 1756142555984,
+      "meta": {
+        "name": "embedded-vector-db",
+        "description": "> **Beta Notice**: `embedded-vector-db` is currently in active development and considered beta software. APIs may change until version 1.0. Use with caution in production environments.",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 1,
+        "githubTopics": []
+      }
+    },
+    "@datastax/astra-db-ts": {
+      "fetchedAt": 1756142557032,
+      "meta": {
+        "name": "@datastax/astra-db-ts",
+        "description": "Data API TypeScript client",
+        "keywords": [
+          "astra",
+          "cassandra",
+          "dse",
+          "document",
+          "model",
+          "schema",
+          "database",
+          "data",
+          "datastore",
+          "query",
+          "nosql",
+          "orm",
+          "db",
+          "dataapi"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/datastax/astra-db-ts.git"
+        },
+        "source": "npm",
+        "downloads": 41961,
+        "githubTopics": []
+      }
+    },
+    "weaviate-api": {
+      "fetchedAt": 1756142558566,
+      "meta": {
+        "name": "weaviate-api",
+        "description": "An API to simplify Weaviate vector db queries",
+        "keywords": [
+          "vector",
+          "database",
+          "fuzzy",
+          "search",
+          "ai",
+          "api",
+          "weaviate",
+          "cohere",
+          "huggingface",
+          "openai",
+          "hnsw"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/tepinly/Weaviate-API.git"
+        },
+        "source": "npm",
+        "downloads": 1,
+        "githubTopics": []
+      }
+    },
+    "mime-types": {
+      "fetchedAt": 1756142559426,
+      "meta": {
+        "name": "mime-types",
+        "description": "The ultimate javascript content-type utility.",
+        "keywords": [
+          "mime",
+          "types"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/jshttp/mime-types.git"
+        },
+        "source": "npm",
+        "downloads": 88974690,
+        "githubTopics": []
+      }
+    },
+    "@mastra/pg": {
+      "fetchedAt": 1756142561515,
+      "meta": {
+        "name": "@mastra/pg",
+        "description": "Postgres provider for Mastra - includes both vector and db storage capabilities",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 28099,
+        "githubTopics": []
+      }
+    },
+    "@lancedb/lancedb": {
+      "fetchedAt": 1756142562307,
+      "meta": {
+        "name": "@lancedb/lancedb",
+        "description": "LanceDB: A serverless, low-latency vector database for AI applications",
+        "keywords": [
+          "database",
+          "lance",
+          "lancedb",
+          "search",
+          "vector",
+          "vector database",
+          "ann"
+        ],
+        "source": "npm",
+        "downloads": 48465,
+        "githubTopics": []
+      }
+    },
+    "mapbox-gl": {
+      "fetchedAt": 1756142563278,
+      "meta": {
+        "name": "mapbox-gl",
+        "description": "A WebGL interactive maps library",
+        "keywords": [],
+        "repository": {
+          "url": "git://github.com/mapbox/mapbox-gl-js.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 1600693,
+        "githubTopics": []
+      }
+    },
+    "ml-nearest-vector": {
+      "fetchedAt": 1756142564090,
+      "meta": {
+        "name": "ml-nearest-vector",
+        "description": "Find the nearest point to a sample point",
+        "keywords": [
+          "machine",
+          "learning",
+          "data",
+          "mining",
+          "datamining",
+          "nearest",
+          "vector",
+          "cluster"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mljs/nearest-vector.git"
+        },
+        "source": "npm",
+        "downloads": 74557,
+        "githubTopics": []
+      }
+    },
+    "imvectordb": {
+      "fetchedAt": 1756142565510,
+      "meta": {
+        "name": "imvectordb",
+        "description": "A super simple in-memory VectorDB",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 6648,
+        "githubTopics": []
+      }
+    },
+    "@react-native-vector-icons/common": {
+      "fetchedAt": 1756142567375,
+      "meta": {
+        "name": "@react-native-vector-icons/common",
+        "description": "Customizable Icons for React Native with support for image source and full styling.",
+        "keywords": [
+          "react-native",
+          "ios",
+          "android",
+          "osx",
+          "windows",
+          "macos",
+          "react-component",
+          "react-native-component",
+          "react",
+          "mobile",
+          "ui",
+          "icon",
+          "icons",
+          "vector",
+          "retina",
+          "font"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/oblador/react-native-vector-icons.git",
+          "directory": "packages/common"
+        },
+        "source": "npm",
+        "downloads": 30148,
+        "githubTopics": []
+      }
+    },
+    "caniuse-lite": {
+      "fetchedAt": 1756142568291,
+      "meta": {
+        "name": "caniuse-lite",
+        "description": "A smaller version of caniuse-db, with only the essentials!",
+        "keywords": [
+          "support"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/browserslist/caniuse-lite.git"
+        },
+        "source": "npm",
+        "downloads": 72418057,
+        "githubTopics": []
+      }
+    },
+    "shindg-vector-db": {
+      "fetchedAt": 1756142569606,
+      "meta": {
+        "name": "shindg-vector-db",
+        "description": "Decentrallized vector db",
+        "keywords": [
+          "gpt"
+        ],
+        "source": "npm",
+        "downloads": 0,
+        "githubTopics": []
+      }
+    },
+    "@azure/cosmos": {
+      "fetchedAt": 1756142570758,
+      "meta": {
+        "name": "@azure/cosmos",
+        "description": "Microsoft Azure Cosmos DB Service Node.js SDK for NOSQL API",
+        "keywords": [
+          "cosmosdb",
+          "cosmos db",
+          "documentdb",
+          "document database",
+          "azure",
+          "nosql",
+          "database",
+          "cloud",
+          "azure"
+        ],
+        "repository": {
+          "url": "git+https://github.com/Azure/azure-sdk-for-js.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 469099,
+        "githubTopics": []
+      }
+    },
+    "sat": {
+      "fetchedAt": 1756142572302,
+      "meta": {
+        "name": "sat",
+        "description": "Library for performing 2D collision detection",
+        "keywords": [
+          "collision detection",
+          "sat",
+          "game"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/jriecken/sat-js.git"
+        },
+        "source": "npm",
+        "downloads": 14160,
+        "githubTopics": []
+      }
+    },
+    "@llm-ui/markdown": {
+      "fetchedAt": 1756142574313,
+      "meta": {
+        "name": "@llm-ui/markdown",
+        "description": "[llm-ui](https://llm-ui.com) markdown block.",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 14811,
+        "githubTopics": []
+      }
+    },
+    "@llm-ui/code": {
+      "fetchedAt": 1756142576321,
+      "meta": {
+        "name": "@llm-ui/code",
+        "description": "[llm-ui](https://llm-ui.com) code block.",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 11886,
+        "githubTopics": []
+      }
+    },
+    "llm": {
+      "fetchedAt": 1756142577692,
+      "meta": {
+        "name": "llm",
+        "description": "Manipulate any language model from the command line.",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 17,
+        "githubTopics": []
+      }
+    },
+    "llm-cost": {
+      "fetchedAt": 1756142578464,
+      "meta": {
+        "name": "llm-cost",
+        "description": "[![Tests](https://github.com/rogeriochaves/llm-cost/actions/workflows/node.js.yml/badge.svg)](https://github.com/rogeriochaves/llm-cost/actions/workflows/node.js.yml) [![npm version](https://badge.fury.io/js/llm-cost.svg)](https://www.npmjs.com/package/ll",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 7523,
+        "githubTopics": []
+      }
+    },
+    "llm-chunk": {
+      "fetchedAt": 1756142579845,
+      "meta": {
+        "name": "llm-chunk",
+        "description": "A super simple text splitter for LLM",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 8159,
+        "githubTopics": []
+      }
+    },
+    "easy-llm-cli": {
+      "fetchedAt": 1756142580769,
+      "meta": {
+        "name": "easy-llm-cli",
+        "description": "![Easy LLM CLI 截图](./docs/assets/openrouter.png)",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/ConardLi/easy-llm-cli.git"
+        },
+        "source": "npm",
+        "downloads": 11375,
+        "githubTopics": []
+      }
+    },
+    "partial-json": {
+      "fetchedAt": 1756142581592,
+      "meta": {
+        "name": "partial-json",
+        "description": "Parse partial JSON generated by LLM",
+        "keywords": [
+          "JSON",
+          "parser",
+          "LLM",
+          "nlp"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/promplate/partial-json-parser-js.git"
+        },
+        "source": "npm",
+        "downloads": 405643,
+        "githubTopics": []
+      }
+    },
+    "langsmith": {
+      "fetchedAt": 1756142582558,
+      "meta": {
+        "name": "langsmith",
+        "description": "Client library to connect to the LangSmith LLM Tracing and Evaluation Platform.",
+        "keywords": [
+          "LLM",
+          "Tracing",
+          "Evaluation",
+          "LangChain"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/langchain-ai/langsmith-sdk.git"
+        },
+        "source": "npm",
+        "downloads": 1911664,
+        "githubTopics": []
+      }
+    },
+    "promptfoo": {
+      "fetchedAt": 1756142583452,
+      "meta": {
+        "name": "promptfoo",
+        "description": "LLM eval & testing toolkit",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/promptfoo/promptfoo.git"
+        },
+        "source": "npm",
+        "downloads": 39533,
+        "githubTopics": []
+      }
+    },
+    "llm-agents": {
+      "fetchedAt": 1756142584679,
+      "meta": {
+        "name": "llm-agents",
+        "description": "LLM Agent framework for Node.js",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 3377,
+        "githubTopics": []
+      }
+    },
+    "@llm-ui/json": {
+      "fetchedAt": 1756142586601,
+      "meta": {
+        "name": "@llm-ui/json",
+        "description": "[llm-ui](https://llm-ui.com) JSON blocks for building custom components.",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 2719,
+        "githubTopics": []
+      }
+    },
+    "@empiricalrun/llm": {
+      "fetchedAt": 1756142589165,
+      "meta": {
+        "name": "@empiricalrun/llm",
+        "description": "Package to connect and trace LLM calls.",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/empirical-run/empirical.git"
+        },
+        "source": "npm",
+        "downloads": 2308,
+        "githubTopics": []
+      }
+    },
+    "@musistudio/llms": {
+      "fetchedAt": 1756142589944,
+      "meta": {
+        "name": "@musistudio/llms",
+        "description": "A universal LLM API transformation server",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 21391,
+        "githubTopics": []
+      }
+    },
+    "@lobehub/icons": {
+      "fetchedAt": 1756142591981,
+      "meta": {
+        "name": "@lobehub/icons",
+        "description": "Popular AI / LLM Model Brand SVG Logo and Icon Collection",
+        "keywords": [
+          "lobehub",
+          "llm icons",
+          "llm brand logo",
+          "react components",
+          "svg icons"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/lobehub/lobe-icons.git"
+        },
+        "source": "npm",
+        "downloads": 81004,
+        "githubTopics": []
+      }
+    },
+    "@scrypted/llm": {
+      "fetchedAt": 1756142594181,
+      "meta": {
+        "name": "@scrypted/llm",
+        "description": "The Scrypted LLM plugin allows connecting to various LLM providers, or running your own locally.",
+        "keywords": [
+          "scrypted",
+          "plugin",
+          "llama.cpp",
+          "llama",
+          "llm",
+          "vision",
+          "chat",
+          "openai",
+          "claude",
+          "gemma"
+        ],
+        "source": "npm",
+        "downloads": 63,
+        "githubTopics": []
+      }
+    },
+    "qiao-llm": {
+      "fetchedAt": 1756142595634,
+      "meta": {
+        "name": "qiao-llm",
+        "description": "llm tools",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/uikoo9/qiao-llm.git"
+        },
+        "source": "npm",
+        "downloads": 36,
+        "githubTopics": []
+      }
+    },
+    "@vscode/prompt-tsx": {
+      "fetchedAt": 1756142597792,
+      "meta": {
+        "name": "@vscode/prompt-tsx",
+        "description": "Declare LLM prompts with TSX",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/microsoft/vscode-prompt-tsx.git"
+        },
+        "source": "npm",
+        "downloads": 80896,
+        "githubTopics": []
+      }
+    },
+    "llm-polyglot": {
+      "fetchedAt": 1756142599222,
+      "meta": {
+        "name": "llm-polyglot",
+        "description": "A universal LLM client - provides adapters for various LLM providers to adhere to a universal interface - the openai sdk - allows you to use providers like anthropic using the same openai interface and transforms the responses in the same way - this allow",
+        "keywords": [
+          "llm",
+          "openai",
+          "gemini",
+          "streaming",
+          "anthropic",
+          "llm client",
+          "claude",
+          "gpt-4"
+        ],
+        "repository": {
+          "directory": "public-packages/llm-client",
+          "type": "git",
+          "url": "git+https://github.com/hack-dance/island-ai.git"
+        },
+        "source": "npm",
+        "downloads": 1784,
+        "githubTopics": []
+      }
+    },
+    "@arizeai/openinference-semantic-conventions": {
+      "fetchedAt": 1756142600742,
+      "meta": {
+        "name": "@arizeai/openinference-semantic-conventions",
+        "description": "This package provides OpenInference semantic conventions for tracing of LLM Applications.",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Arize-ai/openinference.git"
+        },
+        "source": "npm",
+        "downloads": 61613,
+        "githubTopics": []
+      }
+    },
+    "llm-code-highlighter": {
+      "fetchedAt": 1756142602171,
+      "meta": {
+        "name": "llm-code-highlighter",
+        "description": "Condense source code for LLM analysis by extracting essential highlights, utilizing a simplified version of Paul Gauthier's repomap technique from Aider Chat.",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/restlessronin/llm-code-highlighter.git"
+        },
+        "source": "npm",
+        "downloads": 13985,
+        "githubTopics": []
+      }
+    },
+    "qiao-llm-cli": {
+      "fetchedAt": 1756142603645,
+      "meta": {
+        "name": "qiao-llm-cli",
+        "description": "llm cli tool",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/uikoo9/qiao-llm.git"
+        },
+        "source": "npm",
+        "downloads": 32,
+        "githubTopics": []
+      }
+    },
+    "langbase": {
+      "fetchedAt": 1756142604543,
+      "meta": {
+        "name": "langbase",
+        "description": "The AI SDK for building declarative and composable AI-powered LLM products.",
+        "keywords": [
+          "ai",
+          "llm",
+          "langbase core",
+          "langbase sdk",
+          "baseai",
+          "base ai",
+          "langbase",
+          "langbase.com",
+          "generative AI"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/LangbaseInc/langbase-sdk.git"
+        },
+        "source": "npm",
+        "downloads": 51405,
+        "githubTopics": []
+      }
+    },
+    "@llamaindex/chat-ui": {
+      "fetchedAt": 1756142606561,
+      "meta": {
+        "name": "@llamaindex/chat-ui",
+        "description": "Chat UI components for LLM apps",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 7104,
+        "githubTopics": []
+      }
+    },
+    "@nullplatform/llm-gateway": {
+      "fetchedAt": 1756142608755,
+      "meta": {
+        "name": "@nullplatform/llm-gateway",
+        "description": "LLM Gateway Core - Main proxy server",
+        "keywords": [
+          "llm",
+          "gateway",
+          "proxy",
+          "ai",
+          "openai",
+          "anthropic"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/nullplatform/llmgateway.git",
+          "directory": "packages/core"
+        },
+        "source": "npm",
+        "downloads": 1889,
+        "githubTopics": []
+      }
+    },
+    "@nullplatform/llm-gateway-sdk": {
+      "fetchedAt": 1756142610788,
+      "meta": {
+        "name": "@nullplatform/llm-gateway-sdk",
+        "description": "SDK for LLM Gateway plugin development",
+        "keywords": [
+          "llm",
+          "gateway",
+          "sdk",
+          "plugin",
+          "typescript"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/nullplatform/llm-gateway.git",
+          "directory": "packages/sdk"
+        },
+        "source": "npm",
+        "downloads": 1908,
+        "githubTopics": []
+      }
+    },
+    "@nullplatform/llm-gateway-clickhouse-tracer-plugin": {
+      "fetchedAt": 1756142613183,
+      "meta": {
+        "name": "@nullplatform/llm-gateway-clickhouse-tracer-plugin",
+        "description": "LLM Gateway - Regex Hidder Plugin",
+        "keywords": [
+          "llm",
+          "gateway",
+          "proxy",
+          "ai",
+          "openai",
+          "anthropic"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/nullplatform/llm-gateway.git",
+          "directory": "packages/core"
+        },
+        "source": "npm",
+        "downloads": 1910,
+        "githubTopics": []
+      }
+    },
+    "@getzep/zep-cloud": {
+      "fetchedAt": 1756142614115,
+      "meta": {
+        "name": "@getzep/zep-cloud",
+        "description": "Zep: Fast, scalable building blocks for production LLM apps",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/getzep/zep-js"
+        },
+        "source": "npm",
+        "downloads": 121644,
+        "githubTopics": []
+      }
+    },
+    "@getzep/zep-js": {
+      "fetchedAt": 1756142615095,
+      "meta": {
+        "name": "@getzep/zep-js",
+        "description": "Zep: Fast, scalable building blocks for production LLM apps",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/getzep/zep-js"
+        },
+        "source": "npm",
+        "downloads": 109375,
+        "githubTopics": []
+      }
+    },
+    "@loopstack/llm": {
+      "fetchedAt": 1756142617321,
+      "meta": {
+        "name": "@loopstack/llm",
+        "description": "A module for llm prompt execution and caching",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 29,
+        "githubTopics": []
+      }
+    },
+    "@mfbtech/llm-popular": {
+      "fetchedAt": 1756142619369,
+      "meta": {
+        "name": "@mfbtech/llm-popular",
+        "description": "Create uniform bindings for popular llm apis",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 199,
+        "githubTopics": []
+      }
+    },
+    "chatbot": {
+      "fetchedAt": 1756142620789,
+      "meta": {
+        "name": "chatbot",
+        "description": "A simple chat bot in JavaScript with links to smart conversational APIs such as WebKnox (all purpose question answering), spoonacular (food related conversations), and DuckDuckGo Instant Answers (mostly entities like movies, people, and places).",
+        "keywords": [
+          "chatbot",
+          "chat",
+          "bot",
+          "ai",
+          "bot",
+          "ecosystem:jquery",
+          "jquery-plugin"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/ddsky/chatbot.git"
+        },
+        "source": "npm",
+        "downloads": 38,
+        "githubTopics": []
+      }
+    },
+    "react-chatbot-kit": {
+      "fetchedAt": 1756142622264,
+      "meta": {
+        "name": "react-chatbot-kit",
+        "description": "Fully customizable chatbot kit for react.",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/FredrikOseberg/react-chatbot-kit.git"
+        },
+        "source": "npm",
+        "downloads": 40513,
+        "githubTopics": []
+      }
+    },
+    "react-simple-chatbot": {
+      "fetchedAt": 1756142623661,
+      "meta": {
+        "name": "react-simple-chatbot",
+        "description": "React Simple Chatbot",
+        "keywords": [
+          "react",
+          "chat",
+          "chatbot",
+          "conversational-ui"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/LucasBassetti/react-simple-chatbot.git"
+        },
+        "source": "npm",
+        "downloads": 3533,
+        "githubTopics": []
+      }
+    },
+    "discord-chatbot": {
+      "fetchedAt": 1756142625013,
+      "meta": {
+        "name": "discord-chatbot",
+        "description": "A simple Chatbot for your Discord bot",
+        "keywords": [
+          "chatbot",
+          "discord.js",
+          "discord",
+          "bot",
+          "ai",
+          "ai",
+          "chatbot"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/udit2303/discord-chatbot.git"
+        },
+        "source": "npm",
+        "downloads": 6012,
+        "githubTopics": []
+      }
+    },
+    "@integrate.team/react-chatbot-types": {
+      "fetchedAt": 1756142627303,
+      "meta": {
+        "name": "@integrate.team/react-chatbot-types",
+        "description": "React Chatbot Library",
+        "keywords": [
+          "chatbot",
+          "React",
+          "Streaming"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://gitlab.com/huynhthoa.sugr/chatbot-streaming.git"
+        },
+        "source": "npm",
+        "downloads": 94,
+        "githubTopics": []
+      }
+    },
+    "chatbot-widget-ui": {
+      "fetchedAt": 1756142628399,
+      "meta": {
+        "name": "chatbot-widget-ui",
+        "description": "React js Chatbot Widget UI library",
+        "keywords": [
+          "chatbot"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Hassenamri005/chatbot-widget-ui.git"
+        },
+        "source": "npm",
+        "downloads": 686,
+        "githubTopics": []
+      }
+    },
+    "luca-ai-chatbot": {
+      "fetchedAt": 1756142629793,
+      "meta": {
+        "name": "luca-ai-chatbot",
+        "description": "A modern, responsive AI chatbot widget for websites",
+        "keywords": [
+          "chatbot",
+          "ai",
+          "widget",
+          "javascript",
+          "website",
+          "customer-support"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/your-username/luca-ai-chatbot.git"
+        },
+        "source": "npm",
+        "downloads": 67,
+        "githubTopics": []
+      }
+    },
+    "@airelogic/docs-chatbot": {
+      "fetchedAt": 1756142631760,
+      "meta": {
+        "name": "@airelogic/docs-chatbot",
+        "description": "Chatbot for AireSuite Products",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 409,
+        "githubTopics": []
+      }
+    },
+    "axellero-chatbot-ui-react": {
+      "fetchedAt": 1756142633297,
+      "meta": {
+        "name": "axellero-chatbot-ui-react",
+        "description": "Library for chatbot integrate",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 241,
+        "githubTopics": []
+      }
+    },
+    "react-driftjs": {
+      "fetchedAt": 1756142634698,
+      "meta": {
+        "name": "react-driftjs",
+        "description": "React component implementation of Drift Chatbot Widget",
+        "keywords": [
+          "React",
+          "Drift",
+          "npm"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/chardmd/react-drift.git"
+        },
+        "source": "npm",
+        "downloads": 4793,
+        "githubTopics": []
+      }
+    },
+    "@streamelements/chatbot": {
+      "fetchedAt": 1756142636270,
+      "meta": {
+        "name": "@streamelements/chatbot",
+        "description": "This is a client library for chatbot",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 828,
+        "githubTopics": []
+      }
+    },
+    "flowise-embed": {
+      "fetchedAt": 1756142637701,
+      "meta": {
+        "name": "flowise-embed",
+        "description": "Javascript library to display flowise chatbot on your website",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 6167,
+        "githubTopics": []
+      }
+    },
+    "@quickstart-ai/chatbot": {
+      "fetchedAt": 1756142640487,
+      "meta": {
+        "name": "@quickstart-ai/chatbot",
+        "description": "Chatbot React",
+        "keywords": [
+          "chatbot",
+          "react",
+          "typescript",
+          "npm",
+          "AI chatbot",
+          "react component",
+          "customer support",
+          "chatbot integration",
+          "business chatbot",
+          "customer service",
+          "automated responses",
+          "react hooks",
+          "styled-components",
+          "tailwindcss",
+          "vite",
+          "open source",
+          "AI",
+          "react chatbot",
+          "frontend",
+          "react development",
+          "react library",
+          "react chatbot component",
+          "react chatbot ui",
+          "react chatbot widget",
+          "simple installtion chatbot",
+          "chatbot for website",
+          "token based chatbot",
+          "chatbot for business",
+          "chatbot for customer service",
+          "chatbot for customer support",
+          "chatbot for customer interaction",
+          "script chatbot"
+        ],
+        "source": "npm",
+        "downloads": 84,
+        "githubTopics": []
+      }
+    },
+    "@chatui/core": {
+      "fetchedAt": 1756142643092,
+      "meta": {
+        "name": "@chatui/core",
+        "description": "The React library for Chatbot UI",
+        "keywords": [
+          "react",
+          "react-component",
+          "chat",
+          "chat-ui"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/alibaba/ChatUI.git"
+        },
+        "source": "npm",
+        "downloads": 5105,
+        "githubTopics": []
+      }
+    },
+    "@aws-sdk/client-chatbot": {
+      "fetchedAt": 1756142645316,
+      "meta": {
+        "name": "@aws-sdk/client-chatbot",
+        "description": "AWS SDK for JavaScript Chatbot Client for Node.js, Browser and React Native",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/aws/aws-sdk-js-v3.git",
+          "directory": "clients/client-chatbot"
+        },
+        "source": "npm",
+        "downloads": 1034,
+        "githubTopics": []
+      }
+    },
+    "@2uinc/frontend-component-xpert-chatbot": {
+      "fetchedAt": 1756142646940,
+      "meta": {
+        "name": "@2uinc/frontend-component-xpert-chatbot",
+        "description": "<div align=\"center\">   <h1 align=\"center\">Xpert Chatbot Frontend (XCF) 🤖</h1>   <strong align=\"center\">     Increase engagement and revenue with our AI chatbot component.   </strong>   <p>     This project allows teams to     ship a chatbot to production",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/2uinc/frontend-component-xpert-chatbot.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 1274,
+        "githubTopics": []
+      }
+    },
+    "@eeacms/volto-chatbot": {
+      "fetchedAt": 1756142649197,
+      "meta": {
+        "name": "@eeacms/volto-chatbot",
+        "description": "@eeacms/volto-chatbot: Volto add-on",
+        "keywords": [
+          "volto-addon",
+          "volto",
+          "plone",
+          "react"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+ssh://git@github.com/eea/volto-chatbot.git"
+        },
+        "source": "npm",
+        "downloads": 208,
+        "githubTopics": []
+      }
+    },
+    "@gauravrathod674/super-customizable-chatbot": {
+      "fetchedAt": 1756142651012,
+      "meta": {
+        "name": "@gauravrathod674/super-customizable-chatbot",
+        "description": "A highly customizable React chatbot component with support for Gemini, OpenAI, Anthropic, and Groq APIs.",
+        "keywords": [
+          "chatbot",
+          "react chatbot",
+          "customizable chatbot",
+          "gemini chatbot",
+          "openai chatbot",
+          "groq chatbot",
+          "claude chatbot",
+          "voice chatbot",
+          "file upload chatbot",
+          "markdown chatbot",
+          "super customizable chatbot",
+          "tailwind chatbot",
+          "messaging chatbot",
+          "customer support chatbot",
+          "chat bot",
+          "chatbots",
+          "react chat bot",
+          "react chatbots",
+          "ai chatbot",
+          "ai chat bot",
+          "ai chatbots",
+          "customizable chat bot",
+          "custom chatbot",
+          "custom chat bot",
+          "react chatbot component",
+          "chatbot component",
+          "chatbot components",
+          "react ai component",
+          "voice ai chatbot",
+          "voice assistant",
+          "chat widget",
+          "react chat widget",
+          "chat widgets",
+          "chat ui",
+          "chat interface",
+          "chat component",
+          "chat components",
+          "react chat modal",
+          "gemini ai chatbot",
+          "google gemini chatbot",
+          "openai chatbot",
+          "openai chat bot",
+          "gpt chatbot",
+          "gpt chat bot",
+          "gpt-4 chatbot",
+          "gpt-4o chatbot",
+          "claude ai chatbot",
+          "anthropic chatbot",
+          "anthropic ai chatbot",
+          "llama chatbot",
+          "llama ai chatbot",
+          "google chatbot",
+          "multi api chatbot",
+          "multi ai chatbot",
+          "multi model chatbot",
+          "accessible chatbot",
+          "customizable chatbot ui",
+          "chatbot ui customization",
+          "chatbot theming",
+          "animated chatbot",
+          "animation chatbot",
+          "typing animation chatbot",
+          "markdown chat bot",
+          "file upload chat bot",
+          "chatbot with speech-to-text",
+          "speech recognition chatbot",
+          "voice input chatbot",
+          "chatbot for react projects",
+          "chatbot npm package",
+          "chatbot github",
+          "tailwind chat bot",
+          "bot",
+          "bot component",
+          "bot components",
+          "bot ui",
+          "bot interface",
+          "chat",
+          "chat app",
+          "chat application",
+          "messaging bot",
+          "live chat bot",
+          "live chatbot",
+          "support chatbot",
+          "virtual assistant",
+          "virtual assistant chatbot",
+          "ai assistant"
+        ],
+        "source": "npm",
+        "downloads": 1800,
+        "githubTopics": []
+      }
+    },
+    "cdk-slack-chatbot": {
+      "fetchedAt": 1756142653157,
+      "meta": {
+        "name": "cdk-slack-chatbot",
+        "description": "[![NPM version](https://badge.fury.io/js/cdk-slack-chatbot.svg)](https://badge.fury.io/js/cdk-slack-chatbot) [![PyPI version](https://badge.fury.io/py/cdk-slack-chatbot.svg)](https://badge.fury.io/py/cdk-slack-chatbot) ![Release](https://github.com/lvthil",
+        "keywords": [
+          "alarm",
+          "aws",
+          "awscdk",
+          "cdk",
+          "chatbot",
+          "cloudwatch",
+          "slack"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/lvthillo/cdk-slack-chatbot.git"
+        },
+        "source": "npm",
+        "downloads": 325,
+        "githubTopics": []
+      }
+    },
+    "chatbot-ts-lib": {
+      "fetchedAt": 1756142654493,
+      "meta": {
+        "name": "chatbot-ts-lib",
+        "description": "Reusable chatbot popup widget written in TypeScript",
+        "keywords": [
+          "chatbot",
+          "widget"
+        ],
+        "source": "npm",
+        "downloads": 51,
+        "githubTopics": []
+      }
+    },
+    "flowise-embed-react": {
+      "fetchedAt": 1756142655929,
+      "meta": {
+        "name": "flowise-embed-react",
+        "description": "React library to display flowise chatbot on your website",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 5896,
+        "githubTopics": []
+      }
+    },
+    "@servicetitan/titan-chatbot-ui": {
+      "fetchedAt": 1756142658131,
+      "meta": {
+        "name": "@servicetitan/titan-chatbot-ui",
+        "description": "Chatbot experience UI package",
+        "keywords": [
+          "ServiceTitan"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/servicetitan/titan-chatbot-client",
+          "directory": "packages/titan-chatbot-ui"
+        },
+        "source": "npm",
+        "downloads": 188,
+        "githubTopics": []
+      }
+    },
+    "@virtuoso.dev/message-list": {
+      "fetchedAt": 1756142660055,
+      "meta": {
+        "name": "@virtuoso.dev/message-list",
+        "description": "Virtualized React component for rendering human/AI chatbot conversations.",
+        "keywords": [
+          "react",
+          "virtual",
+          "message list",
+          "endless scrolling",
+          "list",
+          "scrolling",
+          "infinite",
+          "virtualized",
+          "chat",
+          "chatbot"
+        ],
+        "source": "npm",
+        "downloads": 2924,
+        "githubTopics": []
+      }
+    },
+    "zeedata-chatbot-widget": {
+      "fetchedAt": 1756142661457,
+      "meta": {
+        "name": "zeedata-chatbot-widget",
+        "description": "Zeedata embeddable chatbot widget",
+        "keywords": [
+          "chatbot",
+          "widget",
+          "embed"
+        ],
+        "source": "npm",
+        "downloads": 272,
+        "githubTopics": []
+      }
+    },
+    "wechaty": {
+      "fetchedAt": 1756142663762,
+      "meta": {
+        "name": "wechaty",
+        "description": "Wechaty is a RPA SDK for Chatbot Makers.",
+        "keywords": [
+          "ai",
+          "bot",
+          "chatbot",
+          "chatie",
+          "conversational",
+          "framework",
+          "robotics",
+          "robot",
+          "rpa",
+          "sdk",
+          "wechat",
+          "wecom",
+          "wxwork",
+          "lark",
+          "TikTok",
+          "weixin",
+          "whatsapp",
+          "微信"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/wechaty/wechaty.git"
+        },
+        "source": "npm",
+        "downloads": 10152,
+        "githubTopics": []
+      }
+    },
+    "next-chatbot": {
+      "fetchedAt": 1756142665143,
+      "meta": {
+        "name": "next-chatbot",
+        "description": "A Chatbot Library for Vue 3",
+        "keywords": [
+          "chatbot",
+          "vue"
+        ],
+        "source": "npm",
+        "downloads": 230,
+        "githubTopics": []
+      }
+    },
+    "rockship-chatbot-sdk": {
+      "fetchedAt": 1756142666751,
+      "meta": {
+        "name": "rockship-chatbot-sdk",
+        "description": "Rockship Chatbot SDK for web integration",
+        "keywords": [
+          "chatbot",
+          "sdk",
+          "chat",
+          "widget",
+          "rockship"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/rockship/rockship-chatbot-sdk.git"
+        },
+        "source": "npm",
+        "downloads": 82,
+        "githubTopics": []
+      }
+    },
+    "@cloudtrain/chatbot": {
+      "fetchedAt": 1756142669137,
+      "meta": {
+        "name": "@cloudtrain/chatbot",
+        "description": "CloudTrain Chatbot Web Component",
+        "keywords": [
+          "CloudTrain"
+        ],
+        "source": "npm",
+        "downloads": 53,
+        "githubTopics": []
+      }
+    },
+    "@tiledesk/tiledesk-chatbot-templates": {
+      "fetchedAt": 1756142670953,
+      "meta": {
+        "name": "@tiledesk/tiledesk-chatbot-templates",
+        "description": "Tiledesk Chatbot Templates",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 153,
+        "githubTopics": []
+      }
+    },
+    "@tiledesk/tiledesk-chatbot-plugs": {
+      "fetchedAt": 1756142673299,
+      "meta": {
+        "name": "@tiledesk/tiledesk-chatbot-plugs",
+        "description": "Tiledesk Chatbot Plugs",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/Tiledesk/tiledesk-chatbot.git"
+        },
+        "source": "npm",
+        "downloads": 154,
+        "githubTopics": []
+      }
+    },
+    "database": {
+      "fetchedAt": 1756142674035,
+      "meta": {
+        "name": "database",
+        "description": "`database` is an npm module for communicating with databases.",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 722,
+        "githubTopics": []
+      }
+    },
+    "@firebase/database-types": {
+      "fetchedAt": 1756142675609,
+      "meta": {
+        "name": "@firebase/database-types",
+        "description": "@firebase/database Types",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/firebase/firebase-js-sdk.git",
+          "type": "git",
+          "directory": "packages/database-types"
+        },
+        "source": "npm",
+        "downloads": 5422244,
+        "githubTopics": []
+      }
+    },
+    "@firebase/database-compat": {
+      "fetchedAt": 1756142676847,
+      "meta": {
+        "name": "@firebase/database-compat",
+        "description": "The Realtime Database component of the Firebase JS SDK.",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/firebase/firebase-js-sdk.git",
+          "type": "git",
+          "directory": "packages/database-compat"
+        },
+        "source": "npm",
+        "downloads": 4978762,
+        "githubTopics": []
+      }
+    },
+    "@firebase/database": {
+      "fetchedAt": 1756142678183,
+      "meta": {
+        "name": "@firebase/database",
+        "description": "This is the Firebase Realtime Database component of the Firebase JS SDK.",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/firebase/firebase-js-sdk.git",
+          "type": "git",
+          "directory": "packages/database"
+        },
+        "source": "npm",
+        "downloads": 5241425,
+        "githubTopics": []
+      }
+    },
+    "@strapi/database": {
+      "fetchedAt": 1756142679617,
+      "meta": {
+        "name": "@strapi/database",
+        "description": "Strapi's database layer",
+        "keywords": [],
+        "repository": {
+          "url": "git://github.com/strapi/strapi.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 137351,
+        "githubTopics": []
+      }
+    },
+    "@planetscale/database": {
+      "fetchedAt": 1756142680507,
+      "meta": {
+        "name": "@planetscale/database",
+        "description": "A Fetch API-compatible PlanetScale database driver",
+        "keywords": [
+          "planetscale",
+          "database",
+          "mysql",
+          "vitess",
+          "serverless",
+          "vercel",
+          "lambda"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/planetscale/database-js.git"
+        },
+        "source": "npm",
+        "downloads": 134138,
+        "githubTopics": []
+      }
+    },
+    "parse-database-url": {
+      "fetchedAt": 1756142681899,
+      "meta": {
+        "name": "parse-database-url",
+        "description": "Database configuration URL parser for node.js",
+        "keywords": [
+          "database",
+          "configuration",
+          "url",
+          "heroku",
+          "database_url"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/pwnall/node-parse-database-url.git"
+        },
+        "source": "npm",
+        "downloads": 114286,
+        "githubTopics": []
+      }
+    },
+    "@hapi/mimos": {
+      "fetchedAt": 1756142682798,
+      "meta": {
+        "name": "@hapi/mimos",
+        "description": "Mime database interface",
+        "keywords": [
+          "mime",
+          "database",
+          "content-type"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/hapijs/mimos.git"
+        },
+        "source": "npm",
+        "downloads": 853239,
+        "githubTopics": []
+      }
+    },
+    "ts-parse-database-url": {
+      "fetchedAt": 1756142684339,
+      "meta": {
+        "name": "ts-parse-database-url",
+        "description": "Parse database urls",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/herlon214/ts-parse-database-url.git"
+        },
+        "source": "npm",
+        "downloads": 33788,
+        "githubTopics": []
+      }
+    },
+    "oci-database": {
+      "fetchedAt": 1756142686155,
+      "meta": {
+        "name": "oci-database",
+        "description": "OCI NodeJS client for Database",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/oracle/oci-typescript-sdk.git"
+        },
+        "source": "npm",
+        "downloads": 20428,
+        "githubTopics": []
+      }
+    },
+    "@hocuspocus/extension-database": {
+      "fetchedAt": 1756142688169,
+      "meta": {
+        "name": "@hocuspocus/extension-database",
+        "description": "a generic Hocuspocus persistence driver for the database",
+        "keywords": [
+          "hocuspocus",
+          "yjs"
+        ],
+        "source": "npm",
+        "downloads": 90665,
+        "githubTopics": []
+      }
+    },
+    "all.db": {
+      "fetchedAt": 1756142689140,
+      "meta": {
+        "name": "all.db",
+        "description": "JSON Database",
+        "keywords": [
+          "Simple",
+          "Fast",
+          "JSON Database"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/NoName-txt/all.db.git"
+        },
+        "source": "npm",
+        "downloads": 5288,
+        "githubTopics": []
+      }
+    },
+    "@replit/database": {
+      "fetchedAt": 1756142691199,
+      "meta": {
+        "name": "@replit/database",
+        "description": "Client for Repl.it Database",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/replit/database-node.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 7358,
+        "githubTopics": []
+      }
+    },
+    "@supabase/realtime-js": {
+      "fetchedAt": 1756142692106,
+      "meta": {
+        "name": "@supabase/realtime-js",
+        "description": "Listen to realtime updates to your PostgreSQL database",
+        "keywords": [
+          "realtime",
+          "phoenix",
+          "elixir",
+          "javascript",
+          "typescript",
+          "firebase",
+          "supabase"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/supabase/realtime-js.git"
+        },
+        "source": "npm",
+        "downloads": 3912011,
+        "githubTopics": []
+      }
+    },
+    "@cloudbase/database": {
+      "fetchedAt": 1756142694036,
+      "meta": {
+        "name": "@cloudbase/database",
+        "description": "database for (node.)js sdk ",
+        "keywords": [],
+        "source": "npm",
+        "downloads": 5815,
+        "githubTopics": []
+      }
+    },
+    "@sap/hana-database-explorer": {
+      "fetchedAt": 1756142694942,
+      "meta": {
+        "name": "@sap/hana-database-explorer",
+        "description": "SAP HANA Database Explorer for Visual Studio Code package",
+        "keywords": [
+          "hana-tooling"
+        ],
+        "source": "npm",
+        "downloads": 46994,
+        "githubTopics": []
+      }
+    },
+    "@cap-js/db-service": {
+      "fetchedAt": 1756142695889,
+      "meta": {
+        "name": "@cap-js/db-service",
+        "description": "CDS base database service",
+        "keywords": [
+          "CAP",
+          "CDS"
+        ],
+        "repository": {
+          "url": "git+https://github.com/cap-js/cds-dbs.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 180481,
+        "githubTopics": []
+      }
+    },
+    "hdb": {
+      "fetchedAt": 1756142696708,
+      "meta": {
+        "name": "hdb",
+        "description": "SAP HANA Database Client for Node",
+        "keywords": [
+          "sap",
+          "hana",
+          "database",
+          "in-memory"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/SAP/node-hdb.git"
+        },
+        "source": "npm",
+        "downloads": 253906,
+        "githubTopics": []
+      }
+    },
+    "database-js": {
+      "fetchedAt": 1756142698246,
+      "meta": {
+        "name": "database-js",
+        "description": "Common database interface for JavaScript",
+        "keywords": [
+          "database-js",
+          "database-js-mysql",
+          "database-js-postgres",
+          "database-js-sqlite",
+          "database-js-adodb",
+          "database-js-firebase",
+          "database-js-ini",
+          "database-js-xlsx",
+          "database-js-csv",
+          "database-js-json",
+          "javascript",
+          "database",
+          "db",
+          "sql",
+          "query",
+          "driver",
+          "mysql",
+          "postgre",
+          "postgres",
+          "postgresql",
+          "sqlite",
+          "ado",
+          "adodb",
+          "firebase",
+          "ini",
+          "xls",
+          "xlsx",
+          "csv",
+          "json"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/mlaanderson/database-js.git"
+        },
+        "source": "npm",
+        "downloads": 2705,
+        "githubTopics": []
+      }
+    },
+    "@cap-js/sqlite": {
+      "fetchedAt": 1756142700147,
+      "meta": {
+        "name": "@cap-js/sqlite",
+        "description": "CDS database service for SQLite",
+        "keywords": [
+          "CAP",
+          "CDS",
+          "SQLite"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/cap-js/cds-dbs.git"
+        },
+        "source": "npm",
+        "downloads": 167843,
+        "githubTopics": []
+      }
+    },
+    "database-cleaner": {
+      "fetchedAt": 1756142701535,
+      "meta": {
+        "name": "database-cleaner",
+        "description": "Database Cleaner for node.js",
+        "keywords": [
+          "database",
+          "cleaner",
+          "mongodb",
+          "redis",
+          "couchdb",
+          "tests",
+          "package.json",
+          "elasticsearch"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/emerleite/node-database-cleaner.git"
+        },
+        "source": "npm",
+        "downloads": 2849,
+        "githubTopics": []
+      }
+    },
+    "lokijs": {
+      "fetchedAt": 1756142702542,
+      "meta": {
+        "name": "lokijs",
+        "description": "Fast document oriented javascript in-memory database",
+        "keywords": [
+          "javascript",
+          "document-oriented",
+          "mmdb",
+          "json",
+          "nosql",
+          "lokijs",
+          "in-memory",
+          "indexeddb"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/techfort/LokiJS.git"
+        },
+        "source": "npm",
+        "downloads": 510528,
+        "githubTopics": []
+      }
+    },
+    "y-indexeddb": {
+      "fetchedAt": 1756142704085,
+      "meta": {
+        "name": "y-indexeddb",
+        "description": "IndexedDB database adapter for Yjs",
+        "keywords": [
+          "Yjs",
+          "CRDT",
+          "offline",
+          "shared editing",
+          "collaboration",
+          "concurrency"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/yjs/y-indexeddb.git"
+        },
+        "source": "npm",
+        "downloads": 120022,
+        "githubTopics": []
+      }
+    },
+    "@aws-sdk/client-database-migration-service": {
+      "fetchedAt": 1756142706279,
+      "meta": {
+        "name": "@aws-sdk/client-database-migration-service",
+        "description": "AWS SDK for JavaScript Database Migration Service Client for Node.js, Browser and React Native",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/aws/aws-sdk-js-v3.git",
+          "directory": "clients/client-database-migration-service"
+        },
+        "source": "npm",
+        "downloads": 93202,
+        "githubTopics": []
+      }
+    },
+    "y-leveldb": {
+      "fetchedAt": 1756142707663,
+      "meta": {
+        "name": "y-leveldb",
+        "description": "LevelDb database adapter for Yjs",
+        "keywords": [
+          "Yjs",
+          "CRDT",
+          "offline",
+          "shared editing",
+          "collaboration",
+          "concurrency"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/yjs/y-leveldb.git"
+        },
+        "source": "npm",
+        "downloads": 97185,
+        "githubTopics": []
+      }
+    },
+    "migrate-mongo": {
+      "fetchedAt": 1756142708459,
+      "meta": {
+        "name": "migrate-mongo",
+        "description": "A database migration tool for MongoDB in Node",
+        "keywords": [
+          "migrate mongo mongodb migrations database"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/seppevs/migrate-mongo.git"
+        },
+        "source": "npm",
+        "downloads": 170805,
+        "githubTopics": []
+      }
+    },
+    "@tursodatabase/database": {
+      "fetchedAt": 1756142710513,
+      "meta": {
+        "name": "@tursodatabase/database",
+        "description": "The Turso database library",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/tursodatabase/turso.git"
+        },
+        "source": "npm",
+        "downloads": 3798,
+        "githubTopics": []
+      }
+    },
+    "wordnet-db": {
+      "fetchedAt": 1756142711322,
+      "meta": {
+        "name": "wordnet-db",
+        "description": "WordNet 3.1 Database files",
+        "keywords": [
+          "WordNet",
+          "wordpos",
+          "natural",
+          "pos"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/moos/wordnet-db.git"
+        },
+        "source": "npm",
+        "downloads": 151306,
+        "githubTopics": []
+      }
+    },
+    "@opentelemetry/instrumentation-mongodb": {
+      "fetchedAt": 1756142712182,
+      "meta": {
+        "name": "@opentelemetry/instrumentation-mongodb",
+        "description": "OpenTelemetry instrumentation for `mongodb` database client for MongoDB",
+        "keywords": [
+          "mongodb",
+          "nodejs",
+          "opentelemetry",
+          "plugin",
+          "profiling",
+          "tracing"
+        ],
+        "repository": {
+          "url": "https://github.com/open-telemetry/opentelemetry-js-contrib.git",
+          "type": "git",
+          "directory": "packages/instrumentation-mongodb"
+        },
+        "source": "npm",
+        "downloads": 6424616,
+        "githubTopics": []
+      }
+    },
+    "analytics": {
+      "fetchedAt": 1756142712979,
+      "meta": {
+        "name": "analytics",
+        "description": "Lightweight analytics library for tracking events, page views, & identifying users. Works with any third party analytics provider via an extendable plugin system.",
+        "keywords": [
+          "analytics",
+          "analytics-project",
+          "metrics",
+          "telemetry",
+          "tracking",
+          "event tracking",
+          "page tracking",
+          "user tracking",
+          "custom events",
+          "stats",
+          "statistics",
+          "monitoring",
+          "pageviews"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/DavidWells/analytics"
+        },
+        "source": "npm",
+        "downloads": 206376,
+        "githubTopics": []
+      }
+    },
+    "@firebase/analytics-types": {
+      "fetchedAt": 1756142714066,
+      "meta": {
+        "name": "@firebase/analytics-types",
+        "description": "@firebase/analytics Types",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/firebase/firebase-js-sdk.git",
+          "type": "git",
+          "directory": "packages/analytics-types"
+        },
+        "source": "npm",
+        "downloads": 3069510,
+        "githubTopics": []
+      }
+    },
+    "analytics-utils": {
+      "fetchedAt": 1756142714933,
+      "meta": {
+        "name": "analytics-utils",
+        "description": "Analytics utility functions used by 'analytics' module",
+        "keywords": [
+          "analytics",
+          "analytics-project",
+          "analytics-utilities"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "https://github.com/DavidWells/analytics"
+        },
+        "source": "npm",
+        "downloads": 204204,
+        "githubTopics": []
+      }
+    },
+    "@firebase/analytics": {
+      "fetchedAt": 1756142716122,
+      "meta": {
+        "name": "@firebase/analytics",
+        "description": "A analytics package for new firebase packages",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/firebase/firebase-js-sdk.git",
+          "type": "git",
+          "directory": "packages/analytics"
+        },
+        "source": "npm",
+        "downloads": 3195971,
+        "githubTopics": []
+      }
+    },
+    "@algolia/client-analytics": {
+      "fetchedAt": 1756142717052,
+      "meta": {
+        "name": "@algolia/client-analytics",
+        "description": "JavaScript client for client-analytics",
+        "keywords": [],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/algolia/algoliasearch-client-javascript.git"
+        },
+        "source": "npm",
+        "downloads": 2742988,
+        "githubTopics": []
+      }
+    },
+    "@analytics/google-analytics": {
+      "fetchedAt": 1756142717937,
+      "meta": {
+        "name": "@analytics/google-analytics",
+        "description": "Google analytics v4 plugin for 'analytics' module",
+        "keywords": [
+          "analytics",
+          "analytics-project",
+          "analytics-plugin",
+          "GA",
+          "google-analytics",
+          "Google Analytics"
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/DavidWells/analytics.git"
+        },
+        "source": "npm",
+        "downloads": 57554,
+        "githubTopics": []
+      }
+    },
+    "@segment/analytics-core": {
+      "fetchedAt": 1756142718840,
+      "meta": {
+        "name": "@segment/analytics-core",
+        "description": "This package represents core 'shared' functionality that is shared by analytics packages. This is not designed to be used directly, but internal to analytics-node and analytics-browser.",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/segmentio/analytics-next.git",
+          "type": "git",
+          "directory": "packages/core"
+        },
+        "source": "npm",
+        "downloads": 1563401,
+        "githubTopics": []
+      }
+    },
+    "universal-analytics": {
+      "fetchedAt": 1756142719682,
+      "meta": {
+        "name": "universal-analytics",
+        "description": "A node module for Google's Universal Analytics tracking",
+        "keywords": [
+          "google",
+          "analytics",
+          "universal",
+          "tracking"
+        ],
+        "repository": {
+          "url": "git+ssh://git@github.com/peaksandpies/universal-analytics.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 895094,
+        "githubTopics": []
+      }
+    },
+    "@aws-amplify/analytics": {
+      "fetchedAt": 1756142720764,
+      "meta": {
+        "name": "@aws-amplify/analytics",
+        "description": "Analytics category of aws-amplify",
+        "keywords": [],
+        "repository": {
+          "url": "https://github.com/aws-amplify/amplify-js.git",
+          "type": "git"
+        },
+        "source": "npm",
+        "downloads": 894693,
+        "githubTopics": []
+      }
+    },
+    "@segment/analytics-node": {
+      "fetchedAt": 1756142721794,
+      "meta": {
+        "name": "@segment/analytics-node",
+        "description": "https://www.npmjs.com/package/@segment/analytics-node",
+        "keywords": [],
+        "repository": {
+          "url": "git+https://github.com/segmentio/analytics-next.git",
+          "type": "git",
+          "directory": "packages/node"
+        },
+        "source": "npm",
+        "downloads": 800601,
+        "githubTopics": []
+      }
+    }
+  }
+}

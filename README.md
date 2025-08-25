@@ -9,8 +9,8 @@
 - --run-id <id>: deterministic run id
 - --seed <seed>: seed to derive deterministic run id
 - --force: force overwrite without prompting
- - --yes / --confirm-overwrite: assume yes and confirm overwrite (non-interactive)
- - --backup-on-overwrite: create timestamped .bak files before overwriting when used with overwrite
+- --yes / --confirm-overwrite: assume yes and confirm overwrite (non-interactive)
+- --backup-on-overwrite: create timestamped .bak files before overwriting when used with overwrite
 
 # Testing
 

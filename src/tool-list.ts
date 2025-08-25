@@ -1,11 +1,16 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import os from "node:os";
+import { TOOL_CATALOG, ToolCatalogItem } from "./tools/catalog.js";
 
 export type ToolItem = {
   name: string;
   hint?: string;
+  description?: string;
   recommends?: string[];
+  language?: string;
+  packageManager?: string;
+  ecosystem?: string;
 };
 
 /**
@@ -18,33 +23,20 @@ export type ToolItem = {
  * @param source - optional local path or URL to a tool list
  */
 export async function loadToolList(source?: string) {
-  const builtIn: ToolItem[] = [
-    { name: "web.run" },
-    { name: "file.search" },
-    { name: "http.get" },
-    { name: "browser.open" },
-    { name: "sql.query" },
-    { name: "pinecone", hint: "vector DB" },
-    { name: "chromadb", hint: "vector DB" },
-    { name: "aws.s3" },
-    { name: "postgres" },
-    { name: "sqlite" },
-    { name: "redis" },
-    { name: "puppeteer" },
-    {
-      name: "playwright",
-      hint: "browser automation",
-      recommends: ["puppeteer"],
-    },
-    { name: "axios", hint: "http client" },
-    { name: "fetch", hint: "builtin http" },
-    { name: "vitest", hint: "fast tests", recommends: ["playwright"] },
-    { name: "jest", hint: "legacy" },
-    { name: "pytest", hint: "python tests" },
-    { name: "pip", hint: "python package manager" },
-    { name: "poetry", hint: "python package & env manager" },
-    { name: "requests", hint: "python http client" },
-  ];
+  // Map the richer catalog into the legacy ToolItem shape used by the CLI
+  const defaultRecommends: Record<string, string[]> = {
+    vitest: ["playwright"],
+    playwright: ["puppeteer"],
+  };
+  const builtIn: ToolItem[] = TOOL_CATALOG.map((c: ToolCatalogItem) => ({
+    name: c.name,
+    hint: c.hint || c.description,
+    description: c.description,
+    recommends: c.recommends ?? defaultRecommends[c.name],
+    language: c.language,
+    packageManager: c.packageManager,
+    ecosystem: c.ecosystem,
+  }));
 
   if (!source) return builtIn;
 

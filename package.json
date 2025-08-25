@@ -22,7 +22,9 @@
     "docs:start": "cd website && pnpm run start",
     "docs:build": "cd website && pnpm run build",
     "docs:serve": "cd website && pnpm run serve",
-    "docs:gen": "cd website && pnpm run gen:api"
+    "docs:gen": "cd website && pnpm run gen:api",
+    "tools:fetch": "tsx scripts/fetch-tools.ts",
+    "tools:fetch:ci": "pnpm -s dlx tsx scripts/fetch-tools.ts"
   },
   "prepare": "husky install",
   "dependencies": {

@@ -1,0 +1,14 @@
+{
+  "id": "api/templates/functions/renderTemplates",
+  "title": "renderTemplates",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/templates/functions/renderTemplates.md",
+  "sourceDirName": "api/templates/functions",
+  "slug": "/api/templates/functions/renderTemplates",
+  "permalink": "/docs/api/templates/functions/renderTemplates",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

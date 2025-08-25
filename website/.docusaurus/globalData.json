@@ -1,0 +1,123 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs",
+          "mainDocId": "intro",
+          "docs": [
+            {
+              "id": "api/index",
+              "path": "/docs/api/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "api/index/functions/run",
+              "path": "/docs/api/index/functions/run"
+            },
+            {
+              "id": "api/index/README",
+              "path": "/docs/api/index/"
+            },
+            {
+              "id": "api/modules",
+              "path": "/docs/api/modules"
+            },
+            {
+              "id": "api/prefs/functions/loadDefaults",
+              "path": "/docs/api/prefs/functions/loadDefaults"
+            },
+            {
+              "id": "api/prefs/functions/saveDefaults",
+              "path": "/docs/api/prefs/functions/saveDefaults"
+            },
+            {
+              "id": "api/prefs/README",
+              "path": "/docs/api/prefs/"
+            },
+            {
+              "id": "api/schema/README",
+              "path": "/docs/api/schema/"
+            },
+            {
+              "id": "api/schema/type-aliases/AgentConfig",
+              "path": "/docs/api/schema/type-aliases/AgentConfig"
+            },
+            {
+              "id": "api/schema/variables/AgentConfigSchema",
+              "path": "/docs/api/schema/variables/AgentConfigSchema"
+            },
+            {
+              "id": "api/schema/variables/ToolSchema",
+              "path": "/docs/api/schema/variables/ToolSchema"
+            },
+            {
+              "id": "api/templates/functions/renderTemplates",
+              "path": "/docs/api/templates/functions/renderTemplates"
+            },
+            {
+              "id": "api/templates/README",
+              "path": "/docs/api/templates/"
+            },
+            {
+              "id": "api/tool-list/functions/loadToolList",
+              "path": "/docs/api/tool-list/functions/loadToolList"
+            },
+            {
+              "id": "api/tool-list/README",
+              "path": "/docs/api/tool-list/"
+            },
+            {
+              "id": "api/tool-list/type-aliases/ToolItem",
+              "path": "/docs/api/tool-list/type-aliases/ToolItem"
+            },
+            {
+              "id": "api/write/functions/deepMerge",
+              "path": "/docs/api/write/functions/deepMerge"
+            },
+            {
+              "id": "api/write/functions/isObject",
+              "path": "/docs/api/write/functions/isObject"
+            },
+            {
+              "id": "api/write/functions/mergeMarkdownSections",
+              "path": "/docs/api/write/functions/mergeMarkdownSections"
+            },
+            {
+              "id": "api/write/functions/writeOutputs",
+              "path": "/docs/api/write/functions/writeOutputs"
+            },
+            {
+              "id": "api/write/README",
+              "path": "/docs/api/write/"
+            },
+            {
+              "id": "getting-started",
+              "path": "/docs/getting-started",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/docs/intro",
+              "sidebar": "tutorialSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "tutorialSidebar": {
+              "link": {
+                "path": "/docs/intro",
+                "label": "intro"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

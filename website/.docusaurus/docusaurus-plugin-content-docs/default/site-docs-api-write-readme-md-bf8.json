@@ -1,0 +1,14 @@
+{
+  "id": "api/write/README",
+  "title": "README",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/write/README.md",
+  "sourceDirName": "api/write",
+  "slug": "/api/write/",
+  "permalink": "/docs/api/write/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

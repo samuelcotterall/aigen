@@ -17,8 +17,20 @@ export const ToolSchema = z.object({
 
 export const AgentConfigSchema = z.object({
   name: z.string(),
+  // user-facing display name (optional; kept for compatibility with `name`)
+  displayName: z.string().optional(),
+  // filesystem-safe slug for output directories
+  slug: z.string().optional(),
   preset: z
-    .enum(["openai", "langchain", "llamaindex", "autogen", "mcp", "custom"])
+    .enum([
+      "openai",
+      "langchain",
+      "llamaindex",
+      "autogen",
+      "mcp",
+      "vscode",
+      "custom",
+    ])
     .optional(),
   style: z.object({
     tsconfig: z.enum(["strict", "balanced", "loose"]).default("strict"),

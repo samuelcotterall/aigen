@@ -1,0 +1,14 @@
+{
+  "id": "api/tool-list/README",
+  "title": "README",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/tool-list/README.md",
+  "sourceDirName": "api/tool-list",
+  "slug": "/api/tool-list/",
+  "permalink": "/docs/api/tool-list/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

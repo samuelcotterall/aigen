@@ -1,0 +1,14 @@
+{
+  "id": "api/write/functions/mergeMarkdownSections",
+  "title": "mergeMarkdownSections",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/write/functions/mergeMarkdownSections.md",
+  "sourceDirName": "api/write/functions",
+  "slug": "/api/write/functions/mergeMarkdownSections",
+  "permalink": "/docs/api/write/functions/mergeMarkdownSections",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

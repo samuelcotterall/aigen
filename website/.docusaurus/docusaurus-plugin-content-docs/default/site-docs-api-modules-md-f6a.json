@@ -1,0 +1,14 @@
+{
+  "id": "api/modules",
+  "title": "modules",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/modules.md",
+  "sourceDirName": "api",
+  "slug": "/api/modules",
+  "permalink": "/docs/api/modules",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

@@ -1,4 +1,5 @@
-# Policies
+# <% const displayName = it.cfg.displayName || it.cfg.name; %>
+# <%= displayName %> — Policies
 - Safety: <%= it.cfg.policies.safetyLevel %>
 - Refusals: <%= it.cfg.policies.refusalPattern %>
 - Privacy: <%= it.cfg.policies.privacyNotes ?? "Avoid unnecessary data retention." %>

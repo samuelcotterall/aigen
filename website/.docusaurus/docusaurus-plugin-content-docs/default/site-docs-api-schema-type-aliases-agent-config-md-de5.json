@@ -1,0 +1,14 @@
+{
+  "id": "api/schema/type-aliases/AgentConfig",
+  "title": "AgentConfig",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/schema/type-aliases/AgentConfig.md",
+  "sourceDirName": "api/schema/type-aliases",
+  "slug": "/api/schema/type-aliases/AgentConfig",
+  "permalink": "/docs/api/schema/type-aliases/AgentConfig",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

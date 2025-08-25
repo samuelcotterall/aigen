@@ -14,6 +14,17 @@ type FrontMatter = {
 
 const FRONT_RE = /^---json\s*\n([\s\S]*?)\n---\s*\n?/;
 
+/**
+ * Parse a JSON-front-matter block from a template file.
+ *
+ * Templates may start with a block like:
+ * ---json
+ * { "when": { "preset": "openai" }, "outPath": "agent.md" }
+ * ---
+ *
+ * @param src - raw template source
+ * @returns parsed front matter and the remaining body
+ */
 function parseFrontMatter(src: string): { fm: FrontMatter; body: string } {
   const m = src.match(FRONT_RE);
   if (!m) return { fm: {}, body: src };
@@ -21,12 +32,18 @@ function parseFrontMatter(src: string): { fm: FrontMatter; body: string } {
   return { fm, body: src.slice(m[0].length) };
 }
 
+/**
+ * Test whether a template's `when` conditions match the provided config.
+ *
+ * @param cfg - the current AgentConfig
+ * @param when - optional front-matter `when` constraints
+ */
 function matchesWhen(cfg: AgentConfig, when?: FrontMatter["when"]) {
   if (!when) return true;
   if (when.preset && when.preset !== (cfg.preset ?? "")) return false;
   if (when.libraries && when.libraries.length) {
     const set = new Set(cfg.libraries ?? []);
-    if (!when.libraries.some((x) => set.has(x))) return false;
+    if (!when.libraries.some((x) => set.has(x as any))) return false;
   }
   return true;
 }
@@ -42,6 +59,14 @@ async function walk(dir: string): Promise<string[]> {
   return files;
 }
 
+/**
+ * Render all templates to a map of output path -> content.
+ *
+ * This will evaluate Eta templates under `templates/common` and return a
+ * flat object containing the final content for each output path.
+ *
+ * @param cfg - parsed AgentConfig used as the template context
+ */
 export async function renderTemplates(cfg: AgentConfig) {
   const eta = new Eta({ views: TEMPLATES_DIR });
   const all = await walk(TEMPLATES_DIR);

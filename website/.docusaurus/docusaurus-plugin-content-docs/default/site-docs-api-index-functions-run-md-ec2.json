@@ -1,0 +1,14 @@
+{
+  "id": "api/index/functions/run",
+  "title": "run",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/index/functions/run.md",
+  "sourceDirName": "api/index/functions",
+  "slug": "/api/index/functions/run",
+  "permalink": "/docs/api/index/functions/run",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

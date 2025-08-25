@@ -1,0 +1,14 @@
+{
+  "id": "api/write/functions/isObject",
+  "title": "isObject",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/write/functions/isObject.md",
+  "sourceDirName": "api/write/functions",
+  "slug": "/api/write/functions/isObject",
+  "permalink": "/docs/api/write/functions/isObject",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

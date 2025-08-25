@@ -1,0 +1,14 @@
+{
+  "entryPoints": [
+    "src/index.ts",
+    "src/write.ts",
+    "src/templates.ts",
+    "src/tool-list.ts",
+    "src/prefs.ts",
+    "src/schema.ts"
+  ],
+  "tsconfig": "tsconfig.json",
+  "out": "website/docs/api",
+  "plugin": ["typedoc-plugin-markdown"],
+  "exclude": ["**/test/**", "**/dist/**", "website/**"]
+}

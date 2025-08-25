@@ -1,0 +1,14 @@
+{
+  "id": "api/write/functions/writeOutputs",
+  "title": "writeOutputs",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/write/functions/writeOutputs.md",
+  "sourceDirName": "api/write/functions",
+  "slug": "/api/write/functions/writeOutputs",
+  "permalink": "/docs/api/write/functions/writeOutputs",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

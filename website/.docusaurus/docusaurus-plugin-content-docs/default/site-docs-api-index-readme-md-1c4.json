@@ -1,0 +1,14 @@
+{
+  "id": "api/index/README",
+  "title": "README",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/index/README.md",
+  "sourceDirName": "api/index",
+  "slug": "/api/index/",
+  "permalink": "/docs/api/index/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

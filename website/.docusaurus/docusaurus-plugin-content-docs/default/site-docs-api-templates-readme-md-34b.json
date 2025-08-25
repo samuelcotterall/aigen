@@ -1,0 +1,14 @@
+{
+  "id": "api/templates/README",
+  "title": "README",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/templates/README.md",
+  "sourceDirName": "api/templates",
+  "slug": "/api/templates/",
+  "permalink": "/docs/api/templates/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

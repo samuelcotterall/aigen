@@ -16,9 +16,17 @@
     "build": "tsup src/index.ts --format esm --dts",
     "dev": "tsx src/index.ts",
     "test": "vitest run",
-    "prepublishOnly": "tsup src/index.ts --format esm --dts"
+    "prepublishOnly": "tsup src/index.ts --format esm --dts",
+    "gen:api": "typedoc --entryPoints src/index.ts --tsconfig tsconfig.json --plugin typedoc-plugin-markdown --out website/docs/api && node scripts/fix-typedoc-index.cjs",
+    "docs:install": "cd website && pnpm install",
+    "docs:start": "cd website && pnpm run start",
+    "docs:build": "cd website && pnpm run build",
+    "docs:serve": "cd website && pnpm run serve",
+    "docs:gen": "cd website && pnpm run gen:api"
   },
+  "prepare": "husky install",
   "dependencies": {
+    "fuse.js": "^6.6.2",
     "@clack/prompts": "^0.7.0",
     "commander": "^12.0.0",
     "conf": "^13.0.0",
@@ -29,6 +37,10 @@
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
+    "mdast-util-to-string": "^2.0.0",
+    "remark-parse": "^10.0.1",
+    "remark-stringify": "^10.0.1",
+    "unified": "^10.0.0",
     "tsup": "^8.0.1",
     "tsx": "^4.7.0",
     "typescript": "^5.9.2",

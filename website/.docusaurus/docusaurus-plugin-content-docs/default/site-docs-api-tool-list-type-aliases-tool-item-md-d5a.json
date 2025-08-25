@@ -1,0 +1,14 @@
+{
+  "id": "api/tool-list/type-aliases/ToolItem",
+  "title": "ToolItem",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/tool-list/type-aliases/ToolItem.md",
+  "sourceDirName": "api/tool-list/type-aliases",
+  "slug": "/api/tool-list/type-aliases/ToolItem",
+  "permalink": "/docs/api/tool-list/type-aliases/ToolItem",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

@@ -1,0 +1,14 @@
+{
+  "id": "api/prefs/functions/saveDefaults",
+  "title": "saveDefaults",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/prefs/functions/saveDefaults.md",
+  "sourceDirName": "api/prefs/functions",
+  "slug": "/api/prefs/functions/saveDefaults",
+  "permalink": "/docs/api/prefs/functions/saveDefaults",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

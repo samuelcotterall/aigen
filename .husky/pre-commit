@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running API generation for docs..."
+pnpm run gen:api
+git add website/docs/api || true

@@ -1,0 +1,14 @@
+{
+  "id": "api/write/functions/deepMerge",
+  "title": "deepMerge",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/write/functions/deepMerge.md",
+  "sourceDirName": "api/write/functions",
+  "slug": "/api/write/functions/deepMerge",
+  "permalink": "/docs/api/write/functions/deepMerge",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

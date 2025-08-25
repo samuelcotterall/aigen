@@ -1,0 +1,14 @@
+{
+  "id": "api/schema/variables/ToolSchema",
+  "title": "ToolSchema",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/schema/variables/ToolSchema.md",
+  "sourceDirName": "api/schema/variables",
+  "slug": "/api/schema/variables/ToolSchema",
+  "permalink": "/docs/api/schema/variables/ToolSchema",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

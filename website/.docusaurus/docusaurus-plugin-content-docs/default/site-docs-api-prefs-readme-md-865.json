@@ -1,0 +1,14 @@
+{
+  "id": "api/prefs/README",
+  "title": "README",
+  "description": "create-agent-instructions",
+  "source": "@site/docs/api/prefs/README.md",
+  "sourceDirName": "api/prefs",
+  "slug": "/api/prefs/",
+  "permalink": "/docs/api/prefs/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

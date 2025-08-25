@@ -8,6 +8,15 @@ export type ToolItem = {
   recommends?: string[];
 };
 
+/**
+ * Load a list of tools. If `source` is not provided, return a built-in list.
+ *
+ * The `source` can be a local JSON file path or an HTTP(S) URL returning
+ * an array of tool descriptors. Remote responses are cached to a temp file
+ * for up to 24 hours.
+ *
+ * @param source - optional local path or URL to a tool list
+ */
 export async function loadToolList(source?: string) {
   const builtIn: ToolItem[] = [
     { name: "web.run" },

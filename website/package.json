@@ -1,0 +1,23 @@
+{
+  "name": "create-agent-instructions-docs",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "serve": "docusaurus serve",
+    "deploy": "docusaurus deploy",
+    "typedoc": "typedoc --options ../typedoc.json",
+    "gen:api": "pnpm run typedoc && node ../scripts/fix-typedoc-index.cjs"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.8.0",
+    "@docusaurus/preset-classic": "^3.8.0"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "pretty-quick": "^4.2.2",
+    "typedoc": "^0.28.11",
+    "typedoc-plugin-markdown": "^4.8.1"
+  }
+}

@@ -1,4 +1,5 @@
-# Tools
+# <% const displayName = it.cfg.displayName || it.cfg.name; %>
+# <%= displayName %> — Tools
 <% if (!it.cfg.tools.length) { %>
 _No tools selected. You can add tools later in `config/agent.json`._
 <% } else { %>

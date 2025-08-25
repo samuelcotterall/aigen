@@ -1,0 +1,9 @@
+/* minimal custom styles for docs */
+:root {
+  --ifm-color-primary: #0b7285;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+}

@@ -1,0 +1,19 @@
+```markdown
+---json
+{ "outPath": "EXAMPLES.md" }
+---
+# Examples for <% const displayName = it.cfg.displayName || it.cfg.name; %>
+
+This file demonstrates sample usage patterns for different presets.
+
+<% if (it.cfg.preset === 'openai') { %>
+## OpenAI examples
+- See `examples/openai.ts` for a minimal runtime example.
+<% } %>
+
+<% if ((it.cfg.libraries || []).includes('langchain')) { %>
+## LangChain examples
+- LangChain-specific wiring and agents
+<% } %>
+
+```

@@ -10,6 +10,7 @@ import {
 } from "@clack/prompts";
 import { AgentConfigSchema } from "./schema.js";
 import { writeOutputs } from "./write.js";
+import { renderTemplates } from "./templates.js";
 import { loadDefaults, saveDefaults } from "./prefs.js";
 import fs from "node:fs/promises";
 import os from "node:os";
@@ -70,20 +71,26 @@ export async function run(opts: any) {
     return imported;
   }
 
-  const preset = await select({
-    message: "Choose a preset/runtime",
-    options: [
-      { value: "openai", label: "OpenAI (system prompt + tools)" },
-      { value: "langchain", label: "LangChain (TS)" },
-      { value: "llamaindex", label: "LlamaIndex" },
-      { value: "autogen", label: "AutoGen" },
-      { value: "mcp", label: "Model Context Protocol (server)" },
-      { value: "vscode", label: "VS Code (Copilot)" },
-      { value: "custom", label: "Custom" },
-    ],
-    initialValue: defaults.preset ?? "openai",
-  });
-  if (isCancel(preset)) return;
+  // Respect non-interactive scripts: use opts.preset or defaults when provided
+  let preset: string;
+  if (opts.nonInteractive) {
+    preset = opts.preset ?? defaults.preset ?? "openai";
+  } else {
+    preset = await select({
+      message: "Choose a preset/runtime",
+      options: [
+        { value: "openai", label: "OpenAI (system prompt + tools)" },
+        { value: "langchain", label: "LangChain (TS)" },
+        { value: "llamaindex", label: "LlamaIndex" },
+        { value: "autogen", label: "AutoGen" },
+        { value: "mcp", label: "Model Context Protocol (server)" },
+        { value: "vscode", label: "VS Code (Copilot)" },
+        { value: "custom", label: "Custom" },
+      ],
+      initialValue: defaults.preset ?? "openai",
+    });
+    if (isCancel(preset)) return;
+  }
 
   // Map common presets to sensible library selections. Only ask for libraries
   // when the user explicitly chooses `custom`.
@@ -98,38 +105,47 @@ export async function run(opts: any) {
 
   let libs: string[] = [];
   if (preset === "custom") {
-    const libsRes = await multiselect({
-      message: "Pick libraries to target",
-      options: [
-        { value: "openai", label: "OpenAI SDK" },
-        { value: "langchain", label: "LangChain" },
-        { value: "llamaindex", label: "LlamaIndex" },
-        { value: "autogen", label: "AutoGen" },
-        { value: "mcp", label: "Model Context Protocol (server)" },
-      ],
-      initialValues: defaults.libraries ?? ["openai"],
-    });
-    if (isCancel(libsRes)) return;
-    libs = libsRes as string[];
+    if (opts.nonInteractive) {
+      libs = opts.libraries ?? defaults.libraries ?? ["openai"];
+    } else {
+      const libsRes = await multiselect({
+        message: "Pick libraries to target",
+        options: [
+          { value: "openai", label: "OpenAI SDK" },
+          { value: "langchain", label: "LangChain" },
+          { value: "llamaindex", label: "LlamaIndex" },
+          { value: "autogen", label: "AutoGen" },
+          { value: "mcp", label: "Model Context Protocol (server)" },
+        ],
+        initialValues: defaults.libraries ?? ["openai"],
+      });
+      if (isCancel(libsRes)) return;
+      libs = libsRes as string[];
+    }
   } else {
     libs = PRESET_LIBS[preset] ?? defaults.libraries ?? ["openai"];
   }
 
-  const tsStrict = await select({
-    message: "TypeScript strictness",
-    options: [
-      { value: "strict", label: "strict" },
-      { value: "balanced", label: "balanced" },
-      { value: "loose", label: "loose" },
-    ],
-    initialValue: defaults.tsconfig ?? "strict",
-  });
-  if (isCancel(tsStrict)) return;
+  let tsStrict: string;
+  if (opts.nonInteractive)
+    tsStrict = opts.tsconfig ?? defaults.tsconfig ?? "strict";
+  else {
+    tsStrict = await select({
+      message: "TypeScript strictness",
+      options: [
+        { value: "strict", label: "strict" },
+        { value: "balanced", label: "balanced" },
+        { value: "loose", label: "loose" },
+      ],
+      initialValue: defaults.tsconfig ?? "strict",
+    });
+    if (isCancel(tsStrict)) return;
+  }
 
   let name: string;
-  if (opts.name) {
-    name = opts.name;
-  } else {
+  if (opts.name) name = opts.name;
+  else if (opts.nonInteractive) name = defaults.name ?? "MyAgent";
+  else {
     const nameRes = await text({
       message: "Agent name",
       initialValue: defaults.name ?? "MyAgent",
@@ -396,30 +412,62 @@ export async function run(opts: any) {
           ).join(", ")}.`;
         }
 
-        const confirm = await select({
-          message: confirmMsg,
-          options,
-          initialValue: "no",
-        });
-        if (isCancel(confirm) || confirm === "abort") return;
-        if (confirm === "no") {
-          const alt = await text({
-            message: "Provide an explicit output parent directory path",
-            placeholder: "./my-agent-output",
-            initialValue: parentOut,
+        // handle non-interactive scripts via flags: --merge or --force
+        if (opts.nonInteractive) {
+          if (opts.force) {
+            // overwrite: writeOpts remains undefined so files are written
+            writeOpts = undefined;
+          } else if (opts.merge) {
+            writeOpts = { skipIfExists: true };
+          } else {
+            throw new Error(
+              `Target ${candidateDir} exists and non-interactive mode requires --merge or --force`
+            );
+          }
+        } else {
+          const confirm = await select({
+            message: confirmMsg,
+            options,
+            initialValue: "no",
           });
-          if (isCancel(alt)) return;
-          parentOut = path.resolve(alt as string);
-        }
-        writeOpts = undefined;
-        if (confirm === "merge") {
-          // when merging, skip writing files that already exist so we preserve user content
-          writeOpts = { skipIfExists: true };
+          if (isCancel(confirm) || confirm === "abort") return;
+          if (confirm === "no") {
+            const alt = await text({
+              message: "Provide an explicit output parent directory path",
+              placeholder: "./my-agent-output",
+              initialValue: parentOut,
+            });
+            if (isCancel(alt)) return;
+            parentOut = path.resolve(alt as string);
+          }
+          writeOpts = undefined;
+          if (confirm === "merge") {
+            // when merging, skip writing files that already exist so we preserve user content
+            writeOpts = { skipIfExists: true };
+          }
         }
       }
     }
   } catch (e) {
     // doesn't exist or other error: proceed and let writeOutputs handle it
+  }
+
+  // Handle dry-run: render templates and print a preview, but do not write files.
+  if (opts.dryRun) {
+    try {
+      const preview = await renderTemplates(cfg);
+      const keys = Object.keys(preview);
+      console.log(
+        `Dry run: ${keys.length} files would be generated under '${path.join(
+          parentOut,
+          cfg.slug || cfg.name
+        )}'`
+      );
+      for (const k of keys.slice(0, 20)) console.log(` - ${k}`);
+      if (keys.length > 20) console.log(` ...and ${keys.length - 20} more`);
+    } catch (e) {}
+    outro(`Dry run complete. No files were written.`);
+    return;
   }
 
   let outDir: string | undefined;
@@ -440,6 +488,30 @@ export async function run(opts: any) {
     console.error("Error writing outputs:", (err as any).message || err);
     return;
   }
+
+  // list files written for final summary
+  try {
+    async function listFiles(dir: string): Promise<string[]> {
+      const entries = await fs.readdir(dir, { withFileTypes: true });
+      const out: string[] = [];
+      for (const e of entries) {
+        const p = path.join(dir, e.name);
+        if (e.isDirectory()) {
+          const sub = await listFiles(p);
+          out.push(
+            ...sub.map((s) => path.relative(outDir || dir, path.join(p, s)))
+          );
+        } else out.push(path.relative(outDir || dir, p));
+      }
+      return out;
+    }
+    try {
+      const files = await listFiles(outDir as string);
+      console.log(`Wrote ${files.length} files to: ${outDir}`);
+      for (const f of files.slice(0, 20)) console.log(` - ${f}`);
+      if (files.length > 20) console.log(` ...and ${files.length - 20} more`);
+    } catch {}
+  } catch {}
   outro(`Done. Generated instruction pack for ${name}.`);
   if (opts.dev) {
     // report where the dev output landed
@@ -453,6 +525,8 @@ program
     "--out-dir <path>",
     "explicit output parent directory (overrides cwd)"
   );
+program.option("--non-interactive", "run without prompts (use flags/defaults)");
+program.option("--dry-run", "preview generated files without writing them");
 program.option(
   "--merge",
   "merge with existing files (preserve existing files)"

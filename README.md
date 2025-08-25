@@ -1,3 +1,19 @@
+# CLI flags
+
+- --dev: write outputs to a temporary development directory
+- --out-dir <path>: explicit output parent directory
+- --non-interactive: run without prompts (use flags/defaults)
+- --dry-run: preview generated files without writing them
+- --merge: merge with existing files (preserve existing files)
+- --ast-merge: use AST-based markdown merging (optional remark packages)
+- --run-id <id>: deterministic run id
+- --seed <seed>: seed to derive deterministic run id
+- --force: force overwrite without prompting
+
+# Testing
+
+- Tests mock `@clack/prompts`; use `test/utils/mockPrompts.ts` to create consistent mocks for tests.
+
 # create-agent-instructions (dev notes)
 
 Usage (dev / local):

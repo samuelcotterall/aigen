@@ -1,0 +1,12 @@
+```markdown
+---json
+{ "outPath": "EXAMPLES.md" }
+---
+# Examples for 
+This file demonstrates sample usage patterns for different presets.
+
+## OpenAI examples
+- See `examples/openai.ts` for a minimal runtime example.
+
+
+```

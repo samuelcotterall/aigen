@@ -2,31 +2,16 @@ import { describe, it, expect, vi } from "vitest";
 import fs from "node:fs/promises";
 import path from "node:path";
 import os from "node:os";
+import makeClackMock from "../utils/mockPrompts";
 
-// Mock @clack/prompts for this integration scenario. We want to simulate the
-// interactive flow where the target directory exists and the user chooses
-// "merge" so the writer will perform merges and create .bak backups.
-vi.mock("@clack/prompts", async () => {
-  return {
-    intro: vi.fn(),
-    outro: vi.fn(),
-    isCancel: () => false,
-    select: vi.fn().mockImplementation((opts: any) => {
-      if (opts.message?.includes("Choose a preset"))
-        return Promise.resolve("openai");
-      if (opts.message?.includes("TypeScript strictness"))
-        return Promise.resolve("strict");
-      if (opts.message?.includes("Target") && opts.options)
-        return Promise.resolve("merge");
-      // default to initialValue when present
-      return Promise.resolve(
-        opts.initialValue ?? (opts.options && opts.options[0]?.value)
-      );
-    }),
-    multiselect: vi.fn().mockResolvedValue([]),
-    text: vi.fn().mockResolvedValue("done"),
-  };
-});
+vi.mock("@clack/prompts", async () =>
+  makeClackMock({
+    preset: "openai",
+    tsconfig: "strict",
+    target: "merge",
+    textValue: "done",
+  })
+);
 
 import { run } from "../../src/index";
 

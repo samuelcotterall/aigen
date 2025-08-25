@@ -3,29 +3,25 @@ import makeClackMock from "./utils/mockPrompts";
 
 vi.mock("@clack/prompts", async () =>
   makeClackMock({
-    preset: "openai",
-    tsconfig: "strict",
-    searchMore: "no",
-    textValue: "done",
+    preset: "custom",
+    tsconfig: "balanced",
+    multiselectValue: ["openai", "langchain"],
+    textValue: "CustomTool",
   })
 );
 
 import { run } from "../src/index";
 
-describe("CLI integration (dev mode)", () => {
-  it("runs programmatically with mocked prompts and writes dev output", async () => {
-    // call run directly with options to avoid spawning a TTY; provide name and dev
-    const opts = { dev: true, name: "Integration Agent" } as any;
-    // capture console output
+describe("CLI custom-selection journeys", () => {
+  it("accepts custom libraries and tools and writes outputs", async () => {
     const logs: string[] = [];
     const origLog = console.log;
     console.log = (...args: any[]) => {
       logs.push(args.join(" "));
-      origLog.apply(console, args);
+      origLog.apply(console, args as any);
     };
-
     try {
-      await run(opts);
+      await run({ dev: true } as any);
       const all = logs.join("\n");
       expect(all).toContain("Dev output written to:");
     } finally {

@@ -367,11 +367,42 @@ export async function run(opts: any) {
     const suffix = meta.length ? ` — ${meta.join(" / ")}` : "";
     return `${t.name}${suffix}`;
   }
+  // Truncate text to a single line and a given max length.
+  function truncateOneLine(s: any, max = 80) {
+    if (!s && s !== 0) return "";
+    const one = String(s).replace(/\s+/g, " ").trim();
+    if (one.length <= max) return one;
+    return one.slice(0, Math.max(0, max - 1)).trimEnd() + "…";
+  }
+
+  function formatToolHint(t: any) {
+    // Prefer explicit description, fall back to hint or combined meta
+    const base = t.description || t.hint || formatToolLabel(t);
+    return truncateOneLine(base, 80);
+  }
+
+  // Ensure an Enquirer choice is a plain object with the expected fields.
+  function normalizeChoice(choice: any) {
+    if (!choice || typeof choice !== "object") {
+      const v = choice == null ? "" : String(choice);
+      return { name: v, message: v, value: v, disabled: false };
+    }
+    return {
+      name: choice.name || String(choice.value || choice.message || ""),
+      message: choice.message || String(choice.name || choice.value || ""),
+      value: choice.value ?? choice.name,
+      disabled: !!choice.disabled,
+      selected: !!choice.selected,
+      hint: choice.hint || "",
+    } as any;
+  }
   const toolOptions = toolList
     .filter((t) => matchesEnv(t, environments))
     .map((t) => ({
       value: t.name,
-      label: formatToolLabel(t),
+      // fallback options (non-Enquirer) should show only the name so
+      // descriptions aren't always visible.
+      label: t.name,
     }));
   toolOptions.push({ value: "other", label: "Other / custom" });
   // (Previously used Fuse.js for a two-step filter flow; replaced by a
@@ -388,6 +419,8 @@ export async function run(opts: any) {
     if (!initialToolNames.includes(s)) initialToolNames.push(s);
   const selectedSet = new Set<string>(initialToolNames as string[]);
   let extraToolsRaw = "";
+  // Before prompting: do not print a duplicate header here — the interactive
+  // prompt will show the same message. Keep this block intentionally empty.
   // Live multi-select using Enquirer: type to filter choices, space to toggle
   // an item, and Enter to submit the selection. This provides a native
   // filter-as-you-type experience without a separate query step.
@@ -401,10 +434,13 @@ export async function run(opts: any) {
     if (!matchesEnv(t, environments) && !selectedSet.has(t.name)) continue;
     choiceMap.set(t.name, {
       name: t.name,
-      message: formatToolLabel(t),
+      // show only the name in the list; provide a short one-line hint
+      // that Enquirer will surface when the item is focused.
+      message: t.name,
+      hint: formatToolHint(t),
       value: t.name,
       disabled: false,
-      checked: selectedSet.has(t.name),
+      selected: selectedSet.has(t.name),
     });
   }
   choiceMap.set("other", {
@@ -412,9 +448,9 @@ export async function run(opts: any) {
     message: "Other / custom",
     value: "other",
     disabled: false,
-    checked: false,
+    selected: false,
   });
-  const enquirerChoices = Array.from(choiceMap.values());
+  const enquirerChoices = Array.from(choiceMap.values()).map(normalizeChoice);
 
   // Decide whether to use Enquirer (rich, filter-as-you-type) or fallback to
   // `@clack/prompts` (works in non-TTY/test environments). Prefer Enquirer
@@ -428,6 +464,63 @@ export async function run(opts: any) {
     process.stdout.isTTY
   );
   const useEnquirer = !inTest && hasTTY;
+
+  // Allow the user to review pre-selected tools first (before adding more).
+  // This is a dedicated, lightweight multiselect that only shows the
+  // currently pre-selected tools so users can uncheck any they don't want.
+  if (!opts.nonInteractive) {
+    const preSelected = Array.from(selectedSet || []);
+    if (preSelected.length) {
+      try {
+        if (useEnquirer) {
+          try {
+            const reviewChoices = preSelected
+              .map((n) => {
+                const found = toolList.find((tt) => tt.name === n);
+                return {
+                  name: n,
+                  message: n,
+                  value: n,
+                  selected: true,
+                  hint: found ? formatToolHint(found) : "",
+                };
+              })
+              .map(normalizeChoice);
+            const reviewAns = await Enquirer.prompt({
+              type: "multiselect",
+              name: "reviewed",
+              message: "Recommended Tools (space to toggle, Enter to finish)",
+              choices: reviewChoices as any,
+              initial: preSelected,
+              limit: Math.max(6, Math.min(12, reviewChoices.length)),
+            } as unknown as any);
+            const kept = (reviewAns as any).reviewed as string[];
+            selectedSet.clear();
+            for (const k of kept || []) selectedSet.add(k);
+          } catch (err) {
+            // Enquirer failed for review step, fallback to clack multiselect
+            const kept = (await multiselect({
+              message: "Recommended Tools (space to toggle, Enter to finish)",
+              options: preSelected.map((s) => ({ value: s, label: s })),
+              initialValues: preSelected,
+            })) as string[];
+            if (!kept) return;
+            selectedSet.clear();
+            for (const k of kept) selectedSet.add(k);
+          }
+        } else {
+          const kept = (await multiselect({
+            message: "Recommended Tools (space to toggle, Enter to finish)",
+            options: preSelected.map((s) => ({ value: s, label: s })),
+            initialValues: preSelected,
+          })) as string[];
+          if (!kept) return;
+          selectedSet.clear();
+          for (const k of kept) selectedSet.add(k);
+        }
+      } catch {}
+    }
+  }
 
   if (!useEnquirer) {
     // Use the clack multiselect (tests mock this) with a simple options list.
@@ -457,6 +550,7 @@ export async function run(opts: any) {
         message:
           "Search tools/frameworks (type to filter, space to toggle, Enter to finish)",
         choices: enquirerChoices as any,
+        initial: Array.from(selectedSet),
         limit: 12,
       } as unknown as any);
       const picked = (answer as any).tools as string[];

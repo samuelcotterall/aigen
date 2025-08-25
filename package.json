@@ -24,7 +24,10 @@
     "docs:serve": "cd website && pnpm run serve",
     "docs:gen": "cd website && pnpm run gen:api",
     "tools:fetch": "tsx scripts/fetch-tools.ts",
-    "tools:fetch:ci": "pnpm -s dlx tsx scripts/fetch-tools.ts"
+    "tools:fetch:ci": "pnpm -s dlx tsx scripts/fetch-tools.ts",
+    "list:eslint-rules": "node scripts/list-eslint-rules.mjs",
+    "docs:gen-styleguide": "node scripts/schema-to-markdown.mjs",
+    "docs:gen-agent-instructions": "node scripts/schema-to-agent-instructions.mjs"
   },
   "prepare": "husky install",
   "dependencies": {

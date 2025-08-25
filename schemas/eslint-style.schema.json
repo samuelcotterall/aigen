@@ -1,0 +1,532 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Project Style Schema",
+  "description": "High-level project style and organization rules (non-linter): file organization, naming conventions, file size limits, script naming, documentation and repo/CI conventions.",
+  "type": "object",
+  "properties": {
+    "projectStructure": {
+      "type": "object",
+      "description": "Guidelines for directory layout and where to place code, tests and assets.",
+      "properties": {
+        "srcDir": {
+          "type": "string",
+          "description": "Primary source directory (e.g. 'src')"
+        },
+        "testsDir": {
+          "type": "string",
+          "description": "Top-level test directory (e.g. 'test' or 'tests')"
+        },
+        "coLocateTests": {
+          "type": "boolean",
+          "description": "Prefer co-locating tests next to implementation files"
+        },
+        "assetsDir": {
+          "type": "string",
+          "description": "Static assets directory (optional)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "fileConventions": {
+      "type": "object",
+      "description": "File naming and placement conventions not covered by linters.",
+      "properties": {
+        "fileNameCase": {
+          "type": "string",
+          "enum": [
+            "kebab-case",
+            "camelCase",
+            "snake_case",
+            "PascalCase"
+          ],
+          "description": "Preferred casing for file names"
+        },
+        "componentFileSuffix": {
+          "type": "string",
+          "description": "Suffix for component files (e.g. .component.tsx)"
+        },
+        "testFilePattern": {
+          "type": "string",
+          "description": "Glob pattern for test files (e.g. **/*.test.*)"
+        },
+        "coLocateAssets": {
+          "type": "boolean",
+          "description": "Prefer co-locating small assets (CSS/images) with components"
+        }
+      },
+      "additionalProperties": false
+    },
+    "fileLimits": {
+      "type": "object",
+      "description": "Soft limits for file sizes and complexity (guidelines, not enforced by linters).",
+      "properties": {
+        "maxLines": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Recommended maximum lines per file"
+        },
+        "maxFunctionsPerFile": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxCyclomaticComplexity": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Guideline for function complexity"
+        }
+      },
+      "additionalProperties": false
+    },
+    "namingConventions": {
+      "type": "object",
+      "description": "High level naming preferences for scripts, binaries and packages (not code-level identifiers).",
+      "properties": {
+        "scriptPrefix": {
+          "type": "string",
+          "description": "Recommended prefix for package.json scripts (e.g., 'dev:', 'build:')"
+        },
+        "binaryNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Preferred executable names for CLI tools"
+        },
+        "packageNamePattern": {
+          "type": "string",
+          "description": "Regex or pattern for package name (optional)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "documentation": {
+      "type": "object",
+      "properties": {
+        "requireReadme": {
+          "type": "boolean",
+          "description": "Require README.md at project root"
+        },
+        "docsFolder": {
+          "type": "string",
+          "description": "Preferred docs folder e.g. 'docs' or 'website'"
+        },
+        "inlineDocStyle": {
+          "type": "string",
+          "description": "Preferred inline doc style (e.g., 'JSDoc', 'TSDoc', 'Sphinx')"
+        }
+      },
+      "additionalProperties": false
+    },
+    "scripts": {
+      "type": "object",
+      "description": "Conventions for package scripts and CI tasks.",
+      "properties": {
+        "requiredScripts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Scripts that should exist in package.json (e.g., build,test,lint)"
+        },
+        "forbiddenScriptNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Script names that should be avoided"
+        }
+      },
+      "additionalProperties": false
+    },
+    "testingConventions": {
+      "type": "object",
+      "properties": {
+        "testFrameworks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Preferred test frameworks or runners"
+        },
+        "testCoverageGoal": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Target percentage for test coverage (informational)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "repository": {
+      "type": "object",
+      "properties": {
+        "defaultBranch": {
+          "type": "string",
+          "description": "Name of the default branch (e.g., 'main')"
+        },
+        "prTemplate": {
+          "type": "boolean",
+          "description": "Recommend using a PR template"
+        },
+        "branchNamePattern": {
+          "type": "string",
+          "description": "Preferred branch naming pattern (e.g., feature/*)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "preferredTools": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Preferred libraries, CLIs, or infrastructure choices (informational)."
+    },
+    "disallowedPractices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "High-level practices to avoid (e.g., 'global variables', 'deeply nested callbacks')."
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "projectStructure": {
+        "srcDir": "src",
+        "testsDir": "test",
+        "coLocateTests": true
+      },
+      "fileConventions": {
+        "fileNameCase": "kebab-case",
+        "testFilePattern": "**/*.test.*",
+        "coLocateAssets": true
+      },
+      "fileLimits": {
+        "maxLines": 300,
+        "maxFunctionsPerFile": 12
+      },
+      "namingConventions": {
+        "scriptPrefix": "ci:",
+        "binaryNames": [
+          "create-agent-instructions"
+        ]
+      },
+      "documentation": {
+        "requireReadme": true,
+        "docsFolder": "docs",
+        "inlineDocStyle": "TSDoc"
+      },
+      "scripts": {
+        "requiredScripts": [
+          "build",
+          "test",
+          "lint"
+        ],
+        "forbiddenScriptNames": [
+          "deploy:prod"
+        ]
+      },
+      "testingConventions": {
+        "testFrameworks": ["vitest"],
+        "testCoverageGoal": 80
+      },
+      "repository": {
+        "defaultBranch": "main",
+        "prTemplate": true,
+        "branchNamePattern": "(feature|fix|chore)/.*"
+      },
+      "preferredTools": [
+        "vitest",
+        "tsx",
+        "tsup"
+      ],
+      "disallowedPractices": [
+        "global variables",
+        "deeply nested callbacks"
+      ]
+    },
+    {
+      "projectStructure": {
+        "srcDir": "src",
+        "testsDir": "tests",
+        "coLocateTests": false
+      },
+      "fileConventions": {
+        "fileNameCase": "kebab-case",
+        "componentFileSuffix": ".ts",
+        "testFilePattern": "**/*.spec.ts",
+        "coLocateAssets": false
+      },
+      "fileLimits": {
+        "maxLines": 200,
+        "maxFunctionsPerFile": 10,
+        "maxCyclomaticComplexity": 10
+      },
+      "namingConventions": {
+        "scriptPrefix": "",
+        "binaryNames": ["aigen"],
+        "packageNamePattern": "^[a-z0-9-]+$"
+      },
+      "documentation": {
+        "requireReadme": true,
+        "docsFolder": "docs",
+        "inlineDocStyle": "TSDoc"
+      },
+      "scripts": {
+        "requiredScripts": [
+          "build",
+          "test",
+          "lint",
+          "typecheck"
+        ],
+        "forbiddenScriptNames": [
+          "postinstall"
+        ]
+      },
+      "testingConventions": {
+        "testFrameworks": ["vitest"],
+        "testCoverageGoal": 90
+      },
+      "repository": {
+        "defaultBranch": "main",
+        "prTemplate": true
+      },
+      "preferredTools": [
+        "tsup",
+        "vitest",
+        "biome"
+      ],
+      "disallowedPractices": [
+        "any types",
+        "default export in libraries"
+      ]
+    },
+    {
+      "projectStructure": {
+        "srcDir": "src",
+        "testsDir": "__tests__",
+        "coLocateTests": true,
+        "assetsDir": "public"
+      },
+      "fileConventions": {
+        "fileNameCase": "kebab-case",
+        "componentFileSuffix": ".tsx",
+        "testFilePattern": "**/*.{test,spec}.tsx",
+        "coLocateAssets": true
+      },
+      "fileLimits": {
+        "maxLines": 150,
+        "maxFunctionsPerFile": 8,
+        "maxCyclomaticComplexity": 8
+      },
+      "namingConventions": {
+        "scriptPrefix": "",
+        "binaryNames": [],
+        "packageNamePattern": "^[a-z0-9-]+$"
+      },
+      "documentation": {
+        "requireReadme": true,
+        "docsFolder": "docs",
+        "inlineDocStyle": "TSDoc"
+      },
+      "scripts": {
+        "requiredScripts": [
+          "dev",
+          "build",
+          "test",
+          "lint",
+          "format"
+        ],
+        "forbiddenScriptNames": [
+          "eject"
+        ]
+      },
+      "testingConventions": {
+        "testFrameworks": ["vitest", "@testing-library/react"],
+        "testCoverageGoal": 80
+      },
+      "repository": {
+        "defaultBranch": "main",
+        "prTemplate": true
+      },
+      "preferredTools": [
+        "react",
+        "react-router-dom",
+        "tailwindcss",
+        "vitest",
+        "@testing-library/react"
+      ],
+      "disallowedPractices": [
+        "nested ternaries in JSX",
+        "inline anonymous functions in props for frequently rendered lists"
+      ]
+    },
+    {
+      "projectStructure": {
+        "srcDir": "src",
+        "testsDir": "tests",
+        "coLocateTests": false
+      },
+      "fileConventions": {
+        "fileNameCase": "snake_case",
+        "testFilePattern": "tests/test_*.py",
+        "coLocateAssets": false
+      },
+      "fileLimits": {
+        "maxLines": 400,
+        "maxFunctionsPerFile": 20,
+        "maxCyclomaticComplexity": 10
+      },
+      "namingConventions": {
+        "scriptPrefix": "",
+        "binaryNames": [],
+        "packageNamePattern": "^[a-z_][a-z0-9_]*$"
+      },
+      "documentation": {
+        "requireReadme": true,
+        "docsFolder": "docs",
+        "inlineDocStyle": "Sphinx"
+      },
+      "scripts": {
+        "requiredScripts": [
+          "build",
+          "test",
+          "lint",
+          "format",
+          "typecheck"
+        ],
+        "forbiddenScriptNames": []
+      },
+      "testingConventions": {
+        "testFrameworks": ["pytest"],
+        "testCoverageGoal": 85
+      },
+      "repository": {
+        "defaultBranch": "main",
+        "prTemplate": true
+      },
+      "preferredTools": [
+        "black",
+        "ruff",
+        "mypy",
+        "pytest",
+        "pydantic",
+        "fastapi"
+      ],
+      "disallowedPractices": [
+        "global variables",
+        "from module import *",
+        "mutating default arguments"
+      ]
+    },
+    {
+      "projectStructure": {
+        "srcDir": ".",
+        "testsDir": ".",
+        "coLocateTests": true
+      },
+      "fileConventions": {
+        "fileNameCase": "snake_case",
+        "testFilePattern": "**/*_test.go",
+        "coLocateAssets": false
+      },
+      "fileLimits": {
+        "maxLines": 300,
+        "maxFunctionsPerFile": 20,
+        "maxCyclomaticComplexity": 10
+      },
+      "namingConventions": {
+        "scriptPrefix": "",
+        "binaryNames": [],
+        "packageNamePattern": "^[a-z0-9_]+$"
+      },
+      "documentation": {
+        "requireReadme": true,
+        "docsFolder": "docs",
+        "inlineDocStyle": "GoDoc"
+      },
+      "scripts": {
+        "requiredScripts": [
+          "build",
+          "test",
+          "lint"
+        ],
+        "forbiddenScriptNames": []
+      },
+      "testingConventions": {
+        "testFrameworks": ["go test"],
+        "testCoverageGoal": 80
+      },
+      "repository": {
+        "defaultBranch": "main"
+      },
+      "preferredTools": [
+        "gofmt",
+        "go vet",
+        "golangci-lint"
+      ],
+      "disallowedPractices": [
+        "stuttering package names",
+        "exported identifiers without comments"
+      ]
+    },
+    {
+      "projectStructure": {
+        "srcDir": "src",
+        "testsDir": "tests",
+        "coLocateTests": true
+      },
+      "fileConventions": {
+        "fileNameCase": "kebab-case",
+        "testFilePattern": "**/*.test.ts",
+        "coLocateAssets": false
+      },
+      "fileLimits": {
+        "maxLines": 250,
+        "maxFunctionsPerFile": 15,
+        "maxCyclomaticComplexity": 12
+      },
+      "namingConventions": {
+        "scriptPrefix": "api:",
+        "binaryNames": [],
+        "packageNamePattern": "^[a-z0-9-]+$"
+      },
+      "documentation": {
+        "requireReadme": true,
+        "docsFolder": "docs",
+        "inlineDocStyle": "TSDoc"
+      },
+      "scripts": {
+        "requiredScripts": [
+          "dev",
+          "build",
+          "test",
+          "lint",
+          "format"
+        ],
+        "forbiddenScriptNames": []
+      },
+      "testingConventions": {
+        "testFrameworks": ["jest", "supertest"],
+        "testCoverageGoal": 85
+      },
+      "repository": {
+        "defaultBranch": "main",
+        "prTemplate": true
+      },
+      "preferredTools": [
+        "eslint",
+        "prettier",
+        "jest",
+        "supertest",
+        "ts-node"
+      ],
+      "disallowedPractices": [
+        "callback hell",
+        "swallowing promise rejections"
+      ]
+    }
+  ]
+}

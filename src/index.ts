@@ -103,6 +103,41 @@ export async function run(opts: any) {
     vscode: ["openai"],
   };
 
+  // New: environment profiles (language/runtime) with suggested tools
+  const ENV_PROFILES: Record<string, { label: string; defaults: string[] }> = {
+    typescript: { label: "TypeScript/Node", defaults: ["fetch", "vitest"] },
+    python: { label: "Python", defaults: ["requests", "pytest"] },
+    web: { label: "Browser/Frontend", defaults: ["fetch", "playwright"] },
+    other: { label: "Other / polyglot", defaults: [] },
+  };
+
+  // Ask for environment selection first; these set recommended tool defaults.
+  let environments: string[] = [];
+  if (opts.nonInteractive) {
+    environments =
+      opts.environments ?? (defaults.environments || ["typescript"]);
+  } else {
+    const envOptions = Object.entries(ENV_PROFILES).map(([k, v]) => ({
+      value: k,
+      label: v.label,
+    }));
+    const envPicked = await multiselect({
+      message: "Select target environment(s) (affects recommended tools)",
+      options: envOptions,
+      initialValues: defaults.environments ?? ["typescript"],
+    });
+    if (!envPicked) return;
+    environments = envPicked as string[];
+  }
+
+  // Collect environment-suggested tools
+  const envSuggestedTools = new Set<string>();
+  for (const e of environments) {
+    const prof = ENV_PROFILES[e];
+    if (prof && prof.defaults)
+      for (const t of prof.defaults) envSuggestedTools.add(t);
+  }
+
   let libs: string[] = [];
   if (preset === "custom") {
     if (opts.nonInteractive) {
@@ -195,6 +230,9 @@ export async function run(opts: any) {
         .map((t) => (typeof t === "string" ? t : t.name))
         .filter(Boolean)
     : [];
+  // seed initial selections with environment suggestions
+  for (const s of Array.from(envSuggestedTools))
+    if (!initialToolNames.includes(s)) initialToolNames.push(s);
   const selectedSet = new Set<string>(initialToolNames as string[]);
   let extraToolsRaw = "";
   // Live multi-select using Enquirer: type to filter choices, space to toggle
@@ -378,6 +416,7 @@ export async function run(opts: any) {
     preset,
     libraries: libs,
     style: {
+      // generalize strictness: store under `strictness` and keep tsconfig if TypeScript selected
       tsconfig: tsStrict,
       naming: "camelCase",
       docs: "tsdoc",
@@ -394,6 +433,7 @@ export async function run(opts: any) {
     preset,
     libraries: libs,
     tsconfig: tsStrict,
+    environments,
     tools: structuredTools,
   });
   // decide output parent directory

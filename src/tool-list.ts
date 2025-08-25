@@ -40,6 +40,10 @@ export async function loadToolList(source?: string) {
     { name: "fetch", hint: "builtin http" },
     { name: "vitest", hint: "fast tests", recommends: ["playwright"] },
     { name: "jest", hint: "legacy" },
+    { name: "pytest", hint: "python tests" },
+    { name: "pip", hint: "python package manager" },
+    { name: "poetry", hint: "python package & env manager" },
+    { name: "requests", hint: "python http client" },
   ];
 
   if (!source) return builtIn;

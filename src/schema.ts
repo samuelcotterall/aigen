@@ -3,13 +3,13 @@ import { z } from "zod";
 export const ToolSchema = z.object({
   name: z.string(),
   description: z.string(),
-  input: z.record(z.any()).describe("JSON schema-like shape"),
-  output: z.record(z.any()).optional(),
+  input: z.record(z.string(), z.any()).describe("JSON schema-like shape"),
+  output: z.record(z.string(), z.any()).optional(),
   examples: z
     .array(
       z.object({
-        call: z.record(z.any()),
-        result: z.record(z.any()).optional(),
+        call: z.record(z.string(), z.any()),
+        result: z.record(z.string(), z.any()).optional(),
       })
     )
     .default([]),
@@ -61,7 +61,7 @@ export const AgentConfigSchema = z.object({
         .string()
         .default("Explain why and suggest safe alternatives."),
     })
-    .default({}),
+    .default(() => ({} as any)),
   outputs: z
     .array(z.enum(["markdown", "json", "yaml"]))
     .default(["markdown", "json"]),

@@ -1,0 +1,24 @@
+---json
+{ "when": { "libraries": ["openai"] }, "outPath": "examples/openai.ts" }
+---
+import OpenAI from "openai";
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const client = new OpenAI();
+
+export async function run(prompt: string) {
+  // Resolve ../agent.md relative to this file at runtime
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const agentPath = path.join(__dirname, "../agent.md");
+  const sys = await fs.readFile(agentPath, "utf8").catch(() => "");
+  const res = await client.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      { role: "system", content: sys },
+      { role: "user", content: prompt }
+    ],
+  });
+  console.log(res.choices[0]?.message?.content);
+}

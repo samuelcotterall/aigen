@@ -1,0 +1,25 @@
+# Node
+node_modules/
+.DS_Store
+npm-debug.log*
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Dist/build
+dist/
+
+# Temp / cache
+/tmp/
+create-agent-*
+create-agent-tools-cache.json
+
+# VSCode
+.vscode/
+
+# OS files
+.DS_Store
+
+# Local dev
+.env
+

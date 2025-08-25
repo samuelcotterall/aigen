@@ -1,0 +1,15 @@
+# Tools
+<% if (!it.cfg.tools.length) { %>
+_No tools selected. You can add tools later in `config/agent.json`._
+<% } else { %>
+Each tool has a JSON input and optional JSON output.
+
+<% it.cfg.tools.forEach(t => { %>
+## <%= t.name %>
+**Description:** <%= t.description %>
+**Input:**
+```json
+<%- JSON.stringify(t.input, null, 2) %>
+```
+<% }) %>
+<% } %>

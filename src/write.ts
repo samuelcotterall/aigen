@@ -207,6 +207,8 @@ export async function writeOutputs(
   cfg: AgentConfig,
   opts?: {
     skipIfExists?: boolean;
+    allowOverwrite?: boolean;
+    backupOnOverwrite?: boolean;
     astMerge?: boolean;
     runId?: string;
     seed?: string | number;
@@ -223,7 +225,9 @@ export async function writeOutputs(
     const stat = await fs.stat(outDir);
     if (stat.isDirectory()) {
       const entries = await fs.readdir(outDir);
-      if (entries.length > 0 && !opts?.skipIfExists) {
+      // If directory exists and is non-empty, only proceed when either
+      // skipIfExists is true (merge) or allowOverwrite is true (explicit overwrite).
+      if (entries.length > 0 && !opts?.skipIfExists && !opts?.allowOverwrite) {
         throw new Error(`Target directory ${outDir} exists and is not empty`);
       }
     }
@@ -245,6 +249,21 @@ export async function writeOutputs(
         .mkdir(path.dirname(path.join(outDir, rel)), { recursive: true })
         .then(async () => {
           const target = path.join(outDir, rel);
+          // If overwriting and backupOnOverwrite is requested, create backups
+          if (opts?.allowOverwrite && opts?.backupOnOverwrite) {
+            try {
+              await fs.stat(target);
+              const ts = new Date().toISOString().replace(/[:.]/g, "-");
+              const bak = `${target}.${ts}.bak`;
+              await fs.copyFile(target, bak);
+              backupFiles.push(bak);
+              try {
+                await fs.copyFile(target, `${target}.bak`);
+                backupFiles.push(`${target}.bak`);
+              } catch {}
+            } catch {}
+          }
+
           if (opts?.skipIfExists) {
             try {
               await fs.stat(target);

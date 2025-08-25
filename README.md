@@ -9,6 +9,8 @@
 - --run-id <id>: deterministic run id
 - --seed <seed>: seed to derive deterministic run id
 - --force: force overwrite without prompting
+ - --yes / --confirm-overwrite: assume yes and confirm overwrite (non-interactive)
+ - --backup-on-overwrite: create timestamped .bak files before overwriting when used with overwrite
 
 # Testing
 
@@ -56,6 +58,15 @@ CLI flags
 Overwrite behaviour
 
 - If the computed output directory already exists and is non-empty the CLI will prompt to either overwrite, choose a different parent output directory, or abort. This prevents accidental data loss. In scripts you can avoid the prompt by pre-creating an empty target directory, or by running the CLI with `--out-dir` pointed to an empty location.
+
+Enhanced overwrite options
+
+- `--yes` / `--confirm-overwrite` - treat overwrite-confirm prompts as accepted (useful in CI/automation).
+- `--backup-on-overwrite` - when used together with overwrite (interactive Yes or `--force`/`--yes`), create timestamped `.bak` backups of files before overwriting them.
+
+Preview + diffs
+
+- When a target directory exists the CLI now shows which files from the generated templates would be overwritten. For `config/*.json` files it also shows a summarized merged diff based on the configured merge strategy to help you confirm changes safely.
 
 Structured defaults
 

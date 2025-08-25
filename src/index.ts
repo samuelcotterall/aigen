@@ -9,7 +9,7 @@ import {
   isCancel,
 } from "@clack/prompts";
 import { AgentConfigSchema } from "./schema.js";
-import { writeOutputs } from "./write.js";
+import { writeOutputs, deepMerge } from "./write.js";
 import { renderTemplates } from "./templates.js";
 import { loadDefaults, saveDefaults } from "./prefs.js";
 import fs from "node:fs/promises";
@@ -200,23 +200,42 @@ export async function run(opts: any) {
   // Live multi-select using Enquirer: type to filter choices, space to toggle
   // an item, and Enter to submit the selection. This provides a native
   // filter-as-you-type experience without a separate query step.
-  const enquirerChoices = toolList.slice().map((t) => ({
-    name: t.name,
-    message: t.hint ? `${t.name} — ${t.hint}` : t.name,
-    value: t.name,
-  }));
-  enquirerChoices.push({
+  // Normalize choices: ensure valid shape, dedupe by name, and provide safe defaults
+  const choiceMap = new Map<string, any>();
+  for (const t of toolList || []) {
+    if (!t || !t.name) continue;
+    if (choiceMap.has(t.name)) continue;
+    choiceMap.set(t.name, {
+      name: t.name,
+      message: t.hint ? `${t.name} — ${t.hint}` : t.name,
+      value: t.name,
+      disabled: false,
+      checked: selectedSet.has(t.name),
+    });
+  }
+  choiceMap.set("other", {
     name: "other",
     message: "Other / custom",
     value: "other",
+    disabled: false,
+    checked: false,
   });
+  const enquirerChoices = Array.from(choiceMap.values());
 
-  // Enquirer requires a real TTY. During tests (vitest) or when running in a
-  // non-interactive environment, fall back to the mocked `multiselect` from
-  // `@clack/prompts` so automated tests can simulate answers.
+  // Decide whether to use Enquirer (rich, filter-as-you-type) or fallback to
+  // `@clack/prompts` (works in non-TTY/test environments). Prefer Enquirer
+  // only when we're not running tests and we have a real TTY.
   const inTest =
     process.env.VITEST === "true" || process.env.NODE_ENV === "test";
-  if (inTest) {
+  const hasTTY = !!(
+    process.stdin &&
+    process.stdin.isTTY &&
+    process.stdout &&
+    process.stdout.isTTY
+  );
+  const useEnquirer = !inTest && hasTTY;
+
+  if (!useEnquirer) {
     // Use the clack multiselect (tests mock this) with a simple options list.
     const picked = (await multiselect({
       message: "Pick tools",
@@ -235,13 +254,15 @@ export async function run(opts: any) {
     for (const p of picked) if (p && p !== "other") selectedSet.add(p);
   } else {
     try {
+      // Enquirer can be brittle in some environments; omit `initial` to avoid
+      // mismatches between provided values and choice objects. We also limit
+      // items shown to keep the prompt responsive.
       const answer = await Enquirer.prompt({
         type: "multiselect",
         name: "tools",
         message:
           "Search tools/frameworks (type to filter, space to toggle, Enter to finish)",
         choices: enquirerChoices as any,
-        initial: Array.from(selectedSet),
         limit: 12,
       } as unknown as any);
       const picked = (answer as any).tools as string[];
@@ -257,8 +278,23 @@ export async function run(opts: any) {
       }
       for (const p of picked) if (p && p !== "other") selectedSet.add(p);
     } catch (err) {
-      // treat as cancel/abort
-      return;
+      // If Enquirer fails (some terminals or edge cases), fallback to the
+      // mocked/clack multiselect flow so the CLI remains usable.
+      const picked = (await multiselect({
+        message: "Pick tools",
+        options: toolOptions,
+        initialValues: Array.from(selectedSet),
+      })) as string[];
+      if (!picked) return;
+      if (picked.includes("other")) {
+        const resp = await text({
+          message: "Comma-separated custom tool names (leave empty to skip)",
+          placeholder: "web.run, fileSearch, http.get",
+        });
+        if (isCancel(resp)) return;
+        extraToolsRaw = extraToolsRaw ? `${extraToolsRaw},${resp}` : resp || "";
+      }
+      for (const p of picked) if (p && p !== "other") selectedSet.add(p);
     }
   }
 
@@ -378,6 +414,14 @@ export async function run(opts: any) {
       .replace(/[^a-zA-Z0-9\-_.]/g, "")
       .toLowerCase() || `agent-${Date.now()}`
   );
+  // pre-render templates so we can show a preview of files that would be
+  // created/overwritten during confirmation.
+  let previewFiles: string[] = [];
+  let previewMap: Record<string, string> = {};
+  try {
+    previewMap = await renderTemplates(cfg);
+    previewFiles = Object.keys(previewMap).map((p) => p.replace(/\\/g, "/"));
+  } catch {}
   try {
     const stat = await fs.stat(candidateDir);
     if (stat.isDirectory()) {
@@ -412,11 +456,90 @@ export async function run(opts: any) {
           ).join(", ")}.`;
         }
 
+        // Show which files from the preview would be overwritten (if any)
+        const wouldOverwrite: string[] = [];
+        for (const f of previewFiles) {
+          try {
+            await fs.stat(path.join(candidateDir, f));
+            wouldOverwrite.push(f);
+          } catch {
+            // doesn't exist, ignore
+          }
+        }
+        if (wouldOverwrite.length) {
+          confirmMsg += `\nThe following files would be overwritten:\n  ${wouldOverwrite
+            .slice(0, 20)
+            .join("\n  ")}`;
+          if (wouldOverwrite.length > 20)
+            confirmMsg += `\n  ...and ${wouldOverwrite.length - 20} more`;
+        }
+
+        // For JSON files under config/, show a small summarized diff of the
+        // merged result vs existing to help users decide.
+        try {
+          const jsonCandidates = wouldOverwrite.filter(
+            (p) => p.startsWith("config/") && p.endsWith(".json")
+          );
+          if (jsonCandidates.length) {
+            const diffs: string[] = [];
+            for (const jf of jsonCandidates.slice(0, 10)) {
+              try {
+                const existingRaw = await fs.readFile(
+                  path.join(candidateDir, jf),
+                  "utf8"
+                );
+                const incomingRaw =
+                  previewMap[jf] ?? previewMap[jf.replace(/\\/g, "/")];
+                const existing = JSON.parse(existingRaw || "{}");
+                const incoming = JSON.parse(incomingRaw || "{}");
+                const merged = deepMerge(existing, incoming);
+                // generate lightweight summary of changes
+                const changes = [] as string[];
+                function walk(o: any, n: any, prefix = "") {
+                  const keys = new Set<string>([
+                    ...Object.keys(o || {}),
+                    ...Object.keys(n || {}),
+                  ]);
+                  for (const k of keys) {
+                    const p = prefix ? `${prefix}.${k}` : k;
+                    const ov = o ? o[k] : undefined;
+                    const nv = n ? n[k] : undefined;
+                    if (ov === undefined && nv !== undefined)
+                      changes.push(`+ ${p}`);
+                    else if (ov !== undefined && nv === undefined)
+                      changes.push(`- ${p}`);
+                    else if (isObject(ov) && isObject(nv)) walk(ov, nv, p);
+                    else if (JSON.stringify(ov) !== JSON.stringify(nv))
+                      changes.push(
+                        `~ ${p}: ${JSON.stringify(ov)} -> ${JSON.stringify(nv)}`
+                      );
+                  }
+                }
+                function isObject(v: any) {
+                  return v && typeof v === "object" && !Array.isArray(v);
+                }
+                walk(existing, merged);
+                if (changes.length) {
+                  diffs.push(`Changes in ${jf}:`);
+                  diffs.push(...changes.slice(0, 20));
+                  if (changes.length > 20)
+                    diffs.push(`...and ${changes.length - 20} more`);
+                }
+              } catch {}
+            }
+            if (diffs.length)
+              confirmMsg += `\n\nJSON diffs:\n  ${diffs.join("\n  ")}`;
+          }
+        } catch {}
+
         // handle non-interactive scripts via flags: --merge or --force
         if (opts.nonInteractive) {
           if (opts.force) {
-            // overwrite: writeOpts remains undefined so files are written
-            writeOpts = undefined;
+            // overwrite: explicitly allow overwrite
+            writeOpts = { allowOverwrite: true };
+          } else if (opts.yes || opts.confirmOverwrite) {
+            // convenience: treat --yes or --confirm-overwrite like force
+            writeOpts = { allowOverwrite: true };
           } else if (opts.merge) {
             writeOpts = { skipIfExists: true };
           } else {
@@ -444,6 +567,10 @@ export async function run(opts: any) {
           if (confirm === "merge") {
             // when merging, skip writing files that already exist so we preserve user content
             writeOpts = { skipIfExists: true };
+          }
+          if (confirm === "yes") {
+            // user explicitly chose to overwrite
+            writeOpts = { ...(writeOpts || {}), allowOverwrite: true };
           }
         }
       }
@@ -481,6 +608,7 @@ export async function run(opts: any) {
             astMerge: !!opts.astMerge,
             runId: opts.runId,
             seed: opts.seed,
+            backupOnOverwrite: !!opts.backupOnOverwrite,
           }
         : { astMerge: !!opts.astMerge, runId: opts.runId, seed: opts.seed }
     );
@@ -527,6 +655,8 @@ program
   );
 program.option("--non-interactive", "run without prompts (use flags/defaults)");
 program.option("--dry-run", "preview generated files without writing them");
+program.option("--yes", "assume yes for overwrite prompts (non-interactive)");
+program.option("--confirm-overwrite", "skip prompt and confirm overwrite");
 program.option(
   "--merge",
   "merge with existing files (preserve existing files)"
@@ -544,6 +674,10 @@ program.option(
   "provide a seed to derive a deterministic run id (hex-encoded sha1)"
 );
 program.option("--force", "force overwrite without prompting");
+program.option(
+  "--backup-on-overwrite",
+  "create .bak backups before overwriting files"
+);
 program.option(
   "--tools-source <url|file>",
   "URL or local JSON file path to load tool choices from"

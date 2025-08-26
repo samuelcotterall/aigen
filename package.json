@@ -1,9 +1,9 @@
 {
-  "name": "create-agent-instructions",
+  "name": "aigen",
   "version": "0.2.0",
   "type": "module",
   "bin": {
-    "create-agent-instructions": "dist/index.js"
+    "aigen": "dist/index.js"
   },
   "files": [
     "dist",
@@ -14,7 +14,8 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts",
-    "dev": "tsx src/index.ts --dev --out-dir out",
+  "dev": "tsx src/index.ts --dev --out-dir out",
+  "detect:env": "tsx src/detectEnv.ts",
     "test": "vitest run",
     "prepublishOnly": "tsup src/index.ts --format esm --dts",
     "gen:api": "typedoc --entryPoints src/index.ts --tsconfig tsconfig.json --plugin typedoc-plugin-markdown --out website/docs/api && node scripts/fix-typedoc-index.cjs",

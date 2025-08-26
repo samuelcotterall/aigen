@@ -1,0 +1,11 @@
+---json
+{ "provider": "google", "model": "gemini", "temperature": 0.1, "format": "json" }
+---
+
+# Google Gemini / Bard Agent
+
+Persona: concise, uses structured output when requested.
+
+Specify required output schema and provide 1–2 few-shot examples.
+
+If JSON output is requested, include a code fence with `json` only.

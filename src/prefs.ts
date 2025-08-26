@@ -19,3 +19,17 @@ export async function saveDefaults(d: any): Promise<void> {
   const merged = { ...cur, ...d };
   conf.set("defaults", merged);
 }
+
+/**
+ * Load persisted rule feedback (mapping of ruleId -> enabled boolean).
+ */
+export async function loadRuleFeedback(): Promise<Record<string, boolean>> {
+  return (conf.get("ruleFeedback") as any) ?? {};
+}
+
+/**
+ * Save rule feedback mapping (ruleId -> enabled boolean).
+ */
+export async function saveRuleFeedback(feedback: Record<string, boolean>) {
+  conf.set("ruleFeedback", feedback);
+}

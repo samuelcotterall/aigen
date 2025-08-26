@@ -9,6 +9,7 @@ const TEMPLATES_DIR = path.join(__dirname, "../templates");
 
 type FrontMatter = {
   when?: Partial<{ preset: string; libraries: string[] }>;
+  emit?: boolean;
   outPath?: string;
 };
 
@@ -67,8 +68,30 @@ async function walk(dir: string): Promise<string[]> {
  *
  * @param cfg - parsed AgentConfig used as the template context
  */
-export async function renderTemplates(cfg: AgentConfig) {
-  const eta = new Eta({ views: TEMPLATES_DIR });
+export async function renderTemplates(
+  cfg: AgentConfig,
+  opts?: { emitAgents?: boolean }
+) {
+  // Enable `useWith: true` so provider templates that reference `cfg` at the
+  // top-level continue to work. When rendering we also pass an `it` object
+  // containing `cfg` so templates that use `it.cfg` (the common templates)
+  // still function correctly.
+  const eta = new Eta({ views: TEMPLATES_DIR, useWith: true });
+  // Provide sane defaults so calling code (tests, scripts) can pass a small
+  // cfg object without needing to populate every nested field that templates
+  // might reference.
+  const defaultStyle = { tsconfig: "strict", naming: "kebab", docs: "typedoc" };
+  const c: any = cfg as any;
+  const renderCfg: AgentConfig = {
+    name: c.name,
+    displayName: c.displayName,
+    preset: c.preset,
+    libraries: c.libraries ?? [],
+    tools: c.tools ?? [],
+    policies: c.policies ?? {},
+    style: { ...(c.style ?? {}), ...defaultStyle },
+    styleRules: c.styleRules ?? [],
+  } as any;
   const all = await walk(TEMPLATES_DIR);
   const outputs: Record<string, string> = {};
 
@@ -76,12 +99,40 @@ export async function renderTemplates(cfg: AgentConfig) {
     const rel = path.relative(TEMPLATES_DIR, abs);
     const raw = await fs.readFile(abs, "utf8");
     const { fm, body } = parseFrontMatter(raw);
-    if (!matchesWhen(cfg, fm.when)) continue;
+    // Handle provider-specific templates under templates/agents/<provider>/...
+    const parts = rel.split(path.sep);
+    if (rel.startsWith("agents/")) {
+      const provider = parts[1] || undefined;
+      const hasWhen = !!fm.when;
+      const candidate = fm.emit === true || (opts && opts.emitAgents === true);
+      // By default skip provider-specific templates unless explicitly requested
+      // via opts.emitAgents or per-template front-matter `emit: true`.
+      if (!candidate) continue;
+
+      // Determine whether there are `when` constraints to enforce. If the
+      // template provided explicit `when`, enforce it. If we are emitting due
+      // to the `emitAgents` option, infer the preset from the provider folder
+      // and enforce that. If the template had `emit: true` but no `when`, do
+      // not enforce a preset match.
+      let effectiveWhen = fm.when;
+      if (!effectiveWhen && opts && opts.emitAgents && provider) {
+        effectiveWhen = { preset: provider };
+      }
+      if (effectiveWhen && !matchesWhen(renderCfg, effectiveWhen)) continue;
+    } else {
+      if (!matchesWhen(renderCfg, fm.when)) continue;
+    }
 
     // Place files from `templates/common/**` at the root of the generated pack
     const defaultOut = rel.replace(/^common\//, "").replace(/\.eta$/, "");
     const outPath = fm.outPath ?? defaultOut;
-    const rendered = eta.renderString(body, { cfg });
+    // Provide both `cfg` (for provider templates) and `it: { cfg }` so both
+    // styles of templates work: those that directly reference `cfg` and those
+    // that expect `it.cfg`.
+    const rendered = eta.renderString(body, {
+      cfg: renderCfg,
+      it: { cfg: renderCfg } as any,
+    });
     if (typeof rendered !== "string") continue;
     outputs[outPath] = rendered;
   }

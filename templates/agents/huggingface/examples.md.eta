@@ -1,0 +1,7 @@
+---json
+{ "provider": "huggingface" }
+---
+
+# Examples (Hugging Face)
+
+Provide messages in OpenAI-style array and include provider hint when necessary.

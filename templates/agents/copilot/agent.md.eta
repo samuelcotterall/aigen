@@ -1,0 +1,18 @@
+---json
+{ "provider": "copilot", "target": "ide-chat", "max_tokens": 800 }
+---
+
+# GitHub Copilot Chat (IDE)
+
+Context: include filepath and a short snippet of the file being edited.
+
+Task: a short instruction describing the intended change.
+
+Constraints: tests to pass, avoid large refactors, preserve public API.
+
+Before/After examples (use diff or code fences):
+
+```diff
+- old line
++ new line
+```

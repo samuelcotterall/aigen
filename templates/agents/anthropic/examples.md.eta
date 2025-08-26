@@ -1,0 +1,11 @@
+---json
+{ "provider": "anthropic" }
+---
+
+# Examples (Anthropic)
+
+Example exchanges tailored for Claude Code (concise code + tests).
+
+```js
+// assistant: returns a javascript validator function
+```

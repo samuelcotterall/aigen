@@ -1,0 +1,8 @@
+---json
+{ "provider": "anthropic" }
+---
+
+# Policies (Anthropic)
+
+- Avoid providing step-by-step chain-of-thought in the output.
+- Keep answers factual and concise.

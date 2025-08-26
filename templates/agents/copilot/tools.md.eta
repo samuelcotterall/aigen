@@ -1,0 +1,8 @@
+---json
+{ "provider": "copilot" }
+---
+
+# Tools (Copilot)
+
+- Local repo context (file excerpts)
+- Unit tests / test runner

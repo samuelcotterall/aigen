@@ -32,3 +32,6 @@ jobs:
 
       - name: Run tests
         run: npx vitest run --passWithNoTests
+
+  # render-test moved to a dedicated workflow that triggers only when templates
+  # or schema files change. See .github/workflows/render-tests.yml

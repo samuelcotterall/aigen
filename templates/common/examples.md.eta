@@ -1,9 +1,10 @@
-```markdown
 ---json
 { "outPath": "EXAMPLES.md" }
 ---
-# Examples for <% const displayName = it.cfg.displayName || it.cfg.name; %>
 
+
+# Examples for
+<% const displayName = it.cfg.displayName || it.cfg.name; %>
 This file demonstrates sample usage patterns for different presets.
 
 <% if (it.cfg.preset === 'openai') { %>
@@ -15,5 +16,3 @@ This file demonstrates sample usage patterns for different presets.
 ## LangChain examples
 - LangChain-specific wiring and agents
 <% } %>
-
-```

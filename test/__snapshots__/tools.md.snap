@@ -1,0 +1,16 @@
+`tools.md` snapshot
+
+# Snapshot Agent — Tools
+Each tool has a JSON input and optional JSON output.
+
+## fetch
+**Description:** HTTP
+**Input:**
+```json
+{}
+```
+
+## Style rules
+
+Enabled rules:
+- [sec] r1

@@ -1,0 +1,7 @@
+---json
+{ "provider": "huggingface" }
+---
+
+# Policies (Hugging Face)
+
+- When using inference providers, include `provider` metadata if you need a specific backend.

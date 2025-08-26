@@ -1,0 +1,16 @@
+---json
+{ "provider": "openai" }
+---
+
+# Tools (OpenAI)
+
+<% if (cfg && cfg.tools && cfg.tools.length) { %>
+<% for (const t of cfg.tools) { %>
+## <%= t.name %>
+
+<%= t.description || '' %>
+
+<% } %>
+<% } else { %>
+No tools configured.
+<% } %>

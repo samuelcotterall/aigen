@@ -1,0 +1,13 @@
+---json
+{ "provider": "anthropic" }
+---
+
+# Tools (Anthropic)
+
+<% if (cfg && cfg.tools) { %>
+<% for (const t of cfg.tools) { %>
+- <%= t.name %>: <%= t.description || '' %>
+<% } %>
+<% } else { %>
+No tools configured.
+<% } %>

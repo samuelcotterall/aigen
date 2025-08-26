@@ -1,5 +1,4 @@
-# <% const displayName = it.cfg.displayName || it.cfg.name; %>
-# <%= displayName %> — Tools
+# <%= it.cfg.displayName || it.cfg.name %> — Tools
 <% if (!it.cfg.tools.length) { %>
 _No tools selected. You can add tools later in `config/agent.json`._
 <% } else { %>
@@ -7,10 +6,24 @@ Each tool has a JSON input and optional JSON output.
 
 <% it.cfg.tools.forEach(t => { %>
 ## <%= t.name %>
+
 **Description:** <%= t.description %>
+
 **Input:**
 ```json
-<%- JSON.stringify(t.input, null, 2) %>
+<%= JSON.stringify(t.input ?? {}, null, 2) %>
+
 ```
+<% }) %>
+<% } %>
+
+## Style rules
+
+<% if (!Array.isArray(it.cfg.styleRules) || it.cfg.styleRules.length === 0) { %>
+_No style rules selected._
+<% } else { %>
+Enabled rules:
+<% it.cfg.styleRules.forEach(r => { %>
+- <%= r.label || r.id %>
 <% }) %>
 <% } %>

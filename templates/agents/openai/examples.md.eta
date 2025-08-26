@@ -1,0 +1,14 @@
+---json
+{ "provider": "openai" }
+---
+
+# Examples (OpenAI)
+
+Example user/assistant exchanges with expected output formats.
+
+```json
+{
+  "summary": "Short 2-3 sentence summary",
+  "highlights": ["bullet", "list"]
+}
+```

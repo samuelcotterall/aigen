@@ -1,1 +1,1 @@
-<%- JSON.stringify(it.cfg, null, 2) %>
+<%= JSON.stringify(it.cfg, null, 2) %>

@@ -1,0 +1,8 @@
+---json
+{ "provider": "copilot" }
+---
+
+# Policies (Copilot)
+
+- Prefer small, testable changes.
+- Ensure the patch applies cleanly to the given file snippet.

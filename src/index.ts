@@ -17,6 +17,9 @@ import os from "node:os";
 import path from "node:path";
 import { loadToolList, ToolItem } from "./tool-list.js";
 import Enquirer from "enquirer";
+import fs2 from "node:fs/promises";
+import fsSync from "node:fs";
+import { Eta } from "eta";
 
 /**
  * CLI entry point: interactively build and write an agent instruction pack.
@@ -396,6 +399,88 @@ export async function run(opts: any) {
       hint: choice.hint || "",
     } as any;
   }
+  // --- Rules / Rulesets support -----------------------------------------
+  // Load the project-style schema and expose a flat list of rules.
+  async function loadSchemaRules() {
+    try {
+      const raw = await fs2.readFile(
+        path.join(process.cwd(), "schemas", "eslint-style.schema.json"),
+        "utf8"
+      );
+      const schema = JSON.parse(raw) as Record<string, any>;
+      const props = (schema.properties || {}) as Record<string, any>;
+      const rules: any[] = [];
+      for (const [sectionKey, sectionRaw] of Object.entries(props)) {
+        const section = sectionRaw as Record<string, any>;
+        if (section && section.type === "object" && section.properties) {
+          for (const [k, propRaw] of Object.entries(section.properties)) {
+            const prop = propRaw as Record<string, any>;
+            const id = `${sectionKey}.${k}`;
+            rules.push({
+              id,
+              section: sectionKey,
+              key: k,
+              description: prop.description || "",
+              appliesTo: prop.appliesTo || null,
+              type: prop.type || null,
+            });
+          }
+        } else {
+          const id = sectionKey;
+          const sec = section as Record<string, any>;
+          rules.push({
+            id,
+            section: null,
+            key: sectionKey,
+            description: (sec && sec.description) || "",
+            appliesTo: (sec && sec.appliesTo) || null,
+            type: (sec && sec.type) || null,
+          });
+        }
+      }
+      return rules;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  // Predefined rulesets mapping. Each ruleset references rule ids from the
+  // master schema. We default to including whole sections for common envs.
+  function buildRulesetsFrom(rules: any[]) {
+    const bySection: Record<string, string[]> = {};
+    for (const r of rules) {
+      const sec = r.section || "general";
+      bySection[sec] = bySection[sec] || [];
+      bySection[sec].push(r.id);
+    }
+    const RULESETS: Record<string, string[]> = {
+      typescript: [
+        ...(bySection["projectStructure"] || []),
+        ...(bySection["fileConventions"] || []),
+        ...(bySection["fileLimits"] || []),
+        ...(bySection["namingConventions"] || []),
+        ...(bySection["documentation"] || []),
+        ...(bySection["scripts"] || []),
+        ...(bySection["testingConventions"] || []),
+      ],
+      python: [
+        ...(bySection["projectStructure"] || []),
+        ...(bySection["fileConventions"] || []),
+        ...(bySection["fileLimits"] || []),
+        ...(bySection["documentation"] || []),
+        ...(bySection["scripts"] || []),
+        ...(bySection["testingConventions"] || []),
+      ],
+      web: [
+        ...(bySection["projectStructure"] || []),
+        ...(bySection["fileConventions"] || []),
+        ...(bySection["documentation"] || []),
+        ...(bySection["scripts"] || []),
+      ],
+      default: rules.map((r: any) => r.id),
+    };
+    return RULESETS;
+  }
   const toolOptions = toolList
     .filter((t) => matchesEnv(t, environments))
     .map((t) => ({
@@ -465,6 +550,171 @@ export async function run(opts: any) {
   );
   const useEnquirer = !inTest && hasTTY;
 
+  // --- RULES selection step ---------------------------------------------
+  // Moved after `useEnquirer` so we can safely use it.
+  const allRules = await loadSchemaRules();
+  const RULESETS = buildRulesetsFrom(allRules);
+  // Load prior feedback to seed selections
+  const priorFeedback = (await loadDefaults()).ruleFeedback || {};
+
+  // Determine default ruleset selection based on envs + libraries
+  const candidateRules = new Set<string>();
+  for (const e of environments) {
+    const set = RULESETS[e] || RULESETS["default"] || [];
+    for (const r of set) candidateRules.add(r);
+  }
+  // Also add rules that apply specifically to selected libraries
+  for (const r of allRules) {
+    if (r.appliesTo && Array.isArray(r.appliesTo)) {
+      for (const lib of libs)
+        if (r.appliesTo.includes(lib)) candidateRules.add(r.id);
+    }
+  }
+
+  // Build choices for rules: show '[section] key' and a one-line truncated
+  // description as the hint. Keep `value` as the canonical `id`.
+  function listLabel(r: any) {
+    const section = r.section ? `[${r.section}] ` : "";
+    return `${section}${r.key}`;
+  }
+
+  function ruleDoDontText(r: any) {
+    // Small, generic Do/Don't guidance derived from description and type.
+    const desc = r.description || listLabel(r);
+    const doLine = `Do: ${truncateOneLine("Follow: " + desc, 100)}`;
+    const dontLine = `Don't: violate this guideline without justification.`;
+    return `${doLine}\n${dontLine}`;
+  }
+
+  const ruleChoices = allRules.map((r) =>
+    normalizeChoice({
+      name: r.id,
+      message: listLabel(r),
+      value: r.id,
+      selected: priorFeedback.hasOwnProperty(r.id)
+        ? !!priorFeedback[r.id]
+        : candidateRules.has(r.id),
+      hint: truncateOneLine(
+        (r.description || "") +
+          (r.appliesTo
+            ? ` (applies to: ${[].concat(r.appliesTo).join(", ")})`
+            : ""),
+        80
+      ),
+    })
+  );
+
+  // Offer an inspection loop so the user can view details for any rule.
+  if (!opts.nonInteractive) {
+    // Let the user optionally inspect rules before final selection.
+    const wantsInspect = await select({
+      message: "Would you like to inspect rules before selecting?",
+      options: [
+        { value: "yes", label: "Yes, inspect rules" },
+        { value: "no", label: "No, go to selection" },
+      ],
+      initialValue: "no",
+    });
+    if (isCancel(wantsInspect)) return;
+    if (wantsInspect === "yes") {
+      // Show a searchable list of rule ids (simple select) and display details
+      let keepInspecting = true;
+      while (keepInspecting) {
+        const pick = await select({
+          message: "Pick a rule to inspect (or Cancel to finish)",
+          options: allRules.map((r) => ({ value: r.id, label: listLabel(r) })),
+        });
+        if (isCancel(pick)) break;
+        const pickedRule = allRules.find((rr) => rr.id === pick);
+        if (pickedRule) {
+          // show details: truncated one-line desc, applies-to, and Do/Don't
+          console.log("\n", listLabel(pickedRule));
+          const appliesLine = pickedRule.appliesTo
+            ? `Applies to: ${[].concat(pickedRule.appliesTo).join(", ")}`
+            : null;
+          console.log(
+            "  ",
+            truncateOneLine(pickedRule.description || "(no description)", 100)
+          );
+          if (appliesLine) console.log("  ", appliesLine);
+          console.log(
+            "\n  ",
+            ruleDoDontText(pickedRule).replace(/\n/g, "\n  ")
+          );
+          // allow quick toggle
+          const toggle = await select({
+            message: `Toggle this rule? (currently ${
+              candidateRules.has(pickedRule.id) ? "enabled" : "disabled"
+            })`,
+            options: [
+              { value: "enable", label: "Enable" },
+              { value: "disable", label: "Disable" },
+              { value: "skip", label: "Skip" },
+            ],
+            initialValue: "skip",
+          });
+          if (!isCancel(toggle)) {
+            if (toggle === "enable") candidateRules.add(pickedRule.id);
+            if (toggle === "disable") candidateRules.delete(pickedRule.id);
+          }
+        }
+        const cont = await select({
+          message: "Inspect another rule?",
+          options: [
+            { value: "yes", label: "Yes" },
+            { value: "no", label: "No, continue to selection" },
+          ],
+          initialValue: "yes",
+        });
+        if (isCancel(cont) || cont === "no") keepInspecting = false;
+      }
+    }
+  }
+
+  // Ask the user to review/select rules (Enquirer when available)
+  let selectedRuleIds: string[] = [];
+  try {
+    if (!opts.nonInteractive && useEnquirer) {
+      const ans = await Enquirer.prompt({
+        type: "multiselect",
+        name: "rules",
+        message:
+          "Select style rules to enable (space to toggle, Enter to finish)",
+        choices: ruleChoices as any,
+        limit: 20,
+      } as unknown as any);
+      selectedRuleIds = (ans as any).rules || [];
+    } else if (!opts.nonInteractive) {
+      const picked = (await multiselect({
+        message: "Select style rules to enable",
+        options: allRules.map((r) => ({ value: r.id, label: r.id })),
+        initialValues: allRules
+          .filter((r) => candidateRules.has(r.id))
+          .map((r) => r.id),
+      })) as string[];
+      selectedRuleIds = picked || [];
+    } else {
+      // non-interactive: respect prior feedback or candidateRules
+      selectedRuleIds = Object.keys(priorFeedback).length
+        ? Object.keys(priorFeedback).filter((k) => priorFeedback[k])
+        : Array.from(candidateRules);
+    }
+  } catch (e) {
+    // fallback: use candidateRules
+    selectedRuleIds = Array.from(candidateRules);
+  }
+
+  // Persist user's rule feedback for next runs (mapping ruleId -> enabled)
+  try {
+    const feedbackMap: Record<string, boolean> = {};
+    for (const r of allRules)
+      feedbackMap[r.id] = selectedRuleIds.includes(r.id);
+    await saveDefaults({
+      ...(await loadDefaults()),
+      ruleFeedback: feedbackMap,
+    });
+  } catch (e) {}
+
   // Allow the user to review pre-selected tools first (before adding more).
   // This is a dedicated, lightweight multiselect that only shows the
   // currently pre-selected tools so users can uncheck any they don't want.
@@ -491,7 +741,6 @@ export async function run(opts: any) {
               name: "reviewed",
               message: "Recommended Tools (space to toggle, Enter to finish)",
               choices: reviewChoices as any,
-              initial: preSelected,
               limit: Math.max(6, Math.min(12, reviewChoices.length)),
             } as unknown as any);
             const kept = (reviewAns as any).reviewed as string[];
@@ -550,7 +799,6 @@ export async function run(opts: any) {
         message:
           "Search tools/frameworks (type to filter, space to toggle, Enter to finish)",
         choices: enquirerChoices as any,
-        initial: Array.from(selectedSet),
         limit: 12,
       } as unknown as any);
       const picked = (answer as any).tools as string[];
@@ -607,13 +855,27 @@ export async function run(opts: any) {
   for (const s of allToolNames) recs.delete(s);
   const recList = Array.from(recs);
   if (recList.length) {
-    const recChoices = await multiselect({
-      message: "Recommended tools based on your selections — add any you want",
-      options: recList.map((r) => ({ value: r, label: r })),
-    });
-    if (!isCancel(recChoices)) {
-      const chosen = (recChoices as string[]).filter(Boolean);
-      allToolNames.push(...chosen);
+    // Make this optional: ask whether the user wants to review recommendations.
+    if (!opts.nonInteractive) {
+      const wantRec = await select({
+        message: "Add recommended tools based on your selections?",
+        options: [
+          { value: "yes", label: "Yes, show recommendations" },
+          { value: "no", label: "No, skip" },
+        ],
+        initialValue: "yes",
+      });
+      if (!isCancel(wantRec) && wantRec === "yes") {
+        const recChoices = await multiselect({
+          message:
+            "Recommended tools based on your selections — add any you want",
+          options: recList.map((r) => ({ value: r, label: r })),
+        });
+        if (!isCancel(recChoices)) {
+          const chosen = (recChoices as string[]).filter(Boolean);
+          allToolNames.push(...chosen);
+        }
+      }
     }
   }
 
@@ -659,6 +921,128 @@ export async function run(opts: any) {
     } as any;
   });
 
+  // Build rich styleRules objects for inclusion in config/agent.json.
+  // Each rule includes id, label, description, appliesTo, and derived Do/Don't text.
+  // Load curated rule example templates once per run and reuse synchronously
+  let _ruleExampleCache: Record<string, string> | null = null;
+  async function loadRuleExampleTemplatesOnce() {
+    if (_ruleExampleCache) return _ruleExampleCache;
+    try {
+      const tmplDir = path.join(
+        process.cwd(),
+        "templates",
+        "common",
+        "rule-examples"
+      );
+      if (!fsSync.existsSync(tmplDir)) return (_ruleExampleCache = {});
+      const files = await fs2.readdir(tmplDir);
+      const eta = new Eta({ views: path.join(process.cwd(), "templates") });
+      const out: Record<string, string> = {};
+      for (const f of files) {
+        if (!f.endsWith(".eta")) continue;
+        const name = f.replace(/\.md\.eta$/, "");
+        const raw = await fs2.readFile(path.join(tmplDir, f), "utf8");
+        const body = raw.replace(/^---json[\s\S]*?---\s*\n?/, "");
+        const rendered = eta.renderString(body, { cfg: {} });
+        out[name] = typeof rendered === "string" ? rendered.trim() : "";
+      }
+      return (_ruleExampleCache = out);
+    } catch (e) {
+      return (_ruleExampleCache = {});
+    }
+  }
+
+  function makeRuleObject(rule: any) {
+    const label =
+      rule.label || (rule.section ? `[${rule.section}] ${rule.key}` : rule.id);
+    const baseDesc = rule.description || label || rule.id;
+    // Minimal example generator: produce 1-2 sentence examples based on appliesTo and description
+    function generateExampleTextSync(
+      r: any,
+      templates: Record<string, string>
+    ) {
+      try {
+        const candidates: string[] = [];
+        if (r.section) candidates.push(r.section.toLowerCase());
+        if (r.key) candidates.push(r.key.toLowerCase());
+        if (
+          String(r.id || "")
+            .toLowerCase()
+            .includes("name")
+        )
+          candidates.push("naming");
+        if (
+          String(r.id || "")
+            .toLowerCase()
+            .includes("format")
+        )
+          candidates.push("formatting");
+        if (
+          String(r.id || "")
+            .toLowerCase()
+            .includes("test")
+        )
+          candidates.push("testing");
+        if (
+          String(r.id || "")
+            .toLowerCase()
+            .includes("security")
+        )
+          candidates.push("security");
+        for (const c of candidates) if (templates[c]) return templates[c];
+        const parts: string[] = [];
+        if (r.appliesTo) {
+          const apps = [].concat(r.appliesTo).slice(0, 3).join(", ");
+          parts.push(`This rule primarily applies to ${apps}.`);
+        }
+        if (r.description) {
+          const short = String(r.description).split(". ")[0];
+          parts.push(`In practice: ${short}.`);
+        }
+        if (!parts.length)
+          parts.push("Apply this rule when relevant to the codebase.");
+        return parts.join(" ");
+      } catch (e) {
+        return "Apply this rule when relevant to the codebase.";
+      }
+    }
+    // Produce a short do/don't pair with an example sentence when possible.
+    const shortDo = rule.doText || rule.do || rule.suggestion;
+    const shortDont = rule.dontText || rule.dont;
+    const derivedDo =
+      shortDo || `Follow this guideline: ${String(baseDesc).trim()}.`;
+    const derivedDont =
+      shortDont ||
+      `Avoid deviations from this guideline unless you document why.`;
+    // Add an examples paragraph when the rule has an appliesTo hint or longer description.
+    // prefer curated templates when available (load once synchronously via cached promise)
+    const templatesSync = (() => {
+      // NOTE: we intentionally call the async loader but rely on cached value
+      // when available; if not yet loaded the template map will be empty.
+      loadRuleExampleTemplatesOnce().catch(() => {});
+      return _ruleExampleCache || {};
+    })();
+    const example = (() => {
+      if (rule.examples && Array.isArray(rule.examples) && rule.examples[0])
+        return String(rule.examples[0]);
+      return generateExampleTextSync(rule, templatesSync);
+    })();
+
+    return {
+      id: rule.id,
+      label,
+      description: String(baseDesc),
+      appliesTo: rule.appliesTo || null,
+      doText: derivedDo + (example ? ` ${example}` : ""),
+      dontText: derivedDont,
+      example: example,
+    };
+  }
+
+  const styleRules = allRules
+    .filter((r) => selectedRuleIds.includes(r.id))
+    .map((r) => makeRuleObject(r));
+
   const cfg = AgentConfigSchema.parse({
     name,
     displayName,
@@ -674,6 +1058,8 @@ export async function run(opts: any) {
       linter: "biome",
     },
     tools: structuredTools,
+    // include the selected rules with richer metadata for templates and downstream tools
+    styleRules,
   });
   // Persist final tool choices (including accepted recommendations and custom tools)
   await saveDefaults({
@@ -709,7 +1095,7 @@ export async function run(opts: any) {
   let previewFiles: string[] = [];
   let previewMap: Record<string, string> = {};
   try {
-    previewMap = await renderTemplates(cfg);
+    previewMap = await renderTemplates(cfg, { emitAgents: !!opts.emitAgents });
     previewFiles = Object.keys(previewMap).map((p) => p.replace(/\\/g, "/"));
   } catch {}
   try {
@@ -872,7 +1258,9 @@ export async function run(opts: any) {
   // Handle dry-run: render templates and print a preview, but do not write files.
   if (opts.dryRun) {
     try {
-      const preview = await renderTemplates(cfg);
+      const preview = await renderTemplates(cfg, {
+        emitAgents: !!opts.emitAgents,
+      });
       const keys = Object.keys(preview);
       console.log(
         `Dry run: ${keys.length} files would be generated under '${path.join(
@@ -943,6 +1331,10 @@ program
     "--out-dir <path>",
     "explicit output parent directory (overrides cwd)"
   );
+program.option(
+  "--emit-agents",
+  "include provider-specific templates under templates/agents in generated output"
+);
 program.option("--non-interactive", "run without prompts (use flags/defaults)");
 program.option("--dry-run", "preview generated files without writing them");
 program.option("--yes", "assume yes for overwrite prompts (non-interactive)");

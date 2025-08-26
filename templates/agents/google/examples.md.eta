@@ -1,0 +1,7 @@
+---json
+{ "provider": "google" }
+---
+
+# Examples (Google)
+
+Supply 1–2 few-shot examples demonstrating required JSON output and edge cases.

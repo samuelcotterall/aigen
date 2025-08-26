@@ -1,0 +1,8 @@
+`policies.md` snapshot
+
+# # Snapshot Agent — Policies
+- Safety: low- Refusals: undefined- Privacy: Avoid unnecessary data retention.
+## Style rules
+
+Enabled rules:
+- [sec] r1

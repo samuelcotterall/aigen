@@ -1,0 +1,8 @@
+---json
+{ "provider": "huggingface" }
+---
+
+# Tools (Hugging Face)
+
+- Inference providers: provider selection hints and model fallbacks.
+- OpenAI-compatible chat envelope supported by some endpoints.

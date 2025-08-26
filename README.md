@@ -71,3 +71,21 @@ Preview + diffs
 Structured defaults
 
 - Persisted defaults (`conf`) now store structured tool objects (not just names). This preserves metadata such as `hint` and `recommends` so subsequent runs can show richer autocomplete and recommendations.
+
+## Continuous Integration and snapshots
+
+- A dedicated workflow `.github/workflows/render-tests.yml` runs the render script and snapshot assertions.
+- `render-tests.yml` runs on pushes and PRs that touch `templates/**` or `schemas/**`, and can be manually dispatched.
+- The CI run always executes the render script (`pnpm test:render`) to verify templates render cleanly; snapshot assertions are only executed when template or schema files changed.
+
+Updating snapshots locally
+
+If you intentionally change templates and need to update snapshots locally run:
+
+```bash
+pnpm test -- --updateSnapshot
+# or using vitest directly
+npx vitest --update
+```
+
+After updating, commit the modified snapshot files under `test/__snapshots__` so CI can compare them deterministically.

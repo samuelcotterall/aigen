@@ -3,3 +3,14 @@
 - Safety: <%= it.cfg.policies.safetyLevel %>
 - Refusals: <%= it.cfg.policies.refusalPattern %>
 - Privacy: <%= it.cfg.policies.privacyNotes ?? "Avoid unnecessary data retention." %>
+
+## Style rules
+
+<% if (!Array.isArray(it.cfg.styleRules) || it.cfg.styleRules.length === 0) { %>
+_No style rules are configured for this agent._
+<% } else { %>
+Enabled rules:
+<% it.cfg.styleRules.forEach(r => { %>
+- <%= r.label || r.id %>
+<% }) %>
+<% } %>

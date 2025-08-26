@@ -1,0 +1,9 @@
+---json
+{ "provider": "huggingface", "model": "meta-llama/Llama-3.1-instruct", "temperature": 0.2 }
+---
+
+# Hugging Face Agent
+
+Compatibility note: provide OpenAI-style `messages` for portability; include provider fallback hints.
+
+Output: prefer `json` fences for machine-readable outputs.

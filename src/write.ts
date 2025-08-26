@@ -240,7 +240,9 @@ export async function writeOutputs(
   }
   await fs.mkdir(outDir, { recursive: true });
 
-  const files = await renderTemplates(cfg);
+  const files = await renderTemplates(cfg, {
+    emitAgents: !!(opts as any)?.emitAgents,
+  });
   const mergedFiles: string[] = [];
   const backupFiles: string[] = [];
   await Promise.all(

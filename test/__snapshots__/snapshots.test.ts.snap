@@ -1,0 +1,65 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`render snapshots > agent and docs match snapshot for sample config > EXAMPLES.md 1`] = `
+"# Examples for
+This file demonstrates sample usage patterns for different presets.
+
+## OpenAI examples
+- See \`examples/openai.ts\` for a minimal runtime example.
+
+"
+`;
+
+exports[`render snapshots > agent and docs match snapshot for sample config > agent.md 1`] = `
+"
+# Snapshot Agent — System Instructions
+
+- Runtime: openai
+- Conventions: strict TS, naming: kebab, docs: typedoc
+You are Snapshot Agent, an AI agent that plans and executes tasks via tools.
+
+## Operating principles
+1) Be explicit about assumptions
+2) Prefer small, reversible steps
+3) Summarize tool results briefly with sources if applicable
+
+- **fetch** — HTTP
+## Style rules
+
+The following style rules are enabled for this agent. Each rule includes a short description and practical Do / Don't guidance.
+
+### [sec] r1_Applies to:_
+- react
+**Description:** desc r1
+**Do:**
+- do r1
+**Don't:**
+- dont r1
+"
+`;
+
+exports[`render snapshots > agent and docs match snapshot for sample config > policies.md 1`] = `
+"# # Snapshot Agent — Policies
+- Safety: low- Refusals: undefined- Privacy: Avoid unnecessary data retention.
+## Style rules
+
+Enabled rules:
+- [sec] r1"
+`;
+
+exports[`render snapshots > agent and docs match snapshot for sample config > tools.md 1`] = `
+"# Snapshot Agent — Tools
+Each tool has a JSON input and optional JSON output.
+
+## fetch
+**Description:** HTTP
+**Input:**
+\`\`\`json
+{}
+\`\`\`
+
+## Style rules
+
+Enabled rules:
+- [sec] r1"
+`;

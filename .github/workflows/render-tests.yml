@@ -1,0 +1,46 @@
+name: Render tests
+
+on:
+  push:
+    paths:
+      - "templates/**"
+      - "schemas/**"
+  pull_request:
+    paths:
+      - "templates/**"
+      - "schemas/**"
+  workflow_dispatch: {}
+
+jobs:
+  render-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies (pnpm)
+        run: pnpm install --frozen-lockfile
+
+      - name: Run render test script
+        run: pnpm test:render
+      - name: Determine if templates or schemas changed
+        id: paths
+        uses: tj-actions/changed-files@v34
+        with:
+          files: |
+            templates/**
+            schemas/**
+
+      - name: Run snapshot tests (only when templates/schemas changed)
+        if: steps.paths.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
+        run: npx vitest run test/snapshots.test.ts --run

@@ -1,0 +1,9 @@
+---json
+{ "provider": "openai" }
+---
+
+# Policies (OpenAI)
+
+- Safety: follow repository safety policy.
+- Privacy: do not emit secrets.
+

@@ -1,3 +1,9 @@
+````markdown
+# Target audience
+
+This CLI is initially targeted at users of **VS Code** who use **GitHub Copilot / Copilot Agents**; the first release focuses on generating VS Code task and Copilot-friendly artifacts.
+
+# CLI flags
 # CLI flags
 
 - --dev: write outputs to a temporary development directory
@@ -16,7 +22,7 @@
 
 - Tests mock `@clack/prompts`; use `test/utils/mockPrompts.ts` to create consistent mocks for tests.
 
-# create-agent-instructions (dev notes)
+# aigen (dev notes)
 
 Usage (dev / local):
 
@@ -25,6 +31,13 @@ Usage (dev / local):
 ```bash
 npm run build
 node dist/index.js
+CLI flags
+
+- `--dev` — write outputs to a temporary development directory (safe for testing).
+- `--out-dir <path>` — explicit output parent directory (overrides cwd).
+- `--tools-source <url|file>` — URL or local JSON file path to load tool choices from.
+- `--name <displayName>` — skip prompt and use this agent display name.
+
 ```
 
 - Dev mode: write outputs to a temporary directory (safe for testing):

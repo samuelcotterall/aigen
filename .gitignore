@@ -9,6 +9,9 @@ yarn.lock
 # Dist/build
 dist/
 
+# Local dev output
+out/
+
 # Temp / cache
 /tmp/
 create-agent-*

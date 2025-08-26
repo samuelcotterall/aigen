@@ -13,8 +13,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts",
-    "dev": "tsx src/index.ts",
+  "build": "tsup src/index.ts --format esm --dts",
+  "dev": "tsx src/index.ts --dev --out-dir out",
     "test": "vitest run",
     "prepublishOnly": "tsup src/index.ts --format esm --dts",
     "gen:api": "typedoc --entryPoints src/index.ts --tsconfig tsconfig.json --plugin typedoc-plugin-markdown --out website/docs/api && node scripts/fix-typedoc-index.cjs",
@@ -27,7 +27,8 @@
     "tools:fetch:ci": "pnpm -s dlx tsx scripts/fetch-tools.ts",
     "list:eslint-rules": "node scripts/list-eslint-rules.mjs",
     "docs:gen-styleguide": "node scripts/schema-to-markdown.mjs",
-    "docs:gen-agent-instructions": "node scripts/schema-to-agent-instructions.mjs"
+    "docs:gen-agent-instructions": "node scripts/schema-to-agent-instructions.mjs",
+    "test:render": "tsx scripts/test-render.ts"
   },
   "prepare": "husky install",
   "dependencies": {

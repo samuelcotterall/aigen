@@ -25,7 +25,11 @@ export function makeTemplateHelpers(rng: () => number) {
     hex(nBytes = 8) {
       const parts: string[] = [];
       for (let i = 0; i < nBytes; i++) {
-        parts.push(Math.floor(rng() * 256).toString(16).padStart(2, "0"));
+        parts.push(
+          Math.floor(rng() * 256)
+            .toString(16)
+            .padStart(2, "0")
+        );
       }
       return parts.join("");
     },

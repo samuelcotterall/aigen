@@ -54,7 +54,9 @@ export async function run(opts: any) {
     try {
       const fpRecorded = (opts && opts.templateFingerprint) || undefined;
       if (fpRecorded && !opts.ignoreTemplateDrift) {
-        const fpCurrent = await computeTemplatesFingerprint().catch(() => undefined);
+        const fpCurrent = await computeTemplatesFingerprint().catch(
+          () => undefined
+        );
         if (fpCurrent && fpCurrent !== fpRecorded) {
           console.error(
             `Template fingerprint mismatch: preset=${fpRecorded} current=${fpCurrent}. Use --ignore-template-drift to proceed.`

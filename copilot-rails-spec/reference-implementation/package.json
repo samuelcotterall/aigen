@@ -1,0 +1,21 @@
+{
+  "name": "copilot-rails",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "copilot-rails": "./cli.mjs"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "description": "Idempotent guardrails for VS Code/Copilot tasks: background tasks, port management, and sequencing.",
+  "keywords": [
+    "vscode",
+    "copilot",
+    "tasks",
+    "ports",
+    "concurrently",
+    "wait-on"
+  ]
+}

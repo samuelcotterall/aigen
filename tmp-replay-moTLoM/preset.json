@@ -1,0 +1,12 @@
+{
+  "name": "replay-agent",
+  "displayName": "Replay Agent",
+  "slug": "replay-agent",
+  "preset": "openai",
+  "libraries": [
+    "openai"
+  ],
+  "environments": [
+    "typescript"
+  ]
+}

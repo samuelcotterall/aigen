@@ -1,0 +1,34 @@
+{
+  &quot;name&quot;: &quot;CustomTool&quot;,
+  &quot;displayName&quot;: &quot;CLIName&quot;,
+  &quot;preset&quot;: &quot;custom&quot;,
+  &quot;libraries&quot;: [
+    &quot;openai&quot;,
+    &quot;langchain&quot;
+  ],
+  &quot;tools&quot;: [
+    {
+      &quot;name&quot;: &quot;openai&quot;,
+      &quot;description&quot;: &quot;openai tool&quot;,
+      &quot;input&quot;: {},
+      &quot;output&quot;: {},
+      &quot;examples&quot;: []
+    },
+    {
+      &quot;name&quot;: &quot;langchain&quot;,
+      &quot;description&quot;: &quot;langchain tool&quot;,
+      &quot;input&quot;: {},
+      &quot;output&quot;: {},
+      &quot;examples&quot;: []
+    }
+  ],
+  &quot;policies&quot;: {},
+  &quot;style&quot;: {
+    &quot;tsconfig&quot;: &quot;strict&quot;,
+    &quot;naming&quot;: &quot;kebab&quot;,
+    &quot;docs&quot;: &quot;typedoc&quot;,
+    &quot;tests&quot;: &quot;vitest&quot;,
+    &quot;linter&quot;: &quot;biome&quot;
+  },
+  &quot;styleRules&quot;: []
+}

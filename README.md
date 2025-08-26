@@ -4,6 +4,7 @@
 This CLI is initially targeted at users of **VS Code** who use **GitHub Copilot / Copilot Agents**; the first release focuses on generating VS Code task and Copilot-friendly artifacts.
 
 # CLI flags
+
 # CLI flags
 
 - --dev: write outputs to a temporary development directory
@@ -37,6 +38,23 @@ CLI flags
 - `--out-dir <path>` — explicit output parent directory (overrides cwd).
 - `--tools-source <url|file>` — URL or local JSON file path to load tool choices from.
 - `--name <displayName>` — skip prompt and use this agent display name.
+
+Presets / deterministic re-runs
+
+You can export the resolved choices from a run into `aigen.config.json` and
+reapply it later to reproduce the same generated output.
+
+- Export after an interactive run:
+
+	npx aigen --save-config
+
+- Apply a saved config non-interactively:
+
+	npx aigen apply-config ./aigen.config.json
+
+The exported manifest includes `templateFingerprint` (sha1) and
+`generatorVersion` so you can detect template drift when replaying across
+projects.
 
 ```
 
@@ -102,3 +120,4 @@ npx vitest --update
 ```
 
 After updating, commit the modified snapshot files under `test/__snapshots__` so CI can compare them deterministically.
+````

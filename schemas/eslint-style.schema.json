@@ -210,7 +210,7 @@
       "namingConventions": {
         "scriptPrefix": "ci:",
         "binaryNames": [
-          "create-agent-instructions"
+          "aigen"
         ]
       },
       "documentation": {
@@ -229,7 +229,9 @@
         ]
       },
       "testingConventions": {
-        "testFrameworks": ["vitest"],
+        "testFrameworks": [
+          "vitest"
+        ],
         "testCoverageGoal": 80
       },
       "repository": {
@@ -266,7 +268,9 @@
       },
       "namingConventions": {
         "scriptPrefix": "",
-        "binaryNames": ["aigen"],
+        "binaryNames": [
+          "aigen"
+        ],
         "packageNamePattern": "^[a-z0-9-]+$"
       },
       "documentation": {
@@ -286,7 +290,9 @@
         ]
       },
       "testingConventions": {
-        "testFrameworks": ["vitest"],
+        "testFrameworks": [
+          "vitest"
+        ],
         "testCoverageGoal": 90
       },
       "repository": {
@@ -344,7 +350,10 @@
         ]
       },
       "testingConventions": {
-        "testFrameworks": ["vitest", "@testing-library/react"],
+        "testFrameworks": [
+          "vitest",
+          "@testing-library/react"
+        ],
         "testCoverageGoal": 80
       },
       "repository": {
@@ -400,7 +409,9 @@
         "forbiddenScriptNames": []
       },
       "testingConventions": {
-        "testFrameworks": ["pytest"],
+        "testFrameworks": [
+          "pytest"
+        ],
         "testCoverageGoal": 85
       },
       "repository": {
@@ -456,7 +467,9 @@
         "forbiddenScriptNames": []
       },
       "testingConventions": {
-        "testFrameworks": ["go test"],
+        "testFrameworks": [
+          "go test"
+        ],
         "testCoverageGoal": 80
       },
       "repository": {
@@ -509,7 +522,10 @@
         "forbiddenScriptNames": []
       },
       "testingConventions": {
-        "testFrameworks": ["jest", "supertest"],
+        "testFrameworks": [
+          "jest",
+          "supertest"
+        ],
         "testCoverageGoal": 85
       },
       "repository": {

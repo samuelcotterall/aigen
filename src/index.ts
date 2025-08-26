@@ -20,6 +20,13 @@ import Enquirer from "enquirer";
 import fs2 from "node:fs/promises";
 import fsSync from "node:fs";
 import { Eta } from "eta";
+import resolveName, { makeSlug } from "./name.js";
+import {
+  loadPreset,
+  savePreset,
+  DEFAULT_CONFIG_FILENAME,
+  computeTemplatesFingerprint,
+} from "./cli/config.js";
 
 /**
  * CLI entry point: interactively build and write an agent instruction pack.
@@ -32,6 +39,55 @@ import { Eta } from "eta";
 export async function run(opts: any) {
   intro("Create Agent Instructions");
   const defaults = await loadDefaults();
+
+  // If a config file is passed, load it and treat the run as non-interactive
+  // unless explicitly overridden. `--apply-config` is an alias for `--config`.
+  const cfgFile = opts.config || opts.applyConfig || undefined;
+  if (cfgFile) {
+    const loaded = await loadPreset(cfgFile).catch(() => ({}));
+    // merge loaded preset into opts so the rest of the flow picks it up
+    opts = { ...loaded, ...opts, nonInteractive: true };
+  }
+
+  // If a preset was loaded, validate its recorded template fingerprint
+  if (cfgFile) {
+    try {
+      const fpRecorded = (opts && opts.templateFingerprint) || undefined;
+      if (fpRecorded && !opts.ignoreTemplateDrift) {
+        const fpCurrent = await computeTemplatesFingerprint().catch(() => undefined);
+        if (fpCurrent && fpCurrent !== fpRecorded) {
+          console.error(
+            `Template fingerprint mismatch: preset=${fpRecorded} current=${fpCurrent}. Use --ignore-template-drift to proceed.`
+          );
+          return;
+        }
+      }
+    } catch (e) {
+      console.error((e as any).message || e);
+      return;
+    }
+  }
+
+  // Run repository detector (src/detectEnv.ts) to seed CLI defaults and
+  // influence which prompts we show. This is best-effort and must not
+  // fail the CLI if the detector has issues.
+  let detectedEnv: any = {};
+  try {
+    const mod = await import("./detectEnv.js");
+    if (mod && typeof mod.detectEnvironment === "function") {
+      detectedEnv = await mod
+        .detectEnvironment(process.cwd())
+        .catch(() => ({}));
+    }
+  } catch (e) {
+    detectedEnv = {};
+  }
+
+  // If the detector indicates a VS Code workspace and no preset is set,
+  // prefer the vscode preset by default.
+  if (!defaults.preset && detectedEnv && detectedEnv.hasVSCodeFolder) {
+    defaults.preset = "vscode";
+  }
 
   // Inspect repository files to guess environment(s) and tools to enable by default
   async function detectEnvAndTools(root: string) {
@@ -298,41 +354,9 @@ export async function run(opts: any) {
     if (isCancel(tsStrict)) return;
   }
 
-  let name: string;
-  if (opts.name) name = opts.name;
-  else if (opts.nonInteractive) name = defaults.name ?? "MyAgent";
-  else {
-    const nameRes = await text({
-      message: "Agent name",
-      initialValue: defaults.name ?? "MyAgent",
-    });
-    if (isCancel(nameRes)) return;
-    name = nameRes as string;
-  }
-
-  // sanitize to a filesystem-safe slug
-  function makeSlug(s: string) {
-    const out = (s || "")
-      .toString()
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^a-z0-9\-_.]/g, "");
-    return out || `agent-${Date.now()}`;
-  }
-  const displayName = name;
-  const slug = makeSlug(name);
-  if (
-    slug !==
-    name
-      .replace(/\s+/g, "-")
-      .replace(/[^a-z0-9\-_.]/gi, "")
-      .toLowerCase()
-  ) {
-    console.log(
-      `Note: output folder will be created as '${slug}' (sanitized from '${name}').`
-    );
-  }
+  // Defer choosing the agent `name` until right before we build the final
+  // configuration so it's the last interactive step. Populate `name` later.
+  let name: string | undefined;
 
   const toolList = (await loadToolList(
     (opts && opts.toolsSource) || undefined
@@ -771,7 +795,16 @@ export async function run(opts: any) {
     }
   }
 
-  if (!useEnquirer) {
+  if (opts.nonInteractive) {
+    // Non-interactive: respect provided opts.tools or defaults. Do not prompt.
+    if (Array.isArray(opts.tools)) {
+      for (const t of opts.tools) {
+        const n = typeof t === "string" ? t : t.name;
+        if (n && n !== "other") selectedSet.add(n);
+      }
+    }
+    if (opts.extraTools) extraToolsRaw = String(opts.extraTools);
+  } else if (!useEnquirer) {
     // Use the clack multiselect (tests mock this) with a simple options list.
     const picked = (await multiselect({
       message: "Pick tools",
@@ -1042,6 +1075,68 @@ export async function run(opts: any) {
   const styleRules = allRules
     .filter((r) => selectedRuleIds.includes(r.id))
     .map((r) => makeRuleObject(r));
+  // Final: resolve name using shared resolver (last interactive step)
+  const resolved = await resolveName(opts, defaults, process.cwd());
+  name = opts.name || resolved.name;
+  let displayName = resolved.displayName;
+  // allow final interactive edit of the display name when appropriate
+  if (!opts.nonInteractive && !opts.name) {
+    const finalName = await text({
+      message: "Agent name (final)",
+      initialValue: displayName,
+    });
+    if (isCancel(finalName)) return;
+    name = finalName as string;
+    displayName = name;
+  }
+
+  // compute slug and offer edit only when derived slug differs from display name
+  let slug = makeSlug(String(displayName));
+  if (!opts.nonInteractive && !opts.name) {
+    const derived = makeSlug(String(displayName));
+    if (derived !== String(displayName)) {
+      const slugEdit = await text({
+        message: "Output folder slug (edit if desired)",
+        initialValue: slug,
+      });
+      if (isCancel(slugEdit)) return;
+      slug = String(slugEdit || slug);
+    }
+  }
+
+  // Immediately persist chosen name/slug so subsequent steps or interruptions
+  // have the chosen defaults recorded.
+  try {
+    const existing = await loadDefaults();
+    await saveDefaults({ ...existing, name, displayName, slug });
+    // Optionally export or save resolved config for deterministic replay
+    if (opts.exportConfig || opts.saveConfig) {
+      try {
+        const exportPath = String(
+          opts.exportConfig || opts.saveConfig || DEFAULT_CONFIG_FILENAME
+        );
+        const toSave: Record<string, any> = {
+          schemaVersion: "1.0",
+          generatorVersion: (await import("../package.json")).version,
+          timestamp: new Date().toISOString(),
+          name,
+          displayName,
+          slug,
+          preset,
+          libraries: libs,
+          environments,
+          tools: structuredTools,
+        };
+        try {
+          const fp = await computeTemplatesFingerprint();
+          if (fp) toSave.templateFingerprint = fp;
+        } catch {}
+        if (opts.seed) toSave.randomSeed = opts.seed;
+        const saved = await savePreset(exportPath, toSave);
+        console.log(`Exported resolved config to: ${saved}`);
+      } catch (e) {}
+    }
+  } catch (e) {}
 
   const cfg = AgentConfigSchema.parse({
     name,
@@ -1077,8 +1172,12 @@ export async function run(opts: any) {
   if (opts.outDir) {
     parentOut = path.resolve(opts.outDir);
   } else if (opts.dev) {
-    // create a temp parent directory for dev runs
-    parentOut = await fs.mkdtemp(path.join(os.tmpdir(), "create-agent-"));
+    // use ./out for dev runs so temporary/dev outputs stay in the repo
+    const outRoot = path.join(process.cwd(), "out");
+    try {
+      await fs.mkdir(outRoot, { recursive: true });
+    } catch {}
+    parentOut = await fs.mkdtemp(path.join(outRoot, "create-agent-"));
   }
 
   // compute candidate outDir (same logic as writeOutputs)
@@ -1095,7 +1194,10 @@ export async function run(opts: any) {
   let previewFiles: string[] = [];
   let previewMap: Record<string, string> = {};
   try {
-    previewMap = await renderTemplates(cfg, { emitAgents: !!opts.emitAgents });
+    previewMap = await renderTemplates(cfg, {
+      emitAgents: !!opts.emitAgents,
+      seed: opts.seed,
+    });
     previewFiles = Object.keys(previewMap).map((p) => p.replace(/\\/g, "/"));
   } catch {}
   try {
@@ -1340,6 +1442,19 @@ program.option("--dry-run", "preview generated files without writing them");
 program.option("--yes", "assume yes for overwrite prompts (non-interactive)");
 program.option("--confirm-overwrite", "skip prompt and confirm overwrite");
 program.option(
+  "--config <file>",
+  "load a preset/config JSON file to run non-interactively"
+);
+program.option("--apply-config <file>", "alias for --config (explicit apply)");
+program.option(
+  "--export-config <file>",
+  "export the resolved config for this run to a JSON file"
+);
+program.option(
+  "--save-config <file>",
+  "save the resolved config to disk (default: aigen.config.json)"
+);
+program.option(
   "--merge",
   "merge with existing files (preserve existing files)"
 );
@@ -1355,6 +1470,10 @@ program.option(
   "--seed <seed>",
   "provide a seed to derive a deterministic run id (hex-encoded sha1)"
 );
+program.option(
+  "--ignore-template-drift",
+  "when applying a saved config, do not fail if template fingerprint differs"
+);
 program.option("--force", "force overwrite without prompting");
 program.option(
   "--backup-on-overwrite",
@@ -1369,4 +1488,34 @@ program.option(
   "skip prompt and use this agent display name"
 );
 program.action(run);
-program.parseAsync(process.argv);
+// Avoid auto-executing the CLI when running under the test harness; tests
+// import the module and call `run()` directly with controlled opts.
+if (process.env.VITEST !== "true") {
+  // add small subcommands to make applying and exporting configs explicit
+  program
+    .command("apply-config <file>")
+    .description(
+      "apply a saved aigen.config.json file and run non-interactively"
+    )
+    .action(async (file) => {
+      await run({ config: file, nonInteractive: true });
+    });
+
+  program
+    .command("export-config [file]")
+    .description(
+      "run and export the resolved config to a file (default: aigen.config.json)"
+    )
+    .action(async (file) => {
+      await run({ saveConfig: file || DEFAULT_CONFIG_FILENAME });
+    });
+
+  program
+    .command("save-config [file]")
+    .description("alias for export-config")
+    .action(async (file) => {
+      await run({ saveConfig: file || DEFAULT_CONFIG_FILENAME });
+    });
+
+  program.parseAsync(process.argv);
+}

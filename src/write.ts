@@ -242,6 +242,7 @@ export async function writeOutputs(
 
   const files = await renderTemplates(cfg, {
     emitAgents: !!(opts as any)?.emitAgents,
+    seed: (opts as any)?.seed,
   });
   const mergedFiles: string[] = [];
   const backupFiles: string[] = [];
@@ -322,14 +323,14 @@ export async function writeOutputs(
                       // fallback to append if AST merge fails
                       const appended =
                         existingRaw +
-                        "\n\n<!-- merged-policies-by-create-agent-instructions -->\n" +
+                        "\n\n<!-- merged-policies-by-aigen -->\n" +
                         content;
                       await fs.writeFile(target, appended, "utf8");
                     }
                   } else if (!existingRaw.includes(content.trim())) {
                     const appended =
                       existingRaw +
-                      "\n\n<!-- merged-policies-by-create-agent-instructions -->\n" +
+                      "\n\n<!-- merged-policies-by-aigen -->\n" +
                       content;
                     await fs.writeFile(target, appended, "utf8");
                     mergedFiles.push(target);
@@ -354,17 +355,13 @@ export async function writeOutputs(
                       mergedFiles.push(target);
                     } catch (e) {
                       const appended =
-                        existingRaw +
-                        "\n\n<!-- added-by-create-agent-instructions -->\n" +
-                        content;
+                        existingRaw + "\n\n<!-- added-by-aigen -->\n" + content;
                       await fs.writeFile(target, appended, "utf8");
                       mergedFiles.push(target);
                     }
                   } else if (!existingRaw.includes(content.trim())) {
                     const appended =
-                      existingRaw +
-                      "\n\n<!-- added-by-create-agent-instructions -->\n" +
-                      content;
+                      existingRaw + "\n\n<!-- added-by-aigen -->\n" + content;
                     await fs.writeFile(target, appended, "utf8");
                     mergedFiles.push(target);
                   }

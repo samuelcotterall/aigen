@@ -1,0 +1,33 @@
+{
+  &quot;name&quot;: &quot;replay-agent&quot;,
+  &quot;displayName&quot;: &quot;replay-agent&quot;,
+  &quot;preset&quot;: &quot;openai&quot;,
+  &quot;libraries&quot;: [
+    &quot;openai&quot;
+  ],
+  &quot;tools&quot;: [
+    {
+      &quot;name&quot;: &quot;vitest&quot;,
+      &quot;description&quot;: &quot;Next generation testing framework powered by Vite&quot;,
+      &quot;input&quot;: {},
+      &quot;output&quot;: {},
+      &quot;examples&quot;: []
+    },
+    {
+      &quot;name&quot;: &quot;fetch&quot;,
+      &quot;description&quot;: &quot;fetch tool&quot;,
+      &quot;input&quot;: {},
+      &quot;output&quot;: {},
+      &quot;examples&quot;: []
+    }
+  ],
+  &quot;policies&quot;: {},
+  &quot;style&quot;: {
+    &quot;tsconfig&quot;: &quot;strict&quot;,
+    &quot;naming&quot;: &quot;kebab&quot;,
+    &quot;docs&quot;: &quot;typedoc&quot;,
+    &quot;tests&quot;: &quot;vitest&quot;,
+    &quot;linter&quot;: &quot;biome&quot;
+  },
+  &quot;styleRules&quot;: []
+}

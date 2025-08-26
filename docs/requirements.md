@@ -1,10 +1,10 @@
 # Requirements
 
-This document outlines the requirements for the **create-agent-instructions** CLI tool.
+This document outlines the requirements for the **aigen** CLI tool.
 
 ## Core Functionality
 
-- Run via `npx create-agent-instructions`.
+- Run via `npx aigen`.
 - Provide an interactive CLI that guides developers through creating AI agent instructions.
 - Allow selection of:
   - Preferred libraries (OpenAI, LangChain, LlamaIndex, AutoGen, MCP).
@@ -33,7 +33,7 @@ This document outlines the requirements for the **create-agent-instructions** CL
 ## Extensibility
 
 - Allow new templates for different runtimes and presets.
-- Plugin system for community-driven presets (e.g., `create-agent-instructions-plugin-*`).
+- Plugin system for community-driven presets (e.g., `aigen-plugin-*`).
 - Ability to extend tool library definitions easily.
 
 ## Development

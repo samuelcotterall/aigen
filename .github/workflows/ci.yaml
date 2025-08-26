@@ -18,23 +18,93 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Detect environment
-        run: npm run detect:env --silent | tee detect-env.json
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
 
+      - name: Detect environment
+        id: detect
+        run: |
+          # produce JSON file
+          npm run detect:env --silent > detect-env.json
+          # extract values using node so we don't depend on jq
+          framework=$(node -e "console.log((JSON.parse(require('fs').readFileSync('detect-env.json','utf8')).framework)||'')")
+          pm=$(node -e "console.log((JSON.parse(require('fs').readFileSync('detect-env.json','utf8')).packageManager)||'')")
+          language=$(node -e "console.log((JSON.parse(require('fs').readFileSync('detect-env.json','utf8')).language)||'')")
+          hasVSCode=$(node -e "console.log((JSON.parse(require('fs').readFileSync('detect-env.json','utf8')).hasVSCodeFolder)||'')")
+          hasCopilot=$(node -e "console.log((JSON.parse(require('fs').readFileSync('detect-env.json','utf8')).hasCopilotSettings)||'')")
+          echo "framework=$framework" >> $GITHUB_OUTPUT
+          echo "packageManager=$pm" >> $GITHUB_OUTPUT
+          echo "language=$language" >> $GITHUB_OUTPUT
+          echo "hasVSCode=$hasVSCode" >> $GITHUB_OUTPUT
+          echo "hasCopilot=$hasCopilot" >> $GITHUB_OUTPUT
+
       - name: Install dependencies
-        run: npm ci
+        run: |
+          pm="${{ steps.detect.outputs.packageManager }}"
+          echo "Detected package manager: $pm"
+          if [ "$pm" = "pnpm" ]; then
+            corepack enable && corepack prepare pnpm@latest --activate
+            pnpm install --frozen-lockfile
+          elif [ "$pm" = "yarn" ]; then
+            corepack enable && corepack prepare yarn@stable --activate
+            yarn install --frozen-lockfile
+          elif [ "$pm" = "bun" ]; then
+            echo "bun detected; attempting bun install"
+            if command -v bun >/dev/null 2>&1; then
+              bun install
+            else
+              echo "bun not available; falling back to npm ci"
+              npm ci
+            fi
+          else
+            npm ci
+          fi
 
-      - name: Build
-        run: npm run build
+      - name: Build (conditional)
+        if: steps.detect.outputs.language != '' && steps.detect.outputs.language != 'unknown'
+        run: |
+          pm="${{ steps.detect.outputs.packageManager }}"
+          echo "Using package manager for build: $pm"
+          if [ "$pm" = "pnpm" ]; then
+            pnpm run build
+          elif [ "$pm" = "yarn" ]; then
+            yarn build
+          elif [ "$pm" = "bun" ]; then
+            if command -v bun >/dev/null 2>&1; then
+              bunx npm run build || bunx tsup src/index.ts --format esm --dts
+            else
+              npm run build
+            fi
+          else
+            npm run build
+          fi
 
-      - name: Run tests
+      - name: Run tests (conditional)
+        if: steps.detect.outputs.language != '' && steps.detect.outputs.language != 'unknown'
         run: npx vitest run --passWithNoTests
 
   # render-test moved to a dedicated workflow that triggers only when templates
   # or schema files change. See .github/workflows/render-tests.yml
+
+  replay-idempotency:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install dependencies
+        run: |
+          corepack enable && corepack prepare pnpm@latest --activate
+          pnpm install --frozen-lockfile
+
+      - name: Run replay idempotency test
+        run: npx vitest run test/replay.test.ts --run

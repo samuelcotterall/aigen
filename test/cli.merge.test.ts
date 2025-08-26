@@ -16,8 +16,10 @@ import { run } from "../src/index";
 
 describe("CLI merge journeys", () => {
   it("merges into an existing directory when requested", async () => {
-    // create a temp directory and simulate existing files
-    const tmp = await fs.mkdtemp(path.join(process.cwd(), "tmp-merge-"));
+    // create a temp directory under ./out and simulate existing files
+    const outRoot = path.join(process.cwd(), "out");
+    await fs.mkdir(outRoot, { recursive: true }).catch(() => {});
+    const tmp = await fs.mkdtemp(path.join(outRoot, "tmp-merge-"));
     try {
       // create the candidate outDir (slug derived from name -> "mergeagent")
       const candidate = path.join(tmp, "mergeagent");

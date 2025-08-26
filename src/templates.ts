@@ -68,9 +68,12 @@ async function walk(dir: string): Promise<string[]> {
  *
  * @param cfg - parsed AgentConfig used as the template context
  */
+import { createSeededRng } from "./random.js";
+import { makeTemplateHelpers } from "./templates/helpers.js";
+
 export async function renderTemplates(
   cfg: AgentConfig,
-  opts?: { emitAgents?: boolean }
+  opts?: { emitAgents?: boolean; seed?: string | number }
 ) {
   // Enable `useWith: true` so provider templates that reference `cfg` at the
   // top-level continue to work. When rendering we also pass an `it` object
@@ -93,6 +96,9 @@ export async function renderTemplates(
     styleRules: c.styleRules ?? [],
   } as any;
   const all = await walk(TEMPLATES_DIR);
+  // create a seeded RNG if requested so templates can generate deterministic IDs
+  const rng = createSeededRng(opts?.seed);
+  const helpers = makeTemplateHelpers(rng);
   const outputs: Record<string, string> = {};
 
   for (const abs of all) {
@@ -132,6 +138,10 @@ export async function renderTemplates(
     const rendered = eta.renderString(body, {
       cfg: renderCfg,
       it: { cfg: renderCfg } as any,
+      // expose a minimal deterministic RNG, helpers, and convenience API to templates
+      rng,
+      random: { next: () => rng() },
+      helpers,
     });
     if (typeof rendered !== "string") continue;
     outputs[outPath] = rendered;

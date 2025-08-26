@@ -1,4 +1,4 @@
-# Build Plan — `create-agent-instructions`
+# Build Plan — `aigen`
 
 > Objective: Ship an `npx`-runnable, TypeScript-based interactive CLI that generates an "agent instruction pack" (Markdown + JSON + examples) from user-selected libraries, structures, and conventions. Plan is deterministic, testable, and leaves no ambiguity.
 
@@ -20,12 +20,12 @@
 
 **Definition of Done (DoD) overall:**
 
-- `npx create-agent-instructions@file:.` produces a folder `{kebab-agent-name}/` with at least: `agent.md`, `tools.md`, `policies.md`, `config/agent.json`.
-- Choosing OpenAI library also generates `examples/openai.ts`.
-- CLI exits `0` and shows `Done. Generated instruction pack for <name>.`
-- CI passes on Node 18/20/22.
-
----
+`npx aigen@file:.` produces a folder `{kebab-agent-name}/` with at least: `agent.md`, `tools.md`, `policies.md`, `config/agent.json`.
+npx aigen
+npx aigen@latest
+npx aigen@latest
+Add plugin API: load `aigen-plugin-*` packages; auto-discover and merge questions/templates.
+[ ] Local `npm pack` + `npx aigen` works.
 
 ## 1) Initialize Repository
 
@@ -41,7 +41,7 @@
 
 **Verification**
 
-- Run `npm pkg get name` → `"create-agent-instructions"`.
+- Run `npm pkg get name` → `"aigen"`.
 - Run `npm ls` completes without errors.
 
 ---
@@ -249,8 +249,8 @@ npm pack
 TMP=$(mktemp -d)
 cd "$TMP"
 npm init -y >/dev/null
-npm i ../create-agent-instructions-*.tgz
-npx create-agent-instructions
+  npm i ../aigen-*.tgz
+  npx aigen
 ```
 
 - Expect interactive prompts and successful generation.
@@ -269,7 +269,7 @@ npx create-agent-instructions
 
 - README shows copy-paste usage:
   ```bash
-  npx create-agent-instructions@latest
+  npx aigen@latest
   ```
 - Includes screenshot/gif (optional later).
 
@@ -313,7 +313,7 @@ npx create-agent-instructions@latest
 ## 14) Backlog (Not in 0.2.0)
 
 - Add LangChain / LlamaIndex / MCP example templates.
-- Add plugin API: load `create-agent-instructions-plugin-*` packages; auto-discover and merge questions/templates.
+- Add plugin API: load `aigen-plugin-*` packages; auto-discover and merge questions/templates.
 - Add `--ci` non-interactive flag to accept a config file and produce outputs.
 - Add prompt linter.
 

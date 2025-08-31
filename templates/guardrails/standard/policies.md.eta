@@ -1,0 +1,31 @@
+# Guardrails — Standard
+
+This document contains the recommended guardrails for the agent at the `standard` level.
+
+<% const g = (typeof cfg === 'object' && cfg) || {}; %>
+<% const policies = (Array.isArray(g.styleRules) ? g.styleRules : []) ; %>
+The generated policies below are designed to be human-readable and include examples and suggested checks.
+
+## Policies
+
+<% let js; try { js = JSON.parse((cfg && cfg._guardrailsRaw) || '{}'); } catch (e) { js = {}; } %>
+<% const guard = (cfg && cfg._guardrails) || {}; %>
+<% if (guard && guard.policies && guard.policies.length) { %>
+<% guard.policies.forEach(function(p) { %>
+### <%= p.title %>
+
+- id: <%= p.id %>
+- severity: <%= p.severity %>
+
+<%= p.description %>
+
+Examples:
+
+- Bad: <%= (p.examples && p.examples.bad) || '...no example...' %>
+- Good: <%= (p.examples && p.examples.good) || '...no example...' %>
+
+<% }) %>
+<% } else { %>
+_No guardrails produced._
+<% } %>
+

@@ -1626,5 +1626,9 @@ if (process.env.VITEST !== "true") {
       }
     });
 
+  // Compatibility: some docs/examples call `aigen create`. Support that by
+  // treating `aigen create --flags` the same as `aigen --flags` so users can
+  // copy/paste examples without editing. This is a no-op when not present.
+  if (process.argv[2] === "create") process.argv.splice(2, 1);
   program.parseAsync(process.argv);
 }

@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+// Minimal wrapper for npx / bin entry to run the compiled CLI
+import("../dist/index.js").catch((e) => {
+  console.error("Failed to start aigen CLI:", e && e.message ? e.message : e);
+  process.exit(1);
+});

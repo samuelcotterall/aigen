@@ -5,7 +5,10 @@ import path from "node:path";
  * Recursively list files under `dir`, returning paths relative to `baseDir`.
  * If `baseDir` is not provided, it's set to the initial `dir` value.
  */
-export async function listFiles(dir: string, baseDir?: string): Promise<string[]> {
+export async function listFiles(
+  dir: string,
+  baseDir?: string
+): Promise<string[]> {
   const base = baseDir || dir;
   const entries = await fs.readdir(dir, { withFileTypes: true });
   const out: string[] = [];

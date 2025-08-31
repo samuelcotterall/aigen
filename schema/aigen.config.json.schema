@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Aigen Config",
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "generatorVersion": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "templateFingerprint": { "type": "string" },
+    "randomSeed": { "oneOf": [{ "type": "string" }, { "type": "number" }] },
+    "name": { "type": "string" },
+    "displayName": { "type": "string" },
+    "slug": { "type": "string" },
+    "preset": { "type": "string" },
+    "libraries": { "type": "array", "items": { "type": "string" } },
+    "environments": { "type": "array", "items": { "type": "string" } },
+    "tools": { "type": "array" }
+  },
+  "additionalProperties": true
+}

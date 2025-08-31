@@ -1,0 +1,27 @@
+<% const meta = cfg || {}; %>
+{
+  "schemaVersion": "1.0",
+  "level": "standard",
+  "timestamp": "<%= new Date().toISOString() %>",
+  "policies": [
+    {
+      "id": "no_personal_data",
+      "title": "Avoid personal or sensitive data",
+      "type": "content",
+      "severity": "high",
+      "description": "Do not include or infer personal, financial, or authentication data in responses.",
+      "checks": [ { "kind": "regex", "pattern": "(ssn|dob|credit card|cvv)", "scope": "response" } ],
+      "examples": { "bad": "Return full SSNs or credit card numbers.", "good": "Mask or omit sensitive values and ask for explicit consent." }
+    },
+    {
+      "id": "rate_limit_calls",
+      "title": "Rate limit external API calls",
+      "type": "operational",
+      "severity": "medium",
+      "description": "Avoid making unbounded or frequent external API calls. Batch requests where possible.",
+      "checks": [ { "kind": "heuristic", "scope": "runtime" } ],
+      "examples": { "bad": "Call the model for every token output.", "good": "Batch inputs and cache results." }
+    }
+  ],
+  "metadata": { "source": "templates/guardrails/standard", "templateFingerprint": "<%= templateFingerprint || '' %>" }
+}

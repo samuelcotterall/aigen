@@ -46,3 +46,12 @@ typedoc/
 # Vitest coverage
 coverage/
 
+
+
+# Repository-specific generated outputs to ignore
+my-agent/
+tmp-*
+tmp-replay-*
+*.tgz
+website/node_modules/
+

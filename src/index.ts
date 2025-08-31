@@ -27,6 +27,7 @@ import {
   DEFAULT_CONFIG_FILENAME,
   computeTemplatesFingerprint,
 } from "./cli/config.js";
+import { detectAgent } from "./detectAgent.js";
 
 /**
  * CLI entry point: interactively build and write an agent instruction pack.
@@ -58,10 +59,49 @@ export async function run(opts: any) {
           () => undefined
         );
         if (fpCurrent && fpCurrent !== fpRecorded) {
-          console.error(
-            `Template fingerprint mismatch: preset=${fpRecorded} current=${fpCurrent}. Use --ignore-template-drift to proceed.`
-          );
-          return;
+          // If non-interactive and --update-config was passed, refresh the
+          // preset file's recorded fingerprint automatically.
+          if (opts.nonInteractive && opts.updateConfig) {
+            try {
+              const orig = (await loadPreset(cfgFile).catch(() => ({}))) as any;
+              orig.templateFingerprint = fpCurrent;
+              await savePreset(cfgFile, orig);
+              console.log(`Updated template fingerprint in: ${cfgFile}`);
+            } catch {}
+          } else if (opts.nonInteractive) {
+            console.error(
+              `Template fingerprint mismatch: preset=${fpRecorded} current=${fpCurrent}. Use --update-config to refresh the preset, --ignore-template-drift to continue anyway, or run interactively to choose.`
+            );
+            return;
+          } else {
+            const choice = await select({
+              message: `Template fingerprint mismatch: preset=${fpRecorded} current=${fpCurrent}. What would you like to do?`,
+              options: [
+                {
+                  value: "update",
+                  label: "Update preset fingerprint and continue",
+                },
+                {
+                  value: "ignore",
+                  label: "Proceed without updating (ignore drift)",
+                },
+                { value: "abort", label: "Abort" },
+              ],
+              initialValue: "abort",
+            });
+            if (isCancel(choice) || choice === "abort") return;
+            if (choice === "update") {
+              try {
+                const orig = (await loadPreset(cfgFile).catch(
+                  () => ({})
+                )) as any;
+                orig.templateFingerprint = fpCurrent;
+                await savePreset(cfgFile, orig);
+                console.log(`Updated template fingerprint in: ${cfgFile}`);
+              } catch {}
+            }
+            // if choice === 'ignore', continue normally
+          }
         }
       }
     } catch (e) {
@@ -920,6 +960,33 @@ export async function run(opts: any) {
   const importedFromFs = (await importExisting(process.cwd()).catch(
     () => ({})
   )) as any;
+  // Also detect a full agent pack in the workspace root and merge
+  // its discovered settings/tools into importedFromFs as higher-priority
+  // context for defaults and tool resolution.
+  try {
+    const detectedAny: any = await detectAgent(process.cwd()).catch(() => ({}));
+    if (detectedAny) {
+      if (detectedAny.name && !importedFromFs.name)
+        importedFromFs.name = detectedAny.name;
+      if (detectedAny.displayName && !importedFromFs.displayName)
+        importedFromFs.displayName = detectedAny.displayName;
+      if (detectedAny.slug && !importedFromFs.slug)
+        importedFromFs.slug = detectedAny.slug;
+      if (Array.isArray(detectedAny.tools)) {
+        importedFromFs.tools = importedFromFs.tools || [];
+        for (const t of detectedAny.tools) {
+          if (
+            !importedFromFs.tools.find(
+              (x: any) => (x.name || x) === (t.name || t)
+            )
+          )
+            importedFromFs.tools.push(t);
+        }
+      }
+      if (detectedAny.policies && !importedFromFs.policies)
+        importedFromFs.policies = detectedAny.policies;
+    }
+  } catch {}
   const importedTools: any[] = Array.isArray(importedFromFs.tools)
     ? importedFromFs.tools
     : [];
@@ -1401,21 +1468,8 @@ export async function run(opts: any) {
 
   // list files written for final summary
   try {
-    async function listFiles(dir: string): Promise<string[]> {
-      const entries = await fs.readdir(dir, { withFileTypes: true });
-      const out: string[] = [];
-      for (const e of entries) {
-        const p = path.join(dir, e.name);
-        if (e.isDirectory()) {
-          const sub = await listFiles(p);
-          out.push(
-            ...sub.map((s) => path.relative(outDir || dir, path.join(p, s)))
-          );
-        } else out.push(path.relative(outDir || dir, p));
-      }
-      return out;
-    }
     try {
+      const { listFiles } = await import("./fs-utils.js");
       const files = await listFiles(outDir as string);
       console.log(`Wrote ${files.length} files to: ${outDir}`);
       for (const f of files.slice(0, 20)) console.log(` - ${f}`);
@@ -1493,6 +1547,23 @@ program.action(run);
 // Avoid auto-executing the CLI when running under the test harness; tests
 // import the module and call `run()` directly with controlled opts.
 if (process.env.VITEST !== "true") {
+  program
+    .command("detect [dir]")
+    .description("inspect a directory and print detected agent metadata")
+    .option("--pretty", "pretty-print JSON output")
+    .action(async (dir, cmd) => {
+      const target = dir || process.cwd();
+      try {
+        const detected = await detectAgent(target);
+        const out = cmd.pretty
+          ? JSON.stringify(detected, null, 2)
+          : JSON.stringify(detected);
+        console.log(out);
+      } catch (e) {
+        console.error("Error detecting agent:", (e as any).message || e);
+        process.exit(2);
+      }
+    });
   // add small subcommands to make applying and exporting configs explicit
   program
     .command("apply-config <file>")
@@ -1501,6 +1572,16 @@ if (process.env.VITEST !== "true") {
     )
     .action(async (file) => {
       await run({ config: file, nonInteractive: true });
+    });
+
+  program
+    .command("plan")
+    .description("print a non-destructive plan (dry-run) for the MVP changes")
+    .option("--out <path>", "explicit out parent path for preview")
+    .option("--seed <seed>", "seed to use for deterministic rendering")
+    .action(async (cmd) => {
+      const mod = await import("./mvp/plan.js");
+      await mod.default({ outDir: cmd.out, seed: cmd.seed });
     });
 
   program
@@ -1519,5 +1600,35 @@ if (process.env.VITEST !== "true") {
       await run({ saveConfig: file || DEFAULT_CONFIG_FILENAME });
     });
 
+  program
+    .command("vscode-tasks")
+    .description(
+      "generate .vscode workspace helpers (settings, tasks, extensions)"
+    )
+    .option(
+      "--out <path>",
+      "output directory (defaults to current working directory)"
+    )
+    .option("--force", "overwrite existing files")
+    .action(async (cmd) => {
+      try {
+        const mod = await import("./cli/vscodeTasks.js");
+        const gen = mod.generateVscodeConfigs || mod.default;
+        const res = await gen({ outDir: cmd.out, force: !!cmd.force });
+        console.log(`Wrote .vscode files to: ${res.dir}`);
+        for (const w of res.written) console.log(` - ${w}`);
+      } catch (e) {
+        console.error(
+          "Error generating .vscode files:",
+          (e as any).message || e
+        );
+        process.exit(2);
+      }
+    });
+
+  // Compatibility: some docs/examples call `aigen create`. Support that by
+  // treating `aigen create --flags` the same as `aigen --flags` so users can
+  // copy/paste examples without editing. This is a no-op when not present.
+  if (process.argv[2] === "create") process.argv.splice(2, 1);
   program.parseAsync(process.argv);
 }

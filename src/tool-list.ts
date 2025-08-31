@@ -1,7 +1,9 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import os from "node:os";
-import { TOOL_CATALOG, ToolCatalogItem } from "./tools/catalog.js";
+import * as Catalog from "./tools/catalog.js";
+
+// Removed duplicate imports
 
 export type ToolItem = {
   name: string;
@@ -28,11 +30,14 @@ export async function loadToolList(source?: string) {
     vitest: ["playwright"],
     playwright: ["puppeteer"],
   };
-  const builtIn: ToolItem[] = TOOL_CATALOG.map((c: ToolCatalogItem) => ({
-    name: c.name,
-    hint: c.hint || c.description,
+
+  const builtIn: ToolItem[] = (Catalog as any).TOOL_CATALOG.map((c: any) => ({
+    name: String(c.name),
+    hint: typeof c.hint === "string" ? c.hint : c.description,
     description: c.description,
-    recommends: c.recommends ?? defaultRecommends[c.name],
+    recommends: Array.isArray(c.recommends)
+      ? c.recommends.map(String)
+      : defaultRecommends[c.name] || undefined,
     language: c.language,
     packageManager: c.packageManager,
     ecosystem: c.ecosystem,

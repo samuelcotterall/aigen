@@ -28,6 +28,8 @@ describe("CLI integration (dev mode)", () => {
       await run(opts);
       const all = logs.join("\n");
       expect(all).toContain("Dev output written to:");
+      // ensure we don't accidentally print duplicated path segments like 'config/config/agent.json'
+      expect(all).not.toMatch(/([\w-]+)\/\1\//);
     } finally {
       console.log = origLog;
     }

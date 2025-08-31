@@ -1,0 +1,9 @@
+{
+  "name": "my-agent",
+  "displayName": "My Agent",
+  "tools": [
+    {
+      "name": "tool1"
+    }
+  ]
+}

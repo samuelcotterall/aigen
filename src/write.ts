@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { AgentConfig } from "./schema.js";
 import { renderTemplates } from "./templates.js";
+import mergePkg, { PackageJson } from "./merge/packageJson.js";
 import crypto from "node:crypto";
 
 /**
@@ -212,6 +213,9 @@ export async function writeOutputs(
     astMerge?: boolean;
     runId?: string;
     seed?: string | number;
+    // new options
+    force?: boolean; // non-interactive override to apply package.json overwrites
+    interactive?: boolean; // when true, prompt for per-change approval
   }
 ) {
   const dirName = (cfg.slug || cfg.name)
@@ -292,8 +296,14 @@ export async function writeOutputs(
                 // merge JSON
                 try {
                   const existingRaw = await fs.readFile(target, "utf8");
-                  const existing = JSON.parse(existingRaw || "{}");
-                  const incoming = JSON.parse(content || "{}");
+                  const existing = JSON.parse(existingRaw || "{}") as Record<
+                    string,
+                    unknown
+                  >;
+                  const incoming = JSON.parse(content || "{}") as Record<
+                    string,
+                    unknown
+                  >;
                   const merged = deepMerge(existing, incoming);
                   await fs.writeFile(
                     target,
@@ -302,6 +312,170 @@ export async function writeOutputs(
                   );
                 } catch (e) {
                   // if parsing fails, skip to avoid clobbering user file
+                  return;
+                }
+                return;
+              }
+              // handle package.json conservatively when present at repo root
+              if (rel === "package.json" || rel.endsWith("/package.json")) {
+                try {
+                  const existingRaw = await fs.readFile(target, "utf8");
+                  let existingObj: unknown = {};
+                  try {
+                    existingObj = existingRaw ? JSON.parse(existingRaw) : {};
+                  } catch (_) {
+                    return; // skip if JSON invalid
+                  }
+                  let incomingObj: unknown = {};
+                  try {
+                    incomingObj = content ? JSON.parse(content) : {};
+                  } catch (_) {
+                    return;
+                  }
+
+                  const res = mergePkg(existingObj, incomingObj, {
+                    force: !!opts?.force,
+                  });
+
+                  // If interactive and not forced, prompt per-change
+                  let finalMerged = res.merged as PackageJson;
+                  if (opts && opts.interactive && !opts.force) {
+                    try {
+                      const mod = (await import(
+                        "@clack/prompts"
+                      )) as unknown as {
+                        confirm: (opts: {
+                          message: string;
+                          initialValue?: boolean;
+                        }) => Promise<boolean>;
+                        isCancel: (v: unknown) => boolean;
+                      };
+                      const { confirm, isCancel } = mod;
+
+                      // handle deps per type
+                      const depTypes = Object.keys(res.diff?.deps || {});
+                      for (const t of depTypes) {
+                        const added = res.diff.deps[t].added || [];
+                        const changed = res.diff.deps[t].changed || [];
+                        for (const name of added) {
+                          const ver = (incomingObj as any)?.[t]?.[name];
+                          const ok = await confirm({
+                            message: `Add ${t} ${name}@${ver}?`,
+                            initialValue: true,
+                          });
+                          if (isCancel(ok) || !ok) {
+                            const map = (
+                              finalMerged as Record<string, unknown>
+                            )[t] as Record<string, string> | undefined;
+                            if (map && name in map) delete map[name];
+                          } else {
+                            (finalMerged as Record<string, unknown>)[t] =
+                              (finalMerged as Record<string, unknown>)[t] || {};
+                            (
+                              (finalMerged as Record<string, unknown>)[
+                                t
+                              ] as Record<string, string>
+                            )[name] = (incomingObj as any)[t][name];
+                          }
+                        }
+                        for (const name of changed) {
+                          const from = (existingObj as any)?.[t]?.[name];
+                          const to = (incomingObj as any)?.[t]?.[name];
+                          const ok = await confirm({
+                            message: `Update ${t} ${name} from ${from} -> ${to}?`,
+                            initialValue: false,
+                          });
+                          if (isCancel(ok) || !ok) {
+                            const map = (
+                              finalMerged as Record<string, unknown>
+                            )[t] as Record<string, string> | undefined;
+                            if (
+                              map &&
+                              (existingObj as any)[t] &&
+                              name in (existingObj as any)[t]
+                            )
+                              map[name] = (existingObj as any)[t][name];
+                          } else {
+                            (finalMerged as Record<string, unknown>)[t] =
+                              (finalMerged as Record<string, unknown>)[t] || {};
+                            (
+                              (finalMerged as Record<string, unknown>)[
+                                t
+                              ] as Record<string, string>
+                            )[name] = to;
+                          }
+                        }
+                      }
+
+                      // scripts
+                      const addedScripts = res.diff?.scripts?.added || [];
+                      const changedScripts = res.diff?.scripts?.changed || [];
+                      for (const s of addedScripts) {
+                        const cmd = (incomingObj as any)?.scripts?.[s];
+                        const ok = await confirm({
+                          message: `Add script '${s}': ${cmd}?`,
+                          initialValue: true,
+                        });
+                        if (isCancel(ok) || !ok) {
+                          const scripts = (
+                            finalMerged as Record<string, unknown>
+                          ).scripts as Record<string, string> | undefined;
+                          if (scripts) delete scripts[s];
+                        } else {
+                          (finalMerged as Record<string, unknown>).scripts =
+                            (finalMerged as Record<string, unknown>).scripts ||
+                            {};
+                          (
+                            (finalMerged as Record<string, unknown>)
+                              .scripts as Record<string, string>
+                          )[s] = cmd;
+                        }
+                      }
+                      for (const s of changedScripts) {
+                        const from = (existingObj as any)?.scripts?.[s];
+                        const to = (incomingObj as any)?.scripts?.[s];
+                        const ok = await confirm({
+                          message: `Update script '${s}' from '${from}' -> '${to}'?`,
+                          initialValue: false,
+                        });
+                        if (isCancel(ok) || !ok) {
+                          const scripts = (
+                            finalMerged as Record<string, unknown>
+                          ).scripts as Record<string, string> | undefined;
+                          if (
+                            scripts &&
+                            (existingObj as any).scripts &&
+                            s in (existingObj as any).scripts
+                          )
+                            scripts[s] = (existingObj as any).scripts[s];
+                        } else {
+                          (finalMerged as Record<string, unknown>).scripts =
+                            (finalMerged as Record<string, unknown>).scripts ||
+                            {};
+                          (
+                            (finalMerged as Record<string, unknown>)
+                              .scripts as Record<string, string>
+                          )[s] = to;
+                        }
+                      }
+                    } catch (e) {
+                      // if prompting fails, fallback to conservative merge (no overwrites)
+                      finalMerged = res.merged as PackageJson;
+                    }
+                  }
+
+                  // Write file if something changed compared to existing
+                  if (
+                    JSON.stringify(finalMerged) !== JSON.stringify(existingObj)
+                  ) {
+                    await fs.writeFile(
+                      target,
+                      JSON.stringify(finalMerged, null, 2),
+                      "utf8"
+                    );
+                    mergedFiles.push(target);
+                  }
+                } catch (e) {
                   return;
                 }
                 return;

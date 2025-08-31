@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { AgentConfig } from "./schema.js";
+import { z } from "zod";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TEMPLATES_DIR = path.join(__dirname, "../templates");
@@ -29,7 +30,22 @@ const FRONT_RE = /^---json\s*\n([\s\S]*?)\n---\s*\n?/;
 function parseFrontMatter(src: string): { fm: FrontMatter; body: string } {
   const m = src.match(FRONT_RE);
   if (!m) return { fm: {}, body: src };
-  const fm = JSON.parse(m[1] || "{}") as FrontMatter;
+  // validate front-matter using zod to avoid unchecked `any` usage
+  const FrontMatterSchema = z
+    .object({
+      when: z
+        .object({
+          preset: z.string().optional(),
+          libraries: z.array(z.string()).optional(),
+        })
+        .partial()
+        .optional(),
+      emit: z.boolean().optional(),
+      outPath: z.string().optional(),
+    })
+    .passthrough();
+  const parsed = FrontMatterSchema.parse(JSON.parse(m[1] || "{}"));
+  const fm = parsed as FrontMatter;
   return { fm, body: src.slice(m[0].length) };
 }
 
@@ -70,6 +86,7 @@ async function walk(dir: string): Promise<string[]> {
  */
 import { createSeededRng } from "./random.js";
 import { makeTemplateHelpers } from "./templates/helpers.js";
+import { computeTemplatesFingerprint } from "./cli/config.js";
 
 export async function renderTemplates(
   cfg: AgentConfig,
@@ -84,21 +101,31 @@ export async function renderTemplates(
   // cfg object without needing to populate every nested field that templates
   // might reference.
   const defaultStyle = { tsconfig: "strict", naming: "kebab", docs: "typedoc" };
-  const c: any = cfg as any;
+  // Ensure cfg conforms to AgentConfig as much as possible while filling defaults
+  const c = cfg as Partial<AgentConfig>;
   const renderCfg: AgentConfig = {
-    name: c.name,
+    name: c.name || "",
     displayName: c.displayName,
+    slug: c.slug,
     preset: c.preset,
     libraries: c.libraries ?? [],
     tools: c.tools ?? [],
-    policies: c.policies ?? {},
-    style: { ...(c.style ?? {}), ...defaultStyle },
-    styleRules: c.styleRules ?? [],
-  } as any;
+    policies: c.policies ?? ({} as any),
+    style: { ...(c.style ?? {}), ...defaultStyle } as any,
+    styleRules: (c as any).styleRules ?? [],
+    outputs: (c as any).outputs ?? ["markdown", "json"],
+  } as AgentConfig;
   const all = await walk(TEMPLATES_DIR);
   // create a seeded RNG if requested so templates can generate deterministic IDs
   const rng = createSeededRng(opts?.seed);
   const helpers = makeTemplateHelpers(rng);
+  // compute a fingerprint for the templates so templates can embed it if
+  // they want to record which template set produced the output. We compute
+  // this once here and expose it to the template render context as
+  // `templateFingerprint`.
+  const templateFingerprint = await computeTemplatesFingerprint().catch(
+    () => undefined
+  );
   const outputs: Record<string, string> = {};
 
   for (const abs of all) {
@@ -142,6 +169,8 @@ export async function renderTemplates(
       rng,
       random: { next: () => rng() },
       helpers,
+      // expose the computed fingerprint (may be undefined in some test envs)
+      templateFingerprint,
     });
     if (typeof rendered !== "string") continue;
     outputs[outPath] = rendered;
